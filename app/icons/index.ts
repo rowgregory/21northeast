@@ -19,6 +19,13 @@ import {
   faDraftingCompass,
   faBed,
   faShower,
+  faSearch,
+  faMagnifyingGlass,
+  faChevronLeft,
+  faChevronRight,
+  faMapMarker,
+  faLocationDot,
+  faTag
 } from "@fortawesome/free-solid-svg-icons";
 
 const calendarIcon = faCalendar;
@@ -41,6 +48,13 @@ const mapLocationIcon = faMapLocation;
 const draftingCompassIcon = faDraftingCompass;
 const bedIcon = faBed;
 const showerIcon = faShower;
+const searchIcon = faSearch;
+const magnifyingGlassIcon = faMagnifyingGlass;
+const chevronLeftIcon = faChevronLeft;
+const chevronRightIcon = faChevronRight;
+const mapMarkerIcon = faMapMarker
+const locationDotIcon  = faLocationDot
+const tagIcon = faTag
 
 const ADMIN_LINK_ICONS = {
   DASHBOARD: dashboardIcon,
@@ -79,4 +93,11 @@ export {
   draftingCompassIcon,
   bedIcon,
   showerIcon,
+  searchIcon,
+  magnifyingGlassIcon,
+  chevronLeftIcon,
+  chevronRightIcon,
+  mapMarkerIcon,
+  locationDotIcon,
+  tagIcon
 };
