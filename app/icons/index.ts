@@ -31,7 +31,8 @@ import {
   faHome,
   faFilter,
   faTimes,
-  faChevronUp
+  faChevronUp,
+  faBarcode
 } from "@fortawesome/free-solid-svg-icons";
 
 const calendarIcon = faCalendar;
@@ -67,6 +68,7 @@ const caretRightIcon = faCaretRight
 const homeIcon = faHome
 const filterIcon = faFilter
 const timesIcon = faTimes
+const barCodeIcon = faBarcode
 
 const ADMIN_LINK_ICONS = {
   DASHBOARD: dashboardIcon,
@@ -117,5 +119,6 @@ export {
   caretRightIcon,
   homeIcon,
   filterIcon,
-  timesIcon
+  timesIcon,
+  barCodeIcon
 };

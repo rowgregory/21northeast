@@ -89,7 +89,7 @@ const FindAProperty = () => {
           className="flex transition-transform duration-300 ease-in-out snap-x"
           style={{ transform: translateX }}
         >
-          {items?.map((obj: any, index: number) => (
+          {items?.map((obj, index) => (
             <PropertyCard key={index} property={obj} index={index} />
           ))}
         </div>

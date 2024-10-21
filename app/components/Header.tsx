@@ -43,7 +43,7 @@ const Header = () => {
       <div
         className={`transform transition-transform duration-200 ease-in-out ${
           navigationDrawer
-            ? " fixed  block h-20  w-screen  top-0  left-0  right-0  bottom-0  z-[1000]  translate-x-[280px]"
+            ? " sm:fixed  sm:block sm:h-20  sm:w-screen  sm:top-0  sm:left-0  sm:right-0  sm:bottom-0  sm:z-[60]  sm:translate-x-[280px]"
             : "sticky top-0 z-50"
         } `}
       >
@@ -52,22 +52,22 @@ const Header = () => {
             {!navigationDrawer && (
               <div
                 onClick={() => dispatch(openNavigationDrawer())}
-                className="w-16"
+                className="w-16 block 990:hidden"
               >
                 <FontAwesomeIcon
                   icon={barsIcon}
-                  className="w-5 h-5 block 990:hidden cursor-pointer"
+                  className="w-5 h-5 cursor-pointer"
                 />
               </div>
             )}
             {navigationDrawer && (
               <div
                 onClick={() => dispatch(closeNavigationDrawer())}
-                className="w-16"
+                className="w-16 block 990:hidden"
               >
                 <FontAwesomeIcon
                   icon={timesIcon}
-                  className="w-5 h-5 block 990:hidden cursor-pointer"
+                  className="w-5 h-5  cursor-pointer"
                 />
               </div>
             )}
@@ -77,22 +77,22 @@ const Header = () => {
             {navigationDrawer && (
               <div
                 onClick={() => dispatch(closeNavigationDrawer())}
-                className="w-16 flex justify-end"
+                className="w-16 flex justify-end 990:hidden"
               >
                 <FontAwesomeIcon
                   icon={timesIcon}
-                  className="w-5 h-5 block  990:hidden"
+                  className="w-5 h-5"
                 />
               </div>
             )}
             {!navigationDrawer && (
               <div
                 onClick={() => dispatch(openKeywordModal())}
-                className="w-16 flex justify-end"
+                className="w-16 flex justify-end 990:hidden"
               >
                 <FontAwesomeIcon
                   icon={magnifyingGlassIcon}
-                  className="w-5 h-5 block  990:hidden"
+                  className="w-5 h-5"
                 />
               </div>
             )}

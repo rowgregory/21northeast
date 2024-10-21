@@ -4,12 +4,10 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
-import { api } from "./services/api";
 import { headerReducer } from "./features/headerSlice";
 
 const rootReducer = combineReducers({
-  header: headerReducer,
-  [api.reducerPath]: api.reducer,
+  header: headerReducer
 });
 
 export const store = configureStore({
@@ -18,7 +16,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(api.middleware),
+    })
 });
 
 export const persistor = persistStore(store);

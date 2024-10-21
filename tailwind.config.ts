@@ -26,6 +26,7 @@ const config: Config = {
     
       },
       screens: {
+        'xs': {'max': '639px'}, 
         '990': '990px',
         '1290': '1290px', 
         '1360': '1360px',

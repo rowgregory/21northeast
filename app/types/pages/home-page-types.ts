@@ -12,6 +12,7 @@ interface AgentCardProps {
 
 interface PropertyCardProps {
   property: {
+    id: string;
     img: string;
     propertyType: string;
     housePrice: string;
@@ -21,7 +22,8 @@ interface PropertyCardProps {
     bedrooms: number;
     bathrooms: number;
     city: string;
-    description: string;
+    state: string;
+    propertySubType: string;
   };
   index: number;
 }
@@ -32,7 +34,7 @@ interface PropertySearchFormProps {
 
 interface PropertyCardBottomBoxProps {
   index: number;
-  sqft: string;
+  sqft: number;
   bedrooms: number;
   bathrooms: number
 }
