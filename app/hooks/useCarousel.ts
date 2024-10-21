@@ -20,7 +20,8 @@ const useCarousel = (items: any[]) => {
     next,
     previous,
     currentIndex,
-    items
+    items,
+    setCurrentIndex
   };
 };
 

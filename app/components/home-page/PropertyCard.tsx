@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { calendarIcon, locationDotIcon, tagIcon, userIcon } from "@/app/icons";
 import { PropertyCardProps } from "@/app/types/pages/home-page-types";
 import PropertyCardBottomBox from "../property-card/PropertyCardBottomBox";
+import Link from "next/link";
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
   property: {
+    id,
     img,
     propertyType,
     housePrice,
@@ -16,22 +18,22 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
     bedrooms,
     bathrooms,
     city,
-    description,
+    propertySubType
   },
   index,
 }) => {
   return (
-    <div className={`bg-[#f8f8f8] w-[calc(100vw-6px)] md:w-[400px]`}>
+    <Link href={`/listings/${id}`} className={`bg-[#f8f8f8] w-[calc(100vw-6px)] md:w-[400px]`}>
       <div className={`p-4`}>
         <Picture
           className={`w-full h-48 object-cover aspect-video`}
           src={img}
-          alt={description}
+          alt={address}
           priority={true}
         />
         <div className="flex flex-col">
           <h2 className="font-bold text-lg my-2 text-gray-800 truncate">
-            {description}
+            {propertySubType}
           </h2>
           <div className="flex items-baseline">
             <span className="font-bold text-orange-500 mr-2 text-sm">
@@ -79,7 +81,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         bedrooms={bedrooms}
         bathrooms={bathrooms}
       />
-    </div>
+    </Link>
   );
 };
 

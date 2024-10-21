@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Banner from "../components/common/Banner";
-import OrangeForSaleBox from "../components/common/OrangeForSaleBox";
 import { orangeUnderline } from "../components/common/styles";
 import PropertySearchForm from "../forms/PropertySearchForm";
 import { LISTINGS_SORTING_OPTIONS } from "../data/form-select-options";
@@ -36,9 +35,6 @@ const ListingsPage = () => {
       </div>
       <div className="mt-24 max-w-1200 mx-auto w-full grid grid-cols-12 lg:gap-x-6 xl:gap-x-10">
         <div className="hidden lg:block lg:col-span-3 bg-[#f8f8f8] h-fit w-full p-2.5">
-          <div className="w-full bg-black mb-7">
-            <OrangeForSaleBox />
-          </div>
           <PropertySearchForm type="listings" />
         </div>
         <div className="col-span-12 lg:col-span-9 px-3 sm:px-10 md:px-12 lg:px-0">
@@ -48,7 +44,7 @@ const ListingsPage = () => {
             Properties
           </h2>
           <div className="flex items-center justify-between mb-3">
-            <OrangeForSaleBox />
+           <div></div>
             <div className="flex items-center">
               <select
                 id="sortingOption"

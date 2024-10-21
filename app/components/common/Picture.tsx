@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { FC, RefObject } from "react";
+import React, { FC, MouseEventHandler, RefObject } from "react";
 
 interface PitureProps {
   src: string;
@@ -7,6 +7,7 @@ interface PitureProps {
   className: string;
   priority: boolean;
   imgRef?: RefObject<HTMLImageElement>;
+  onClick?: MouseEventHandler<HTMLImageElement>;
 }
 
 const Picture: FC<PitureProps> = ({
@@ -15,9 +16,11 @@ const Picture: FC<PitureProps> = ({
   className,
   priority = false,
   imgRef,
+  onClick,
 }) => {
   return (
     <Image
+      onClick={onClick}
       ref={imgRef}
       src={src}
       alt={alt}

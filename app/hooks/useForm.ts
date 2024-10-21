@@ -12,7 +12,7 @@ const useForm = (fields: string[], data?: Inputs): UseFormHook => {
       if (name.startsWith("is")) {
         acc[name] = undefined; // Explicitly set to undefined for boolean values
       } else {
-        acc[name] = "";
+        acc[name] = name === "propertyStatus" ? "For Rent" : "";
       }
       return acc;
     },
@@ -25,16 +25,17 @@ const useForm = (fields: string[], data?: Inputs): UseFormHook => {
   useEffect(() => {
     if (data) {
       const mappedInputs = fields.reduce(
-        (
-          acc: Record<string, string | number | boolean | undefined>,
-          name: string
-        ) => {
-          acc[name] = data[name] !== undefined ? data[name] : undefined;
+        (acc: Record<string, string | number | boolean | undefined>, name: string) => {
+          acc[name] = data[name] !== undefined ? data[name] : '';
           return acc;
         },
         {}
       );
-      setInputs(mappedInputs);
+      
+      // Only update state if mappedInputs is different from current inputs
+      if (JSON.stringify(mappedInputs) !== JSON.stringify(inputs)) {
+        setInputs(mappedInputs);
+      }
     }
   }, [data, fields]);
 

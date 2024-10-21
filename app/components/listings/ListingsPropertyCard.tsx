@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { calendarIcon, locationDotIcon, tagIcon, userIcon } from "@/app/icons";
 import { PropertyCardProps } from "@/app/types/pages/home-page-types";
 import PropertyCardBottomBox from "../property-card/PropertyCardBottomBox";
+import Link from "next/link";
 
 const ListingsPropertyCard: React.FC<PropertyCardProps> = ({
   property: {
+    id,
     img,
     propertyType,
     housePrice,
@@ -16,22 +18,22 @@ const ListingsPropertyCard: React.FC<PropertyCardProps> = ({
     bedrooms,
     bathrooms,
     city,
-    description,
+    state
   },
   index,
 }) => {
   return (
-    <div className={`bg-[#f8f8f8] w-full`}>
+    <Link href={`/listings/${id}`} className={`bg-[#f8f8f8] w-full`}>
       <div className={`p-4 w-full flex flex-col md:flex-row gap-y-4 sm:gap-x-4 md:gap-x-8`}>
         <Picture
           className={`md:max-w-[330px] w-full h-full object-cover aspect-video`}
           src={img}
-          alt={description}
+          alt={id}
           priority={true}
         />
         <div className="flex flex-col justify-between w-full">
           <h2 className="text-wrap w-full font-bold text-lg my-2 text-gray-800 truncate">
-            {description}
+            {propertyType} {address} {city} {state}
           </h2>
           <div className="flex items-baseline">
             <span className="font-bold text-orange-500 mr-2 text-sm">
@@ -79,7 +81,7 @@ const ListingsPropertyCard: React.FC<PropertyCardProps> = ({
           />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

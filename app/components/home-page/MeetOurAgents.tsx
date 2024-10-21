@@ -17,15 +17,10 @@ const MeetOurAgents = () => {
   useEffect(() => {
     const updateTransform = () => {
       if (window.innerWidth < 768) {
-        setTranslateX(
-          `translateX(-${currentIndex * window.innerWidth}px)`
-        );
-      } 
-      else if(window.innerWidth < 1040) {
+        setTranslateX(`translateX(-${currentIndex * window.innerWidth}px)`);
+      } else if (window.innerWidth < 1040) {
         setTranslateX(`translateX(-${currentIndex * 365}px)`);
-      
-      } 
-      else {
+      } else {
         setTranslateX(`translateX(-${currentIndex * 305}px)`);
       }
     };
@@ -50,7 +45,7 @@ const MeetOurAgents = () => {
           Meet Our Agents
         </h1>
       </div>
-      <div className="relative w-[calc(100vw-6px)] sm:max-w-[710px] lg:max-w-[895px] 1360:max-w-[1200px] h-full">
+      <div className="relative w-[calc(100vw-6px)] sm:max-w-[710px] lg:max-w-[895px] 2xl:max-w-[1200px] h-full">
         <div
           onClick={previous}
           className={`left-0 xl:-left-16 ${carouselBtnStyles}`}
@@ -58,7 +53,7 @@ const MeetOurAgents = () => {
           <FontAwesomeIcon icon={chevronLeftIcon} className="w-3 h-3" />
         </div>
         <div className="flex overflow-hidden">
-          <div 
+          <div
             className="flex transition-transform duration-300 ease-in-out snap-x md:gap-x-5"
             style={{ transform: translateX }}
           >
