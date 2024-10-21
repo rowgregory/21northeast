@@ -1,22 +1,42 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import PropertyCard from "./PropertyCard";
+import useCarousel from "@/app/hooks/useCarousel";
 import { chevronLeftIcon, chevronRightIcon } from "@/app/icons";
 import mockBrowseDreamHomesData from "@/app/mock-data/mock-browser-dream-homes-data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import React from "react";
-import useCarousel from "@/app/hooks/useCarousel";
 import { orangeUnderline } from "../common/styles";
-import PropertyCard from "./PropertyCard";
 
 const FindAProperty = () => {
   const { previous, next, items, currentIndex } = useCarousel(
     mockBrowseDreamHomesData
   );
+  const [translateX, setTranslateX] = useState("0px");
+
+  useEffect(() => {
+    const updateTransform = () => {
+      if (window.innerWidth < 768) {
+        setTranslateX(
+          `translateX(-${currentIndex * (window.innerWidth - 6)}px)`
+        );
+      } else {
+        setTranslateX(`translateX(-${currentIndex * 400}px)`);
+      }
+    };
+
+    updateTransform();
+    window.addEventListener("resize", updateTransform);
+
+    return () => {
+      window.removeEventListener("resize", updateTransform);
+    };
+  }, [currentIndex]);
 
   return (
     <div className="py-24">
-      <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-center justify-between mb-20">
+      <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center sm:justify-between mb-10 sm:mb-12">
         <div className={`pb-4 relative ${orangeUnderline}`}>
           <h1 className="text-3xl mb-1 uppercase font-semibold text-[#232323]">
             Find a Property
@@ -25,7 +45,7 @@ const FindAProperty = () => {
             Your Perfect Home Awaits
           </p>
         </div>
-        <div className="flex items-center h-9 gap-3">
+        <div className="flex items-start sm:items-center h-9 gap-3 mt-8 md:mt-0">
           <div className="flex items-center h-9">
             <div
               className={`bg-gray-100 h-full w-7 flex items-center justify-center relative
@@ -67,12 +87,10 @@ const FindAProperty = () => {
       <div className={`relative w-full h-full flex overflow-hidden max-w-[2000px] mx-auto`}>
         <div
           className="flex transition-transform duration-300 ease-in-out snap-x"
-          style={{ transform: `translateX(-${currentIndex * 400}px)` }}
+          style={{ transform: translateX }}
         >
           {items?.map((obj: any, index: number) => (
-            <div className="min-w-[400px]" key={index}>
-              <PropertyCard property={obj} index={index} />
-            </div>
+            <PropertyCard key={index} property={obj} index={index} />
           ))}
         </div>
       </div>

@@ -13,4 +13,10 @@ const orangeUnderline = `
   after:border-orange-500 after:border-2 
   after:w-28 after:left-0 after:bottom-0`;
 
-export { largeOrangeUpChevron, orangeUnderline };
+const logoOrangeLines = `
+  before:absolute before:content-[''] before:bg-orange-500
+  before:w-1 before:h-[65px] 990:before:h-[70px] before:-top-3.5 before:-left-2
+  after:absolute after:content-[''] after:bg-orange-500 
+  after:w-[65px] 990:after:w-[70px] after:h-1 after:-top-2 after:-left-3.5`
+
+export { largeOrangeUpChevron, orangeUnderline, logoOrangeLines };

@@ -1,22 +1,22 @@
 import React, { FC } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Assume you're using FontAwesome for icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Picture from "../common/Picture";
 import { AgentCardProps } from "@/app/types/pages/home-page-types";
 
 const AgentCard: FC<AgentCardProps> = ({ agent }) => {
   return (
-    <div className="w-[270px] flex flex-col items-center">
+    <div className="w-screen md:w-[345px] lg:w-[285px] flex flex-col items-center">
       <Picture
         src={agent.img}
         alt={agent.name}
-        className="w-full h-[360px] object-cover"
-        priority={false}
+        className="w-full h-[420px] sm:h-[360px] object-contain md:object-cover"
+        priority={true}
       />
-      <div className="bg-black text-white w-full text-center pt-4 pb-10">
+      <div className="bg-zinc-900 text-white w-full text-center pt-[18px] pb-8">
         <h2 className="text-xl font-bold">{agent.name}</h2>
         <p className="text-gray-400 mt-1">{agent.activeListings} properties</p>
       </div>
-      <div className="bg-orange-500 w-5/6 -mt-6 flex justify-center py-1.5 items-center">
+      <div className="bg-orange-500 w-5/6 -mt-5 flex justify-center py-1.5 items-center h-9">
         {agent.socialMedia.map((social, index) => (
           <a
             key={index}
@@ -25,7 +25,7 @@ const AgentCard: FC<AgentCardProps> = ({ agent }) => {
             rel="noopener noreferrer"
             className="mx-2"
           >
-            <FontAwesomeIcon icon={social.icon} className="text-white" />
+            <FontAwesomeIcon icon={social.icon} className="text-white w-4 h-4" />
           </a>
         ))}
       </div>

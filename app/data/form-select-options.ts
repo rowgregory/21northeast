@@ -73,10 +73,21 @@ const MAX_PRICE_OPTIONS = [
   "$2,000",
 ];
 
+const LISTINGS_SORTING_OPTIONS = [
+  "Default Order",
+  "Featured",
+  "Most Viewed",
+  "Price (Low to High)",
+  "Price (High to Low)",
+  "Date (Old to New)",
+  "Date (New to Old)"
+];
+
 export {
   ALL_TYPES_OPTIONS,
   BEDROOM_OPTIONS,
   BATHROOM_OPTIONS,
   MIN_PRICE_OPTIONS,
   MAX_PRICE_OPTIONS,
+  LISTINGS_SORTING_OPTIONS
 };
