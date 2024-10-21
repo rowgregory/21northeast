@@ -5,7 +5,7 @@ const Video: FC<VideoProps> = ({ videoRef, src }) => {
   return (
     <video
       ref={videoRef}
-      className="fade-in block w-full h-full object-cover absolute top-0 left-0 z-0"
+      className="fade-in flex w-full h-full object-cover md:absolute md:top-0 md:left-0 md:z-0"
       autoPlay
       muted
       loop

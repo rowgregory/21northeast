@@ -26,4 +26,15 @@ interface PropertyCardProps {
   index: number;
 }
 
-export type { AgentCardProps, PropertyCardProps };
+interface PropertySearchFormProps {
+  type: string;
+}
+
+interface PropertyCardBottomBoxProps {
+  index: number;
+  sqft: string;
+  bedrooms: number;
+  bathrooms: number
+}
+
+export type { AgentCardProps, PropertyCardProps, PropertySearchFormProps,PropertyCardBottomBoxProps };

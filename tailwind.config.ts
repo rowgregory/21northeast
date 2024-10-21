@@ -10,8 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        "footer-p": "#858585"
       },
       fontSize: {
         '11': '0.6875rem',
@@ -20,6 +19,19 @@ const config: Config = {
       },
       fontFamily: {
         Poppins: [`"Poppins", sans-serif`],
+      },
+      maxWidth: {
+        '1160': '1160px',
+        '1200': '1200px',
+    
+      },
+      screens: {
+        '990': '990px',
+        '1290': '1290px', 
+        '1360': '1360px',
+      },
+      transitionProperty: {
+        'transform': 'transform',
       },
     },
   },

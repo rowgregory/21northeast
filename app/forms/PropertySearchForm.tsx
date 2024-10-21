@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, { FC, FormEvent } from "react";
 import useForm from "../hooks/useForm";
 import { PROPERTY_SEARCH_FIELDS } from "../data/form-input-fields";
 import {
@@ -13,13 +13,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { magnifyingGlassIcon } from "../icons";
 import DualSlider from "../components/common/DualSlider";
+import { PropertySearchFormProps } from "../types/pages/home-page-types";
+import getPropertySearchFormStyles from "../utils/getPropertySearchFormStylts";
 
-const inputstyles = `py-3 px-1.5 h-12 border-2 border-[#565656] rounded-sm bg-transparent text-[#7c7c7c] focus:border-orange-500 focus:outline-none`;
-
-const PropertySearchForm = () => {
+const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
   const { inputs, handleInput, handleSelect, setInputs } = useForm(
     PROPERTY_SEARCH_FIELDS
   );
+
+  const styles = getPropertySearchFormStyles(type);
 
   const handleSqFtSliderChange = (values: [number, number]) => {
     setInputs((prev) => ({
@@ -45,15 +47,12 @@ const PropertySearchForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmitPropertySearch}
-      className="grid grid-cols-12 gap-x-8 gap-y-4"
-    >
+    <form onSubmit={handleSubmitPropertySearch} className={styles.form}>
       <select
         name="propertyType"
         id="propertyType"
         onChange={handleSelect}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={`${styles.inputs}`}
         aria-label="Property Type"
         tabIndex={0}
       >
@@ -68,7 +67,7 @@ const PropertySearchForm = () => {
         id="title"
         onChange={handleInput}
         value={inputs.title as string}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={` ${styles.inputs}`}
         aria-label="Title"
         placeholder="Title"
       />
@@ -77,7 +76,7 @@ const PropertySearchForm = () => {
         id="address"
         onChange={handleInput}
         value={inputs.address as string}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={` ${styles.inputs}`}
         aria-label="Address"
         placeholder="Address"
       />
@@ -86,7 +85,7 @@ const PropertySearchForm = () => {
         id="bedrooms"
         onChange={handleSelect}
         value={inputs.bedrooms as string}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={` ${styles.inputs}`}
         aria-label="Bedrooms"
         tabIndex={0}
       >
@@ -101,7 +100,7 @@ const PropertySearchForm = () => {
         id="bathrooms"
         onChange={handleSelect}
         value={inputs.bathrooms as string}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={` ${styles.inputs}`}
         aria-label="Bathrooms"
         tabIndex={0}
       >
@@ -111,13 +110,13 @@ const PropertySearchForm = () => {
           </option>
         ))}
       </select>
-      <div className="col-span-12 md:col-span-6 lg:col-span-4 flex gap-8">
+      <div className={`${styles.minMaxContainer}`}>
         <select
           name="minPrice"
           id="minPrice"
           onChange={handleSelect}
           value={inputs.minPrice as string}
-          className={`form-control w-full sm${inputstyles}`}
+          className={`w-full ${styles.inputs}`}
           aria-label="Min Price"
           tabIndex={0}
         >
@@ -132,7 +131,7 @@ const PropertySearchForm = () => {
           id="maxPrice"
           onChange={handleSelect}
           value={inputs.maxPrice as string}
-          className={`form-control w-full sm${inputstyles}`}
+          className={`w-full ${styles.inputs}`}
           aria-label="Max Price"
           tabIndex={0}
         >
@@ -162,15 +161,13 @@ const PropertySearchForm = () => {
         id="propertyId"
         onChange={handleInput}
         value={inputs.propertyId as string}
-        className={`form-control col-span-12 md:col-span-6 lg:col-span-4 sm${inputstyles}`}
+        className={` ${styles.inputs}`}
         aria-label="Property Id"
         placeholder="Property Id"
       />
       <button
         type="submit"
-        className="col-span-12 md:col-span-2 md:col-start-11 gap-1.5
-          flex justify-center items-center py-2.5  bg-orange-500  border-2 border-orange-500 group duration-200
-          hover:bg-transparent"
+        className={`${styles.button} gap-1.5 flex justify-center items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent`}
       >
         <FontAwesomeIcon
           icon={magnifyingGlassIcon}

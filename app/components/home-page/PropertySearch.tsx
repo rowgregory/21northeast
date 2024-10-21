@@ -1,13 +1,16 @@
 import PropertySearchForm from "@/app/forms/PropertySearchForm";
 import React from "react";
+import OrangeForSaleBox from "../common/OrangeForSaleBox";
 
 const PropertySearch = () => {
   return (
     <div className="bg-[#1a1a1a] w-full overflow-hidden">
       <div className="max-w-[1200px] w-full mx-auto grid grid-cols-12">
-        <div className="col-span-12 md:col-span-3 pt-28">
-          <h4 className="text-white uppercase text-lg">Discover Your</h4>
-          <h1 className="text-5xl text-white uppercase font-bold">
+        <div className="col-span-12 md:col-span-3 py-12 flex flex-col items-center sm:pt-28">
+          <h1 className="text-4xl lg:text-5xl text-white uppercase font-bold text-center md:text-left">
+          <div className="text-center sm:text-lg md:text-left font-normal">
+            Discover Your
+          </div>
             <span className="text-orange-500">E</span>pic <br />
             <span className="text-orange-500">J</span>ourney
           </h1>
@@ -20,10 +23,8 @@ const PropertySearch = () => {
         `}
         >
           <div className="flex flex-col relative z-10 gap-y-8">
-            <div className="bg-orange-500 text-white font-normal px-2.5 py-3 w-fit text-sm">
-              For Sale
-            </div>
-            <PropertySearchForm />
+            <OrangeForSaleBox />
+            <PropertySearchForm type='home' />
           </div>
         </div>
       </div>

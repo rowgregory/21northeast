@@ -7,9 +7,12 @@ interface VideoProps {
 
 interface BannerProps {
   src: string;
-  s1?: ReactNode;
-  s2?: ReactNode;
-  s3?: ReactNode;
+  title: string;
+  breadcrumb: string;
 }
 
-export type { VideoProps, BannerProps };
+interface ChildrenProps {
+  children: ReactNode;
+}
+
+export type { VideoProps, BannerProps, ChildrenProps };

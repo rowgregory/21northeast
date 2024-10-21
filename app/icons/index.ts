@@ -25,7 +25,13 @@ import {
   faChevronRight,
   faMapMarker,
   faLocationDot,
-  faTag
+  faTag,
+  faEnvelope,
+  faCaretRight,
+  faHome,
+  faFilter,
+  faTimes,
+  faChevronUp
 } from "@fortawesome/free-solid-svg-icons";
 
 const calendarIcon = faCalendar;
@@ -52,9 +58,15 @@ const searchIcon = faSearch;
 const magnifyingGlassIcon = faMagnifyingGlass;
 const chevronLeftIcon = faChevronLeft;
 const chevronRightIcon = faChevronRight;
+const chevronUpIcon = faChevronUp
 const mapMarkerIcon = faMapMarker
 const locationDotIcon  = faLocationDot
 const tagIcon = faTag
+const envelopeIcon = faEnvelope;
+const caretRightIcon = faCaretRight
+const homeIcon = faHome
+const filterIcon = faFilter
+const timesIcon = faTimes
 
 const ADMIN_LINK_ICONS = {
   DASHBOARD: dashboardIcon,
@@ -97,7 +109,13 @@ export {
   magnifyingGlassIcon,
   chevronLeftIcon,
   chevronRightIcon,
+  chevronUpIcon,
   mapMarkerIcon,
   locationDotIcon,
-  tagIcon
+  tagIcon,
+  envelopeIcon,
+  caretRightIcon,
+  homeIcon,
+  filterIcon,
+  timesIcon
 };

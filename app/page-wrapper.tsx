@@ -1,17 +1,18 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import Header from "./components/Header";
 import { ChakraProvider } from "@chakra-ui/react";
-import Footer from "./components/footer/Footer";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import PageSlideWrapper from "./page-slide-wrapper";
 
 const PageWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <ChakraProvider>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider>
+        <PageSlideWrapper>{children}</PageSlideWrapper>
+      </ChakraProvider>
+    </Provider>
   );
 };
 

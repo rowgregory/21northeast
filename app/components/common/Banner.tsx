@@ -1,21 +1,28 @@
 "use client";
 
 import React, { FC } from "react";
-import useVideo from "@/app/hooks/useVideo";
-import Video from "./Video";
 import { BannerProps } from "@/app/types/common-types";
+import Picture from "./Picture";
+import Breadcrumb from "./Breadcrumb";
 
-const Banner: FC<BannerProps> = ({ src, s1, s2, s3 }) => {
-  const { videoRef } = useVideo();
-
+const Banner: FC<BannerProps> = ({ src, title, breadcrumb }) => {
   return (
-    <div className="relative w-full h-[450px] lg:h-[750px]">
-      <Video videoRef={videoRef} src={src} />
-      <div className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col w-full h-full flex justify-center bg-black/50">
-        <div className="max-w-[1200px] mx-auto w-full flex flex-col">
-          <div className="slide-down text-white">{s1}</div>
-          <div className="scale-ine text-white">{s2}</div>
-          <div className="slide-up">{s3}</div>
+    <div className="relative w-full h-72">
+      <Picture
+        src={src}
+        alt="21 North East Listings"
+        className="w-full h-full object-cover"
+        priority={true}
+      />
+      <div
+        className="absolute z-10 top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col w-full 
+      h-full flex justify-center bg-black/90"
+      >
+        <div className="px-3 xl:px-0 max-w-1200 mx-auto w-full flex flex-col 990:items-center 990:flex-row 990:justify-between">
+          <h1 className="text-3xl text-white sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 990:mb-0">
+            {title}
+          </h1>
+          <Breadcrumb breadcrumb={breadcrumb} />
         </div>
       </div>
     </div>
