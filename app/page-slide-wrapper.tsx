@@ -1,18 +1,16 @@
-"use client";
+'use client'
 
-import React, { FC, Fragment } from "react";
-import { ChildrenProps } from "./types/common-types";
-import Header from "./components/Header";
-import KeywordModal from "./modals/KeywordModal";
-import NavigationDrawer from "./components/NavigationDrawer";
-import ScrollToTopButton from "./components/ScrollToTopButton";
-import Footer from "./components/footer/Footer";
-import { RootState, useAppSelector } from "./redux/store";
+import React, { FC, Fragment } from 'react'
+import { ChildrenProps } from './types/common-types'
+import Header from './components/Header'
+import KeywordModal from './modals/KeywordModal'
+import NavigationDrawer from './components/NavigationDrawer'
+import ScrollToTopButton from './components/ScrollToTopButton'
+import Footer from './components/footer/Footer'
+import { RootState, useAppSelector } from './redux/store'
 
 const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
-  const { navigationDrawer } = useAppSelector(
-    (state: RootState) => state.header
-  );
+  const { navigationDrawer } = useAppSelector((state: RootState) => state.header)
 
   return (
     <Fragment>
@@ -21,9 +19,7 @@ const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
       <KeywordModal />
       <div
         className={`transform transition-transform duration-200 ease-in-out overflow-hidden ${
-          navigationDrawer
-            ? "translate-x-0  sm:translate-x-[280px] mt-20"
-            : "translate-x-0"
+          navigationDrawer ? 'translate-x-0  sm:translate-x-[280px] mt-20' : 'translate-x-0'
         }`}
       >
         <main>{children}</main>
@@ -31,7 +27,7 @@ const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
       </div>
       <ScrollToTopButton />
     </Fragment>
-  );
-};
+  )
+}
 
-export default PageSlideWrapper;
+export default PageSlideWrapper

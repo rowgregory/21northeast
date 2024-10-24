@@ -1,50 +1,40 @@
-import React, { Fragment } from "react";
-import useCustomPathname from "../utils/useCustomPathname";
-import headerLinksData from "../data/header-links-data";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  barsIcon,
-  instaIcon,
-  magnifyingGlassIcon,
-  phoneIcon,
-  timesIcon,
-  userIcon,
-} from "../icons";
-import HeaderLink from "./header/HeaderLink";
-import Logo from "./common/Logo";
-import { logoOrangeLines } from "./common/styles";
-import { RootState, useAppDispatch, useAppSelector } from "../redux/store";
+import React, { Fragment } from 'react'
+import useCustomPathname from '../utils/useCustomPathname'
+import headerLinksData from '../data/header-links-data'
+import { barsIcon, instaIcon, magnifyingGlassIcon, phoneIcon, timesIcon } from '../icons'
+import HeaderLink from './header/HeaderLink'
+import Logo from './common/Logo'
+import { logoOrangeLines } from './common/styles'
+import { RootState, useAppDispatch, useAppSelector } from '../redux/store'
 import {
   closeNavigationDrawer,
   openKeywordModal,
-  openNavigationDrawer,
-} from "../redux/features/headerSlice";
+  openNavigationDrawer
+} from '../redux/features/headerSlice'
+import AwesomeIcon from './common/AwesomeIcon'
+import { eileenInsta } from '../data/social-media-links'
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const path = useCustomPathname();
-  const { navigationDrawer } = useAppSelector(
-    (state: RootState) => state.header
-  );
+  const dispatch = useAppDispatch()
+  const path = useCustomPathname()
+  const { navigationDrawer } = useAppSelector((state: RootState) => state.header)
+
   return (
     <Fragment>
       <div className="hidden 990:block bg-[#222222] px-6 h-10">
-        <div className="max-w-[1200px] mx-auto w-full flex items-center justify-between h-full">
-          <div className="flex items-center gap-2">
-            <FontAwesomeIcon
-              icon={userIcon}
-              className="text-orange-500 w-3 h-3"
-            />
-            <p className="text-white text-xs">Login or Register</p>
-          </div>
-          <FontAwesomeIcon icon={instaIcon} className="text-white w-3 h-3" />
+        <div className="max-w-[1200px] mx-auto w-full flex items-center justify-end h-full">
+          <AwesomeIcon
+            onClick={() => window.open(eileenInsta, '_blank')}
+            icon={instaIcon}
+            className="text-white w-3 h-3 duration-200 hover:text-orange-500 cursor-pointer"
+          />
         </div>
       </div>
       <div
         className={`transform transition-transform duration-200 ease-in-out ${
           navigationDrawer
-            ? " sm:fixed  sm:block sm:h-20  sm:w-screen  sm:top-0  sm:left-0  sm:right-0  sm:bottom-0  sm:z-[60]  sm:translate-x-[280px]"
-            : "sticky top-0 z-50"
+            ? ' sm:fixed  sm:block sm:h-20  sm:w-screen  sm:top-0  sm:left-0  sm:right-0  sm:bottom-0  sm:z-[60]  sm:translate-x-[280px]'
+            : 'sticky top-0 z-50'
         } `}
       >
         <div className="bg-white h-20 overflow-hidden px-3">
@@ -54,10 +44,7 @@ const Header = () => {
                 onClick={() => dispatch(openNavigationDrawer())}
                 className="w-16 block 990:hidden"
               >
-                <FontAwesomeIcon
-                  icon={barsIcon}
-                  className="w-5 h-5 cursor-pointer"
-                />
+                <AwesomeIcon icon={barsIcon} className="w-5 h-5 cursor-pointer" />
               </div>
             )}
             {navigationDrawer && (
@@ -65,10 +52,7 @@ const Header = () => {
                 onClick={() => dispatch(closeNavigationDrawer())}
                 className="w-16 block 990:hidden"
               >
-                <FontAwesomeIcon
-                  icon={timesIcon}
-                  className="w-5 h-5  cursor-pointer"
-                />
+                <AwesomeIcon icon={timesIcon} className="w-5 h-5  cursor-pointer" />
               </div>
             )}
             <div className={`relative ${logoOrangeLines}`}>
@@ -79,10 +63,7 @@ const Header = () => {
                 onClick={() => dispatch(closeNavigationDrawer())}
                 className="w-16 flex justify-end 990:hidden"
               >
-                <FontAwesomeIcon
-                  icon={timesIcon}
-                  className="w-5 h-5"
-                />
+                <AwesomeIcon icon={timesIcon} className="w-5 h-5" />
               </div>
             )}
             {!navigationDrawer && (
@@ -90,27 +71,17 @@ const Header = () => {
                 onClick={() => dispatch(openKeywordModal())}
                 className="w-16 flex justify-end 990:hidden"
               >
-                <FontAwesomeIcon
-                  icon={magnifyingGlassIcon}
-                  className="w-5 h-5"
-                />
+                <AwesomeIcon icon={magnifyingGlassIcon} className="w-5 h-5" />
               </div>
             )}
             <div className="hidden 990:flex items-center h-full w-full">
               <div className="flex justify-end items-center w-full gap-6 pr-12">
-                {headerLinksData(path).map(
-                  ({ linkKey, active, textKey }, i) => (
-                    <HeaderLink
-                      key={i}
-                      linkKey={linkKey}
-                      active={active}
-                      textKey={textKey}
-                    />
-                  )
-                )}
+                {headerLinksData(path).map(({ linkKey, active, textKey }, i) => (
+                  <HeaderLink key={i} linkKey={linkKey} active={active} textKey={textKey} />
+                ))}
               </div>
               <div
-                className={`hidden sm:flex z-10 h-full px-10 items-center justify-center bg-orange-500 relative
+                className={`hidden sm:flex flex-col z-10 h-full px-10 items-center justify-center bg-orange-500 relative
                   before:absolute before:content-[''] before:right-full before:z-10 before:bottom-0 before:top-0   
                   before:border-b-orange-500 before:border-b-[80px]
                   before:border-t-transparent before:border-t-0
@@ -120,17 +91,16 @@ const Header = () => {
                   after:left-full after:h-full after:top-0 after:z-10
                   `}
               >
-                <FontAwesomeIcon
-                  icon={phoneIcon}
-                  className="text-white w-7 h-7 rotate-[137deg]"
-                />
+                <a href="tel:7817187665">
+                  <AwesomeIcon icon={phoneIcon} className="text-white w-7 h-7 rotate-[137deg]" />
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </Fragment>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

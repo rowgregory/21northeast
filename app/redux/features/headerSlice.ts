@@ -1,12 +1,12 @@
-import { Reducer, createSlice } from "@reduxjs/toolkit";
+import { Reducer, createSlice } from '@reduxjs/toolkit'
 
 export interface HeaderStatePayload {
-  loading: boolean;
-  success: boolean;
-  error: string | false | null;
-  navigationDrawer: boolean;
-  keywordModal: boolean;
-  keyword: string;
+  loading: boolean
+  success: boolean
+  error: string | false | null
+  navigationDrawer: boolean
+  keywordModal: boolean
+  keyword: string
 }
 
 const initialHeaderState: HeaderStatePayload = {
@@ -15,33 +15,33 @@ const initialHeaderState: HeaderStatePayload = {
   error: null,
   navigationDrawer: false,
   keywordModal: false,
-  keyword: ""
-};
+  keyword: ''
+}
 
 export const headerSlice = createSlice({
-  name: "header",
+  name: 'header',
   initialState: initialHeaderState,
   reducers: {
     openNavigationDrawer: (state) => {
       console.log('OPENING NAVIGATION DRAWER')
-      state.navigationDrawer = true;
+      state.navigationDrawer = true
     },
     closeNavigationDrawer: (state) => {
-      state.navigationDrawer = false;
+      state.navigationDrawer = false
     },
     openKeywordModal: (state) => {
-      state.keywordModal = true;
+      state.keywordModal = true
     },
     closeKeywordModal: (state) => {
-      state.keywordModal = false;
+      state.keywordModal = false
     },
     setKeyword: (state, { payload }) => {
       state.keyword = payload.keyword
     }
-  },
-});
+  }
+})
 
-export const headerReducer = headerSlice.reducer as Reducer<HeaderStatePayload>;
+export const headerReducer = headerSlice.reducer as Reducer<HeaderStatePayload>
 
 export const {
   openNavigationDrawer,
@@ -49,4 +49,4 @@ export const {
   openKeywordModal,
   closeKeywordModal,
   setKeyword
-} = headerSlice.actions;
+} = headerSlice.actions

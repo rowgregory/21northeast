@@ -1,13 +1,14 @@
 {
   "overrides": [
     {
-      "files": ["**.js", "**.jsx"],
+      "files": ["**.js", "**.jsx", "**.ts", "**.tsx"],
       "options": {
-        "parser": "babel",
+        "parser": "typescript",
         "jsxBracketSameLine": false,
         "singleQuote": true,
         "trailingComma": "none",
-        "semi": false
+        "semi": false,
+        "printWidth": 100
       }
     }
   ]
