@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react'
 
-const PropertyStatusButton = ({ text, active, onClick }: { text: string; active: boolean; onClick: any }) => {
+const PropertyStatusButton = ({ text, active }: { text: string; active: boolean }) => {
   return (
-    <div onClick={onClick} className={`${active ? 'bg-orange-500' : '' } cursor-pointer text-white font-normal p-2.5 w-fit text-sm`}>
+    <div
+      className={`${
+        active ? 'bg-orange-500' : ''
+      } cursor-pointer text-white font-normal p-2.5 w-fit text-sm`}
+    >
       {text}
     </div>
-  );
-};
+  )
+}
 
-export default PropertyStatusButton;
+export default PropertyStatusButton

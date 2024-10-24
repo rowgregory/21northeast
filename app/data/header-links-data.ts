@@ -1,26 +1,36 @@
-import { HeaderLinkProps } from "../types/header-types";
+import { HeaderLinkProps } from '../types/header-types'
 
 const headerLinksData = (path: string): HeaderLinkProps[] => [
   {
-    textKey: "Home",
-    linkKey: "/",
-    active: path === "/",
+    textKey: 'Home',
+    linkKey: '/',
+    active: path === '/'
   },
   {
-    textKey: "Meet Our Team",
-    linkKey: "/team",
-    active: path === "/team",
+    textKey: 'Team',
+    linkKey: '/team',
+    active: path === '/team'
   },
   {
-    textKey: "Listings",
-    linkKey: "/listings",
-    active: path === "/listings",
+    textKey: 'Listings',
+    linkKey: '/listings',
+    active: path === '/listings'
   },
   {
-    textKey: "Real Estate Services",
-    linkKey: "/services",
-    active: path === "/services",
+    textKey: 'Services',
+    linkKey: '/services',
+    active: path === '/services'
   },
-];
+  {
+    textKey: 'Search',
+    linkKey: '/search',
+    active: path === '/search'
+  },
+  {
+    textKey: 'Contact',
+    linkKey: '/contact',
+    active: path === '/contact'
+  }
+]
 
-export default headerLinksData;
+export default headerLinksData
