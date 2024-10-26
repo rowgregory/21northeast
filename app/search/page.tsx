@@ -13,7 +13,7 @@ import { createSelector } from '@reduxjs/toolkit'
 import { useSearchParams } from 'next/navigation'
 import { setKeyword } from '../redux/features/listingSlice'
 
-export const selectFilteredListings = createSelector(
+const selectFilteredListings = createSelector(
   (state) => state.listing.listings,
   (state) => state.listing.keyword,
   (listings: any[], keyword: string) => {
