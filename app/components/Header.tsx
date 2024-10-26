@@ -13,6 +13,7 @@ import {
 } from '../redux/features/headerSlice'
 import AwesomeIcon from './common/AwesomeIcon'
 import { eileenInsta } from '../data/social-media-links'
+import Link from 'next/link'
 
 const Header = () => {
   const dispatch = useAppDispatch()
@@ -22,7 +23,12 @@ const Header = () => {
   return (
     <Fragment>
       <div className="hidden 990:block bg-[#222222] px-6 h-10">
-        <div className="max-w-[1200px] mx-auto w-full flex items-center justify-end h-full">
+        <div className="max-w-[1200px] mx-auto w-full flex gap-x-3 items-center justify-end h-full">
+          <AwesomeIcon
+            onClick={() => dispatch(openKeywordModal())}
+            icon={magnifyingGlassIcon}
+            className="text-white w-3 h-3 duration-200 hover:text-orange-500 cursor-pointer"
+          />
           <AwesomeIcon
             onClick={() => window.open(eileenInsta, '_blank')}
             icon={instaIcon}
@@ -55,9 +61,9 @@ const Header = () => {
                 <AwesomeIcon icon={timesIcon} className="w-5 h-5  cursor-pointer" />
               </div>
             )}
-            <div className={`relative ${logoOrangeLines}`}>
+            <Link href="/" className={`relative ${logoOrangeLines}`}>
               <Logo width="w-48 990:w-60" />
-            </div>
+            </Link>
             {navigationDrawer && (
               <div
                 onClick={() => dispatch(closeNavigationDrawer())}
@@ -69,7 +75,7 @@ const Header = () => {
             {!navigationDrawer && (
               <div
                 onClick={() => dispatch(openKeywordModal())}
-                className="w-16 flex justify-end 990:hidden"
+                className="w-16 flex justify-end 990:hidden cursor-pointer"
               >
                 <AwesomeIcon icon={magnifyingGlassIcon} className="w-5 h-5" />
               </div>

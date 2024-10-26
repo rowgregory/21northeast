@@ -5,12 +5,13 @@ import AwesomeIcon from '../common/AwesomeIcon'
 import { chevronLeftIcon, chevronRightIcon } from '@/app/icons'
 
 interface ListingImageCarouselProps {
-  images: string[]
+  images: any
 }
 
 const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
   const imageRef = useRef<HTMLImageElement>(null)
   const [translateX, setTranslateX] = useState('0px')
+  const [translateSmallerX, setTranslateSmallerX] = useState('0px')
   const { previous, next, items, currentIndex, setCurrentIndex } = useCarousel(images)
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
         const imgWidth = imageRef.current.offsetWidth
 
         setTranslateX(`translateX(-${currentIndex * imgWidth}px)`)
+        setTranslateSmallerX(`translateX(-${currentIndex * 153.92}px)`)
       }
     }
 
@@ -37,17 +39,15 @@ const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
           className="flex transition-transform duration-300 ease-in-out snap-x"
           style={{ transform: translateX }}
         >
-          {items?.map((img: any, index: number) => (
+          {items?.map((img: { url: string }, index: number) => (
             <div key={index} className="flex-shrink-0 w-full min-w-full">
-              <div className="flex items-center justify-center h-[410px]">
-                <Picture
-                  src={img}
-                  alt={`${index}`}
-                  className="max-w-full w-full max-h-full object-contain"
-                  priority={false}
-                  imgRef={imageRef}
-                />
-              </div>
+              <Picture
+                src={img.url || '/images/eileen-agent.jpg'}
+                alt={`${index}`}
+                className="max-w-full w-full max-h-full object-contain"
+                priority={true}
+                imgRef={imageRef}
+              />
             </div>
           ))}
         </div>
@@ -66,17 +66,22 @@ const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
           </button>
         </div>
       </div>
-      <div className="flex items-center mt-2.5 w-full gap-2.5">
-        {items?.map((img: string, i: number) => (
-          <Picture
-            onClick={() => setCurrentIndex(i)}
-            key={i}
-            src={img}
-            alt={`${i}`}
-            className="w-full h-24 object-cover cursor-pointer"
-            priority={false}
-          />
-        ))}
+      <div className="flex items-center mt-2.5 w-full overflow-hidden">
+        <div
+          className="flex gap-2.5 transition-transform duration-300 ease-in-out snap-x"
+          style={{ transform: translateSmallerX }}
+        >
+          {items?.map((img: { url: string }, i: number) => (
+            <Picture
+              onClick={() => setCurrentIndex(i)}
+              key={i}
+              src={img.url || '/images/eileen-agent.jpg'}
+              alt={`${i}`}
+              className="w-full h-24 object-cover cursor-pointer"
+              priority={true}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

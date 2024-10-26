@@ -12,22 +12,19 @@ interface OtherFeaturesProps {
 }
 
 const features = [
-  { name: 'Air Conditioning', inputName: 'hasAirConditioning' },
-  { name: 'Laundry', inputName: 'hasLaundry' },
-  { name: 'Swimming Pool', inputName: 'hasSwimmingPool' },
-  { name: 'Central Heating', inputName: 'hasCentralHeating' },
-  { name: 'Laundry Room', inputName: 'hasLaundryRoom' },
-  { name: 'TV Cable', inputName: 'hasTVCable' },
-  { name: 'Electric Range', inputName: 'hasElectricRange' },
-  { name: 'Marble Floors', inputName: 'hasMarbleFloors' },
-  { name: 'Washer', inputName: 'hasWasher' },
-  { name: 'Fire Alarm', inputName: 'hasFireAlarm' },
-  { name: 'Microwave', inputName: 'hasMicrowave' },
-  { name: 'WiFi', inputName: 'hasWiFi' },
-  { name: 'Gym', inputName: 'hasGym' },
-  { name: 'Refrigerator', inputName: 'hasRefrigerator' },
-  { name: 'Home Theatre', inputName: 'hasHomeTheater' },
-  { name: 'Sauna', inputName: 'hasSauna' }
+  { name: 'Air Conditioning', inputName: 'coolingYN' },
+  { name: 'Heating', inputName: 'heatingYN' },
+  { name: 'Swimming Pool', inputName: 'poolPrivateYN' },
+  { name: 'Property Attached', inputName: 'propertyAttachedYN' },
+  { name: 'Central Heating', inputName: 'heatingYN' },
+  { name: 'Fire Place', inputName: 'fireplaceYN' },
+  { name: 'Attached Garage', inputName: 'attachedGarageYN' },
+  { name: 'Garage', inputName: 'garageYN' },
+  { name: 'Car Port', inputName: 'carportYN' },
+  { name: 'Horse', inputName: 'horseYN' },
+  { name: 'Water Front', inputName: 'waterfrontYN' },
+  { name: 'Open Parking', inputName: 'openParkingYN' },
+  { name: 'Sauna', inputName: 'spaYN' }
 ]
 
 const OtherFeatures: FC<OtherFeaturesProps> = ({ handleToggle, inputs }) => {

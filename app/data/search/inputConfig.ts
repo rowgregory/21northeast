@@ -3,14 +3,12 @@ import {
   ALL_TYPES_OPTIONS,
   BATHROOM_OPTIONS,
   BEDROOM_OPTIONS,
-  LISTINGS_SORTING_OPTIONS,
-  MAX_LAND_AREA_SQFT_OPTIONS,
+  MAX_ACREAGE_OPTIONS,
   MAX_PRICE_OPTIONS,
   MAX_SQFT_OPTIONS,
-  MIN_LAND_AREA_SQFT_OPTIONS,
+  MIN_ACREAGE_OPTIONS,
   MIN_PRICE_OPTIONS,
   MIN_SQFT_OPTIONS,
-  PRICE_REDUCTION_OPTIONS,
   PROPERTY_SUB_TYPE_OPTIONS,
   STATUS_OPTIONS
 } from '../form-select-options'
@@ -18,13 +16,13 @@ import {
 const inputConfig: DynamicInputConfig[] = [
   {
     type: 'select',
-    name: 'propertyType',
+    name: 'propType',
     label: 'Property Type',
     options: ALL_TYPES_OPTIONS
   },
   {
     type: 'select',
-    name: 'bathrooms',
+    name: 'totalBaths',
     label: 'Bathrooms',
     options: BATHROOM_OPTIONS
   },
@@ -48,82 +46,63 @@ const inputConfig: DynamicInputConfig[] = [
   },
   {
     type: 'select',
-    name: 'propertySubType',
+    name: 'propSubType',
     label: 'Property Sub Type',
     options: PROPERTY_SUB_TYPE_OPTIONS
   },
-
   {
     type: 'select',
-    name: 'priceReduced',
-    label: 'Price Reduced',
-    options: PRICE_REDUCTION_OPTIONS
-  },
-  {
-    type: 'select',
-    name: 'status',
+    name: 'propStatus',
     label: 'Status',
     options: STATUS_OPTIONS
   },
   {
     type: 'input',
-    name: 'city',
+    name: 'cityName',
     label: 'City',
     placeholder: 'City'
   },
   {
     type: 'input',
-    name: 'maxDaysListed',
-    label: 'Max Days Listed',
-    placeholder: 'Max Days Listed'
+    name: 'streetName',
+    label: 'Street Name',
+    placeholder: 'Street Name'
+  },
+  {
+    type: 'input',
+    name: 'countyName',
+    label: 'County',
+    placeholder: 'County'
+  },
+  {
+    type: 'input',
+    name: 'listingID',
+    label: 'PropertyID',
+    placeholder: 'Property ID'
   },
   {
     type: 'select',
-    name: 'minSqFt',
+    name: 'rangeValue1',
     label: 'Min SqFt',
     options: MIN_SQFT_OPTIONS
   },
   {
     type: 'select',
-    name: 'maxSqFt',
+    name: 'rangeValue2',
     label: 'Max SqFt',
     options: MAX_SQFT_OPTIONS
   },
   {
     type: 'select',
-    name: 'sortingOption',
-    label: 'Sorting Option',
-    options: LISTINGS_SORTING_OPTIONS
-  },
-  {
-    type: 'input',
-    name: 'highSchool',
-    label: 'High School',
-    placeholder: 'High School'
-  },
-  {
-    type: 'input',
-    name: 'middleOrJuniorSchool',
-    label: 'Middle or Junior School',
-    placeholder: 'Middle or Junior School'
-  },
-  {
-    type: 'input',
-    name: 'elementarySchool',
-    label: 'Elementary School',
-    placeholder: 'Elementary School'
+    name: 'rangeValue3',
+    label: 'Min Acreage',
+    options: MIN_ACREAGE_OPTIONS
   },
   {
     type: 'select',
-    name: 'minLandAreaSqFt',
-    label: 'Min Land Area SqFt',
-    options: MIN_LAND_AREA_SQFT_OPTIONS
-  },
-  {
-    type: 'select',
-    name: 'maxLandAreaSqFt',
-    label: 'Max Land Area SqFt',
-    options: MAX_LAND_AREA_SQFT_OPTIONS
+    name: 'rangeValue4',
+    label: 'Max Acreage',
+    options: MAX_ACREAGE_OPTIONS
   }
 ]
 

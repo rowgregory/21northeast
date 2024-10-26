@@ -1,39 +1,46 @@
 'use client'
 
-import React from 'react'
-import findListingById from '@/app/actions/findListingById'
-import AwesomeIcon from '@/app/components/common/AwesomeIcon'
+import React, { Fragment } from 'react'
 import SqFtBedroomsAndBathroomsBox from '@/app/components/home-page/SqFtBedroomsAndBathroomsBox'
 import PropertyIdAndBarcode from '@/app/components/listings/PropertyIdAndBarcode'
 import TitleWithOrangeLine from '@/app/components/listings/TitleWithOrangeLine'
 import SingleListingMap from '@/app/components/SingleMapListing'
 import PropertySearchForm from '@/app/forms/PropertySearchForm'
-import { plusIcon } from '@/app/icons'
 import ListingDetailsImageCarousel from '@/app/components/listings/ListingImageCarousel'
 import DetailsGridOne from '@/app/components/listings/DetailsGridOne'
-import { Property } from '@/app/types/mock/listing-types'
 import DetailsGridTwo from '@/app/components/listings/DetailsGridTwo'
 import DetailsGridThree from '@/app/components/listings/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
+import { RootState, useAppSelector } from '@/app/redux/store'
+import Roller from '@/app/components/loaders/Roller'
+import addCommas from '@/app/utils/addCommas'
 
-const ListingDetails = ({ params }: { params: any }) => {
-  const listing = findListingById(params.id) as Property
+const ListingDetails = ({ params }: { params: { listingID: string } }) => {
+  const { listings } = useAppSelector((state: RootState) => state.listing)
+  const listing = listings?.find((item) => String(item.listingID) === String(params?.listingID))
 
-  // ToDo
-  // await getListingById(params.id).unwrap()
+  if (!listing) {
+    return (
+      <div className="relative w-full mb-20 990:mb-[120px] -mt-20 990:mt-[-120px] min-h-[calc(100vh-80px)] 990:min-h-[calc(100vh-120px)]">
+        <div className="absolute inset-0 flex items-center justify-center z-50">
+          <Roller />
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div>
+    <Fragment>
       <div className="h-[420px] w-full relative">
-        <SingleListingMap latitude={listing?.latitude} longitude={listing?.longitude} />
-        <div className="px-3 md:px-0 max-w-screen-md 990:max-w-[990px] xl:max-w-1200 absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full">
+        <SingleListingMap latitude={listing?.latitude || 0} longitude={listing?.longitude || 0} />
+        <div className="max-w-screen-md px-3 1240:px-0 990:max-w-[990px] lg:max-w-1200 absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full">
           <div className="max-w-screen-sm bg-black bg-opacity-70">
             <div className=" text-white p-4">
               <h2 className="text-4xl font-bold mb-2">
-                {listing.address}, {listing.city}
+                {listing?.address}, {listing?.cityName}
               </h2>
               <div className="flex items-end gap-2">
-                <p className="text-2xl font-bold leading-6">{listing.housePrice}</p>
+                <p className="text-2xl font-bold leading-6">${addCommas(listing?.price)}</p>
                 <div className="bg-red-500 text-white font-normal py-1 px-2 w-fit text-sm">
                   For Sale
                 </div>
@@ -42,55 +49,37 @@ const ListingDetails = ({ params }: { params: any }) => {
           </div>
         </div>
       </div>
-      <div className="px-3 md:px-0 max-w-screen-md 990:max-w-[990px] xl:max-w-1200 mx-auto w-full">
+      <div className="max-w-screen-md px-3 1240:px-0 990:max-w-[990px] lg:max-w-1200 mx-auto w-full">
         <div className="bg-[#f8f8f8] gap-y-3 px-5 py-3 mb-16 flex flex-col md:flex-row md:items-center md:justify-between">
-          <div className="gap-y-4 sm:gap-8 flex items-center flex-wrap lg:flex-auto">
+          <div className="gap-y-4 sm:gap-8 flex flex-col sm:flex-row sm:items-center">
             <SqFtBedroomsAndBathroomsBox
-              sqft={listing.sqft}
-              bedrooms={listing.bedrooms}
-              bathrooms={listing.bathrooms}
+              sqFt={listing?.sqFt}
+              bedrooms={Number(listing?.bedrooms)}
+              bathrooms={Number(listing?.fullBaths)}
               iconColor="text-orange-500"
             />
-            <PropertyIdAndBarcode listing={listing} />
-          </div>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-[#232323] flex items-center justify-center">
-              <AwesomeIcon icon={plusIcon} className="text-white w-4 h-4" />
-            </div>
+            <PropertyIdAndBarcode id={listing?.listingID} />
           </div>
         </div>
-        <div className="grid grid-cols-12 gap-8">
+        <div className="grid grid-cols-12 gap-y-8 sm:gap-8">
           <div className="col-span-12 lg:col-span-9">
-            <ListingDetailsImageCarousel images={listing.images} />
+            <ListingDetailsImageCarousel images={listing?.images} />
             <div className="mb-16">
               <TitleWithOrangeLine section="Description" />
-              <p className="text-[#959595] text-sm leading-6 font-normal">{listing.description}</p>
+              <p className="text-[#959595] text-sm leading-6 font-normal">
+                {listing?.remarksConcat}
+              </p>
             </div>
             <div className="mb-16 text-sm flex flex-col gap-y-1.5">
               <TitleWithOrangeLine section="Address" />
               <strong className="text-[#959595]">
                 Address:{' '}
                 <span className="text-[#959595] font-normal">
-                  {listing.address} {listing.city} {listing.state} {listing.zipCode}
+                  {listing?.address} {listing?.cityName} {listing?.state} {listing?.zip4}
                 </span>
               </strong>
               <strong className="text-[#959595]">
                 Country: <span className="text-[#959595] font-normal">United States</span>
-              </strong>
-              <strong className="text-[#959595]">
-                School District:{' '}
-                <span className="text-[#959595] font-normal">{listing.schoolDistrict}</span>
-              </strong>
-              <strong className="text-[#959595]">
-                Community Amenities:{' '}
-                {listing.communityAmenities?.map((str, i) => (
-                  <span key={i} className="text-[#959595] font-normal">
-                    {str}
-                    {listing.communityAmenities && i !== listing?.communityAmenities.length - 1
-                      ? ', '
-                      : ''}
-                  </span>
-                ))}
               </strong>
             </div>
             <DetailsGridOne listing={listing} />
@@ -101,7 +90,7 @@ const ListingDetails = ({ params }: { params: any }) => {
                 <Picture
                   src="/images/mls-pin-2.png"
                   alt="MLS Pin"
-                  className="w-16 h-auto object-contain inline-block align-middle mr-1" // Use inline-block and align-middle for alignment
+                  className="w-16 h-auto object-contain inline-block align-middle mr-1"
                   priority={false}
                 />
               </span>
@@ -123,19 +112,19 @@ const ListingDetails = ({ params }: { params: any }) => {
               the status and availability of properties displayed on this website.
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-3 flex flex-col gap-y-7">
+          <div className="hidden md:flex col-span-12 lg:col-span-3 flex-col gap-y-7">
             <div className="flex items-center gap-3">
               <div className="w-4 h-1 bg-orange-500"></div>
               <h3 className="text-2xl font-bold">Search</h3>
             </div>
 
             <div className="hidden lg:block lg:col-span-3 bg-[#f8f8f8] h-fit w-full p-2.5">
-              <PropertySearchForm type="listings" />
+              <PropertySearchForm type="listing-details" />
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   )
 }
 

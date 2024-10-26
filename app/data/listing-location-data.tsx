@@ -1,19 +1,21 @@
-import { Property } from "../types/mock/listing-types";
+import { Property } from './listing-types'
 
-const listingLocationData = (listing: Property) => {
+const listingLocationData = (listing: Property | undefined) => {
   const additional = [
-    { textKey: "Building Area Source", value: listing?.location?.buildingAreaSource },
-    { textKey: "Country", value: listing?.location?.ownerCountry },
-    { textKey: "Currency", value: listing?.location?.currency },
-    { textKey: "Directions", value: listing?.location?.directions },
-    { textKey: "Elementary School", value: listing?.location?.elementarySchool },
-    { textKey: "High School", value: listing?.location?.highSchool },
-    { textKey: "Middle or Junior School", value: listing?.location?.middleOrJuniorSchool },
-    { textKey: "Waterfront", value: listing?.location?.waterfront },
-    { textKey: "Zoning", value: listing?.location?.zoning },
-  ];
+    { textKey: 'Building Area Source', value: listing?.advanced?.buildingAreaSource?.join(', ') },
+    { textKey: 'Country', value: listing?.ownerCountry },
+    { textKey: 'Currency', value: listing?.currency },
+    { textKey: 'Directions', value: listing?.advanced?.directions },
+    { textKey: 'Elementary School', value: listing?.advanced?.elementarySchool?.join(', ') },
+    { textKey: 'High School', value: listing?.advanced?.highSchool?.join(', ') },
+    {
+      textKey: 'Middle or Junior School',
+      value: listing?.advanced?.middleOrJuniorSchool?.join(', ')
+    },
+    { textKey: 'Waterfront', value: listing?.advanced?.waterfront },
+    { textKey: 'Zoning', value: listing?.advanced?.zoning }
+  ]
 
-  return additional.filter((item) => item.value);
-};
-
-export default listingLocationData;
+  return additional.filter((item) => item.value)
+}
+export default listingLocationData

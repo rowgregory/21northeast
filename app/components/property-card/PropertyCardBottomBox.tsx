@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
   index,
-  sqft,
+  sqFt,
   bedrooms,
   bathrooms
 }) => {
@@ -17,15 +17,15 @@ const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
     >
       <div className="flex items-center gap-2">
         <FontAwesomeIcon icon={draftingCompassIcon} className="w-4 h-4 text-white" />
-        <p className="text-white font-bold leading-4">{sqft} SqFt</p>
+        <p className="text-white font-bold leading-4">{sqFt} SqFt</p>
       </div>
       <div className="flex items-center gap-2">
         <FontAwesomeIcon icon={bedIcon} className="w-4 h-4 text-white" />
-        <p className="text-white font-bold leading-4">{bedrooms}</p>
+        <p className="text-white font-bold leading-4">{bedrooms || 0}</p>
       </div>
       <div className="flex items-center gap-2 pr-6">
         <FontAwesomeIcon icon={showerIcon} className="w-4 h-4 text-white" />
-        <p className="text-white font-bold leading-4">{bathrooms}</p>
+        <p className="text-white font-bold leading-4">{bathrooms || 0}</p>
       </div>
     </div>
   )

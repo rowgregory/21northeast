@@ -2,7 +2,7 @@
 
 import React, { FC, FormEvent } from 'react'
 import useForm from '../hooks/useForm'
-import { PROPERTY_SEARCH_FIELDS } from '../data/form-input-fields'
+import { ADVANCED_SEARCH_FIELDS } from '../data/form-input-fields'
 import {
   ALL_TYPES_OPTIONS,
   BATHROOM_OPTIONS,
@@ -13,17 +13,23 @@ import {
   STATUS_OPTIONS
 } from '../data/form-select-options'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { magnifyingGlassIcon } from '../icons'
+import { filterIcon, magnifyingGlassIcon } from '../icons'
 import DualSlider from '../components/common/DualSlider'
 import { PropertySearchFormProps } from '../types/pages/home-page-types'
 import getPropertySearchFormStyles from '../utils/getPropertySearchFormStylts'
 import PropertyStatusButton from '../components/common/PropertyStatusButton'
 import cleanInputs from '../utils/cleanInputs'
 import { useRouter } from 'next/navigation'
+import { RootState, useAppDispatch, useAppSelector } from '../redux/store'
+import { propertySearch, resetSearch, setHasDispatched } from '../redux/features/listingSlice'
+import AwesomeIcon from '../components/common/AwesomeIcon'
+import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 
 const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
   const navigate = useRouter()
-  const { inputs, handleInput, handleSelect, setInputs } = useForm(PROPERTY_SEARCH_FIELDS)
+  const dispatch = useAppDispatch()
+  const { inputs, handleInput, handleSelect, setInputs } = useForm(ADVANCED_SEARCH_FIELDS)
+  const { hasSearched } = useAppSelector((state: RootState) => state.listing)
 
   const styles = getPropertySearchFormStyles(type)
 
@@ -44,40 +50,57 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
 
   const handleSubmitPropertySearch = (e: FormEvent) => {
     e.preventDefault()
-
+    dispatch(setHasDispatched(false))
     const cleanedInputs = cleanInputs(inputs)
-    const queryString = new URLSearchParams(cleanedInputs).toString()
-    navigate.push(`/search?${queryString}`)
+    if (Object.keys(cleanedInputs).length > 0) {
+      if (type === 'listings') {
+        dispatch(propertySearch({ searchCriteria: cleanedInputs }))
+      } else {
+        const queryString = new URLSearchParams(cleanedInputs).toString()
+        navigate.push(`/search?${queryString}`)
+      }
+    }
+  }
+
+  const handleReset = (e: FormEvent) => {
+    e.preventDefault()
+
+    dispatch(resetSearch())
+    setInputs({})
   }
 
   return (
     <form onSubmit={handleSubmitPropertySearch}>
-      <div className={`flex items-center gap-2 mb-10 ${type === 'listings' ? 'bg-zinc-900' : ''}`}>
+      <div
+        className={`flex items-center gap-2 mb-10 ${
+          type === 'listings' || type === 'listing-details' ? 'bg-zinc-900' : ''
+        }`}
+      >
         <PropertyStatusButton text="For Sale" active={true} />
       </div>
       <div className={styles.form}>
         <select
-          name="propertyType"
-          id="propertyType"
+          name="propType"
+          id="propType"
           onChange={handleSelect}
-          value={inputs.propertyType as string}
+          value={inputs.propType as string}
           className={`${styles.inputs}`}
           aria-label="Property Type"
           tabIndex={0}
         >
-          {ALL_TYPES_OPTIONS.map((type) => (
-            <option key={type} value={type}>
+          {ALL_TYPES_OPTIONS.map((type, index) => (
+            <option key={type} value={index === 0 ? '' : type}>
               {type}
             </option>
           ))}
         </select>
         <select
-          name="status"
-          id="status"
+          name="propStatus"
+          id="propStatus"
           onChange={handleSelect}
-          value={inputs.status as string}
+          value={inputs.propStatus as string}
           className={`${styles.inputs}`}
-          aria-label="Status"
+          aria-label="Property Status"
           tabIndex={0}
         >
           {STATUS_OPTIONS.map((status, index) => (
@@ -87,10 +110,10 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           ))}
         </select>
         <select
-          name="propertySubType"
-          id="propertySubType"
+          name="propSubType"
+          id="propSubType"
           onChange={handleSelect}
-          value={inputs.propertySubType as string}
+          value={inputs.propSubType as string}
           className={`${styles.inputs}`}
           aria-label="Property Sub Type"
           tabIndex={0}
@@ -105,7 +128,7 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           name="bedrooms"
           id="bedrooms"
           onChange={handleSelect}
-          value={inputs.bedrooms as string}
+          value={inputs.bedrooms as number}
           className={` ${styles.inputs}`}
           aria-label="Bedrooms"
           tabIndex={0}
@@ -117,10 +140,10 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           ))}
         </select>
         <select
-          name="bathrooms"
-          id="bathrooms"
+          name="totalBaths"
+          id="totalBaths"
           onChange={handleSelect}
-          value={inputs.bathrooms as string}
+          value={inputs.totalBaths as string}
           className={` ${styles.inputs}`}
           aria-label="Bathrooms"
           tabIndex={0}
@@ -172,16 +195,16 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
         />
         <DualSlider
           min={0}
-          max={10000}
+          max={10}
           value={[inputs.rangeValue3 as number, inputs.rangeValue4 as number]}
           onInputChange={handleLandAreaSliderChange}
           text="Land Area"
         />
         <input
-          name="propertyId"
-          id="propertyId"
+          name="listingID"
+          id="listingID"
           onChange={handleInput}
-          value={(inputs.propertyId as string) || ''}
+          value={(inputs.listingID as string) || ''}
           className={` ${styles.inputs}`}
           aria-label="Property Id"
           placeholder="Property Id"
@@ -191,11 +214,22 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           className={`${styles.button} gap-1.5 flex justify-center items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent`}
         >
           <FontAwesomeIcon
-            icon={magnifyingGlassIcon}
+            icon={type === 'listings' ? filterIcon : magnifyingGlassIcon}
             className="text-white group-hover:text-orange-500 w-3 h-3"
           />
-          <p className="text-sm text-white group-hover:text-orange-500">Search</p>
+          <p className="text-sm text-white group-hover:text-orange-500">
+            {type === 'listings' ? 'Filter' : 'Search'}
+          </p>
         </button>
+        {hasSearched && type === 'listings' && (
+          <button
+            onClick={handleReset}
+            className="bg-gray-200 flex items-center justify-center gap-x-1 px-5 py-2.5 text-white text-center w-full"
+          >
+            <AwesomeIcon icon={faRotateLeft} className="w-3 h-3" />
+            <span className="text-sm">Reset</span>
+          </button>
+        )}
       </div>
     </form>
   )

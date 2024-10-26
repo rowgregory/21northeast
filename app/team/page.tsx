@@ -5,9 +5,11 @@ import Banner from '../components/common/Banner'
 import { largeLeftOrangeUpChevron, orangeUnderline } from '../components/common/styles'
 import ourAgents from '../mock-data/our-agents'
 import Picture from '../components/common/Picture'
+import { RootState, useAppSelector } from '../redux/store'
 
 const TeamPage = () => {
   const [openBios, setOpenBios] = useState(Array(ourAgents.length).fill(false))
+  const { activeListings } = useAppSelector((state: RootState) => state.listing)
 
   const toggleBio = (index: number) => {
     setOpenBios((prev) => prev.map((isOpen, i) => (i === index ? !isOpen : isOpen)))
@@ -27,7 +29,7 @@ const TeamPage = () => {
             </h1>
           </div>
           <div className="flex flex-col gap-y-16">
-            {ourAgents.map((obj, i) => (
+            {ourAgents(activeListings).map((obj, i) => (
               <div key={i} className="grid grid-cols-12 border-b-2 border-gray-100 gap-x-7">
                 <div className="col-span-12 sm:col-span-5 xl:col-span-3 flex justify-end items-end mb-6 sm:mb-0 relative">
                   <Picture
@@ -39,8 +41,10 @@ const TeamPage = () => {
                 </div>
                 <div className="col-span-12 sm:col-span-7 xl:col-span-9">
                   <h4 className="text-xl font-bold">{obj.name}</h4>
-                  <h6 className="text-[#959595] mb-8">{obj.activeListings} properties</h6>
-                  <div className="text-sm text-[#6e6e6e] font-light pb-5">
+                  {obj?.activeListings && (
+                    <h6 className="text-[#959595]">{obj?.activeListings} properties</h6>
+                  )}
+                  <div className="text-sm text-[#6e6e6e] font-light pb-5 mt-6">
                     {obj.bio && openBios[i] ? (
                       obj.bio.split('\n').map((para, j) => (
                         <p key={j} className="text-sm font-light pb-5 leading-6">

@@ -1,20 +1,20 @@
-import { Property } from '../types/mock/listing-types'
+import { Property } from './listing-types'
 
-const listingOverviewData = (listing: Property) => {
+const listingOverviewData = (listing: Property | undefined) => {
   const data = [
-    { textKey: 'Property ID', value: listing.propertyId },
-    { textKey: 'Price', value: listing.housePrice },
-    { textKey: 'Status', value: listing.status },
-    { textKey: 'Bedrooms', value: listing.bedrooms },
-    { textKey: 'Total Baths', value: listing.bathrooms },
-    { textKey: 'Full Baths', value: listing.fullBaths },
-    { textKey: 'Partial Baths', value: listing.partialBaths },
-    { textKey: 'SqFt', value: listing.sqft },
-    { textKey: 'Acres', value: listing.acres },
-    { textKey: 'County', value: listing.county },
-    { textKey: 'Year Built', value: listing.builtYear },
-    { textKey: 'Property Type', value: listing.propertyType },
-    { textKey: 'Property Sub Type', value: listing.propertySubType }
+    { textKey: 'Property ID', value: listing?.listingID },
+    { textKey: 'Price', value: listing?.priceData?.value?.formatted },
+    { textKey: 'Status', value: listing?.propStatus },
+    { textKey: 'Bedrooms', value: listing?.bedrooms },
+    { textKey: 'Total Baths', value: listing?.totalBaths },
+    { textKey: 'Full Baths', value: listing?.fullBaths },
+    { textKey: 'Partial Baths', value: listing?.partialBaths },
+    { textKey: 'SqFt', value: listing?.sqFt },
+    { textKey: 'Acres', value: listing?.acres },
+    { textKey: 'County', value: listing?.countyName },
+    { textKey: 'Year Built', value: listing?.yearBuiltDetails },
+    { textKey: 'Property Type', value: listing?.propType },
+    { textKey: 'Property Sub Type', value: listing?.propSubType }
   ]
 
   return data.filter((item) => item.value)

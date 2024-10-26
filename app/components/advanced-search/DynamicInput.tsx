@@ -21,10 +21,7 @@ const DynamicInput: FC<DynamicInputProps> = ({ config, value, onChange }) => {
       >
         {config.options?.map((option, index) => (
           <option key={option} value={index === 0 ? '' : option}>
-            {option}{' '}
-            {['minSqFt', 'maxSqFt', 'minLandAreaSqFt', 'maxLandAreaSqFt'].includes(config.name)
-              ? ' SqFt'
-              : ''}
+            {option} {['rangeValue1', 'rangeValue2'].includes(config.name) ? ' SqFt' : ''}
           </option>
         ))}
       </select>
