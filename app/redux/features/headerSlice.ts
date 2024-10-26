@@ -23,7 +23,6 @@ export const headerSlice = createSlice({
   initialState: initialHeaderState,
   reducers: {
     openNavigationDrawer: (state) => {
-      console.log('OPENING NAVIGATION DRAWER')
       state.navigationDrawer = true
     },
     closeNavigationDrawer: (state) => {

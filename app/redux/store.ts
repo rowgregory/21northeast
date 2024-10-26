@@ -6,10 +6,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { persistStore } from 'redux-persist'
 import { headerReducer } from './features/headerSlice'
 import { listingReducer } from './features/listingSlice'
+import { idxBrokerApi } from './services/idxBrokerApi'
 
 const rootReducer = combineReducers({
   header: headerReducer,
-  listing: listingReducer
+  listing: listingReducer,
+  [idxBrokerApi.reducerPath]: idxBrokerApi.reducer
 })
 
 export const store = configureStore({
@@ -18,7 +20,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false
-    })
+    }).concat(idxBrokerApi.middleware)
 })
 
 export const persistor = persistStore(store)

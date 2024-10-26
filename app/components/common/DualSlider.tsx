@@ -16,12 +16,12 @@ interface DualSliderProps {
 
 const DualSlider: FC<DualSliderProps> = ({ min, max, value, onInputChange, text }) => {
   const [thumb1, setThumb1] = useState(0)
-  const [thumb2, setThumb2] = useState(10000)
+  const [thumb2, setThumb2] = useState(max)
 
   useEffect(() => {
     setThumb1(value[0] || 0)
-    setThumb2(value[1] || 10000)
-  }, [value])
+    setThumb2(value[1] || max)
+  }, [max, value])
 
   const handleChange = (values: number[]) => {
     const newThumb1 = values[0]
@@ -38,7 +38,7 @@ const DualSlider: FC<DualSliderProps> = ({ min, max, value, onInputChange, text 
   return (
     <div className="pt-2 pr-2.5 col-span-12 md:col-span-6 lg:col-span-4">
       <p className="text-sm text-[#a8a8a8] mb-1">
-        {text} {`[${thumb1} - ${thumb2}]`} SqFt
+        {text} {`[${thumb1} - ${thumb2}]`} {text === 'Size' ? 'SqFt' : 'Acres'}
       </p>
       <RangeSlider
         min={min}

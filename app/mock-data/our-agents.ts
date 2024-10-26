@@ -11,11 +11,11 @@ import {
 } from '../data/social-media-links'
 import { fbIcon } from '../icons'
 
-const ourAgents = [
+const ourAgents = (activeListings: number) => [
   {
     img: '/images/eileen-removebg.png',
     name: 'Eileen Jonah',
-    activeListings: 12,
+    activeListings: activeListings,
     socialMedia: [
       {
         icon: fbIcon,
@@ -27,7 +27,6 @@ const ourAgents = [
   {
     img: '/images/carol-removebg.png',
     name: 'Carol Curley',
-    activeListings: 0,
     socialMedia: [
       {
         icon: fbIcon,
@@ -39,7 +38,6 @@ const ourAgents = [
   {
     img: '/images/jill-avery-removebg.png',
     name: 'Jill Avery',
-    activeListings: 6,
     socialMedia: [
       {
         icon: fbIcon,
@@ -63,7 +61,6 @@ const ourAgents = [
   {
     img: '/images/courtney-trahan-removebg.png',
     name: 'Courtney Trahan',
-    activeListings: 6,
     socialMedia: [
       {
         icon: fbIcon,
@@ -75,7 +72,6 @@ const ourAgents = [
   {
     img: '/images/annmarie-jonah-removebg.png',
     name: 'AnnMarie Jonah',
-    activeListings: 8,
     socialMedia: [
       {
         icon: fbIcon,
@@ -86,7 +82,6 @@ const ourAgents = [
   {
     img: '/images/sarah-bullock-removebg.png',
     name: 'Sarah Bullock',
-    activeListings: 0,
     socialMedia: [
       {
         icon: fbIcon,
@@ -97,7 +92,6 @@ const ourAgents = [
   {
     img: '/images/betsy-removebg.png',
     name: 'Betsy',
-    activeListings: 0,
     socialMedia: [
       {
         icon: fbIcon,
@@ -108,7 +102,6 @@ const ourAgents = [
   {
     img: '/images/joan-regan-removebg.png',
     name: 'Joan Regan',
-    activeListings: 2,
     socialMedia: [
       {
         icon: fbIcon,

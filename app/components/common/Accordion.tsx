@@ -7,13 +7,12 @@ const Accordion: FC<ChildrenProps> = ({ children }) => {
   const contentRef = useRef<HTMLDivElement>(null)
   const [contentHeight, setContentHeight] = useState<string>('0px')
 
-  const updateContentHeight = () => {
-    if (contentRef.current) {
-      setContentHeight(otherFeatures ? `${contentRef.current.scrollHeight}px` : '0px')
-    }
-  }
-
   useEffect(() => {
+    const updateContentHeight = () => {
+      if (contentRef.current) {
+        setContentHeight(otherFeatures ? `${contentRef.current.scrollHeight}px` : '0px')
+      }
+    }
     updateContentHeight()
 
     window.addEventListener('resize', updateContentHeight)

@@ -1,6 +1,7 @@
 'use client'
 
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useMemo } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { ADVANCED_SEARCH_FIELDS } from '../../data/form-input-fields'
 import useForm from '../../hooks/useForm'
 import OtherFeatures from './other-features/OtherFeatures'
@@ -11,21 +12,23 @@ import DynamicInputGroup from '@/app/components/advanced-search/DynamicInputGrou
 import inputConfig from '@/app/data/search/inputConfig'
 import pairedFormInputs from '@/app/data/search/pairedFormInputs'
 import { RootState, useAppDispatch, useAppSelector } from '@/app/redux/store'
-import { propertySearch, resetSearch } from '@/app/redux/features/listingSlice'
-import mockBrowseDreamHomesData from '@/app/mock-data/mock-browser-dream-homes-data'
+import { propertySearch, resetSearch, setHasDispatched } from '@/app/redux/features/listingSlice'
 import cleanInputs from '@/app/utils/cleanInputs'
-import { useSearchParams } from 'next/navigation'
 
 const AdvancedSearchForm = () => {
   const dispatch = useAppDispatch()
   const searchParams = useSearchParams()
-  const [hasDispatched, setHasDispatched] = useState(false)
-  const { hasSearched } = useAppSelector((state: RootState) => state.listing)
-  const filters = {} as any
+  const navigation = useRouter()
+  const { hasSearched, hasDispatched } = useAppSelector((state: RootState) => state.listing)
+  const cityName = searchParams.get('cityName')
 
-  searchParams.forEach((value, key) => {
-    filters[key] = value
-  })
+  const filters = useMemo(() => {
+    const filterObj: Record<string, string> = {}
+    searchParams.forEach((value, key) => {
+      filterObj[key] = value
+    })
+    return filterObj
+  }, [searchParams])
 
   const { inputs, handleInput, handleSelect, handleToggle, setInputs } = useForm(
     ADVANCED_SEARCH_FIELDS,
@@ -33,21 +36,26 @@ const AdvancedSearchForm = () => {
   )
 
   useEffect(() => {
-    if (!hasDispatched) {
-      if (Object.keys(filters).length > 0) {
-        dispatch(propertySearch({ properties: mockBrowseDreamHomesData, searchCriteria: filters }))
-        setHasDispatched(true)
-      }
+    if (cityName) {
+      dispatch(propertySearch({ searchCriteria: filters }))
+      dispatch(setHasDispatched(false)) // Reset to allow dispatch
     }
-  }, [dispatch, hasDispatched, filters])
+  }, [cityName, dispatch, filters])
+
+  useEffect(() => {
+    if (Object.keys(filters).length > 0 && !hasDispatched) {
+      dispatch(propertySearch({ searchCriteria: filters }))
+      dispatch(setHasDispatched(true))
+    }
+  }, [filters, dispatch, hasDispatched])
 
   const handlePropertySearch = (e: FormEvent) => {
     e.preventDefault()
 
     const cleanedInputs = cleanInputs(inputs)
-    dispatch(
-      propertySearch({ properties: mockBrowseDreamHomesData, searchCriteria: cleanedInputs })
-    )
+    if (Object.keys(cleanedInputs).length > 0) {
+      dispatch(propertySearch({ searchCriteria: cleanedInputs }))
+    }
   }
 
   const handleReset = (e: FormEvent) => {
@@ -62,6 +70,10 @@ const AdvancedSearchForm = () => {
     }, {})
 
     setInputs(resetState)
+
+    const pathname = window.location.pathname
+    // Update the URL without the query string
+    navigation.replace(pathname)
   }
 
   return (
@@ -90,13 +102,13 @@ const AdvancedSearchForm = () => {
           handleSelect={handleSelect}
         />
         <DynamicInputGroup
-          inputNames={['minSqFt', 'maxSqFt']}
+          inputNames={['rangeValue1', 'rangeValue2']}
           inputConfig={inputConfig}
           inputs={inputs}
           handleSelect={handleSelect}
         />
         <DynamicInputGroup
-          inputNames={['minLandAreaSqFt', 'maxLandAreaSqFt']}
+          inputNames={['rangeValue3', 'rangeValue4']}
           inputConfig={inputConfig}
           inputs={inputs}
           handleSelect={handleSelect}
@@ -107,7 +119,7 @@ const AdvancedSearchForm = () => {
         {hasSearched && (
           <button
             onClick={handleReset}
-            className="bg-zinc-900 flex items-center gap-x-1 px-5 py-2.5 text-orange"
+            className="bg-zinc-900 flex items-center gap-x-1 px-5 py-2.5 text-orange-500"
           >
             <span className="text-sm">Reset</span>
           </button>

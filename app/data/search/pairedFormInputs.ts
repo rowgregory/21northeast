@@ -1,10 +1,10 @@
 const pairedFormInputs = [
   'minPrice',
   'maxPrice',
-  'minSqFt',
-  'maxSqFt',
-  'minLandAreaSqFt',
-  'maxLandAreaSqFt'
+  'rangeValue1',
+  'rangeValue2',
+  'rangeValue3',
+  'rangeValue4'
 ]
 
 export default pairedFormInputs

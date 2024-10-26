@@ -10,9 +10,14 @@ import useCustomPathname from '@/app/utils/useCustomPathname'
 import Link from 'next/link'
 import AwesomeIcon from '../common/AwesomeIcon'
 import { eileenInsta } from '@/app/data/social-media-links'
+import { useRouter } from 'next/navigation'
+import { useAppDispatch } from '@/app/redux/store'
+import { setHasDispatched } from '@/app/redux/features/listingSlice'
 
 const Footer = () => {
+  const navigate = useRouter()
   const pathname = useCustomPathname()
+  const dispatch = useAppDispatch()
   const routes = [
     '/',
     '/team',
@@ -25,6 +30,11 @@ const Footer = () => {
   const isRouteMatched = routes.some((route) =>
     typeof route === 'string' ? route === pathname : route.test(pathname)
   )
+
+  const handleCitySearch = (city: string) => {
+    dispatch(setHasDispatched(false))
+    navigate.push(`/search?cityName=${city}`)
+  }
 
   return (
     <footer className={`${isRouteMatched ? 'flex' : 'hidden'}  flex-col`}>
@@ -77,7 +87,11 @@ const Footer = () => {
             <h5 className="text-white text-lg font-bold mb-5">Property Cities</h5>
             <div className="grid grid-cols-12 gap-2">
               {servicedCities.map((obj, i) => (
-                <div key={i} className="col-span-6 flex items-center gap-1 cursor-pointer">
+                <div
+                  onClick={() => handleCitySearch(obj.city)}
+                  key={i}
+                  className="col-span-6 flex items-center gap-1 cursor-pointer"
+                >
                   <AwesomeIcon icon={caretRightIcon} className="text-orange-500 w-3 h-3" />
                   <p className="text-[#a6a6a6] text-sm">{obj.city}</p>
                 </div>

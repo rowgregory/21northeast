@@ -1,11 +1,11 @@
 import listingOverviewData from '@/app/data/listing-overview-data'
 import listingAdditionalData from '@/app/data/listing-additional-data'
 import React, { FC, useState } from 'react'
-import { Property } from '@/app/types/mock/listing-types'
 import listingLocationData from '@/app/data/listing-location-data'
+import { Property } from '@/app/data/listing-types'
 
 interface DetailsDridOneProps {
-  listing: Property
+  listing: Property | undefined
 }
 
 const DetailsGridOne: FC<DetailsDridOneProps> = ({ listing }) => {
@@ -38,7 +38,7 @@ const DetailsGridOne: FC<DetailsDridOneProps> = ({ listing }) => {
           Additional
         </button>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 text-[#757575] text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-4 text-[#757575] text-sm">
         {[
           ...(section === 'Additional'
             ? listingAdditionalData(listing)

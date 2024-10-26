@@ -1,10 +1,10 @@
 interface ServicedCity {
-  city: string;
-  img: string;
+  city: string
+  img: string
   coordinates: {
-    lat: number,
+    lat: number
     long: number
-  };
+  }
 }
 
 const servicedCities: ServicedCity[] = [
@@ -86,6 +86,22 @@ const servicedCities: ServicedCity[] = [
     coordinates: {
       lat: 42.5982,
       long: -70.9493
+    }
+  },
+  {
+    city: 'Topsfield',
+    img: '/images/thmb-topsfield.jpg',
+    coordinates: {
+      lat: 42.6418,
+      long: -70.9505
+    }
+  },
+  {
+    city: 'Winthrop',
+    img: '/images/thmb-winthrop.jpeg',
+    coordinates: {
+      lat: 42.3748,
+      long: -70.9863
     }
   }
 ]

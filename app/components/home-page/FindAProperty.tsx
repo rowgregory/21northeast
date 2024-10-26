@@ -5,23 +5,25 @@ import Link from 'next/link'
 import PropertyCard from './PropertyCard'
 import useCarousel from '@/app/hooks/useCarousel'
 import { chevronLeftIcon, chevronRightIcon } from '@/app/icons'
-import mockBrowseDreamHomesData from '@/app/mock-data/mock-browser-dream-homes-data'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { orangeUnderline } from '../common/styles'
+import { RootState, useAppSelector } from '@/app/redux/store'
+import { Property } from '@/app/data/listing-types'
 
 const FindAProperty = () => {
-  const { previous, next, items, currentIndex } = useCarousel(mockBrowseDreamHomesData)
+  const { listings, loading } = useAppSelector((state: RootState) => state.listing)
+  const { previous, next, items, currentIndex } = useCarousel(listings)
   const [translateX, setTranslateX] = useState('0px')
 
-  const updateTransform = () => {
-    if (window.innerWidth < 768) {
-      setTranslateX(`translateX(-${currentIndex * (window.innerWidth - 6)}px)`)
-    } else {
-      setTranslateX(`translateX(-${currentIndex * 400}px)`)
-    }
-  }
-
   useEffect(() => {
+    const updateTransform = () => {
+      if (window.innerWidth < 768) {
+        setTranslateX(`translateX(-${currentIndex * (window.innerWidth - 6)}px)`)
+      } else {
+        setTranslateX(`translateX(-${currentIndex * 400}px)`)
+      }
+    }
+
     updateTransform()
     window.addEventListener('resize', updateTransform)
 
@@ -76,16 +78,26 @@ const FindAProperty = () => {
           </Link>
         </div>
       </div>
-      <div className={`relative w-full h-full flex overflow-hidden max-w-[2000px] mx-auto`}>
-        <div
-          className="flex transition-transform duration-300 ease-in-out snap-x"
-          style={{ transform: translateX }}
-        >
-          {items?.map((obj, index) => (
-            <PropertyCard key={index} property={obj} index={index} />
-          ))}
+      {loading ? (
+        <div className="w-full flex justify-center items-center h-[364px]">
+          <div className="loader"></div>
         </div>
-      </div>
+      ) : (
+        <div
+          className={`relative w-full h-full flex overflow-hidden max-w-[${
+            items?.length * 400
+          }px] mx-auto`}
+        >
+          <div
+            className="flex transition-transform duration-300 ease-in-out snap-x"
+            style={{ transform: translateX }}
+          >
+            {items?.map((obj: Property, index: number) => (
+              <PropertyCard key={index} property={obj} index={index} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

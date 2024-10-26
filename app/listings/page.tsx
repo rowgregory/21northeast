@@ -1,6 +1,6 @@
 'use client'
 
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 import Banner from '../components/common/Banner'
 import { orangeUnderline } from '../components/common/styles'
 import PropertySearchForm from '../forms/PropertySearchForm'
@@ -11,13 +11,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { filterIcon } from '../icons'
 import FilterDrawer from '../components/listings/FilterDrawer'
 import { RootState, useAppDispatch, useAppSelector } from '../redux/store'
-import { sortProperties } from '../redux/features/listingSlice'
+import { resetSearch, setToggleFilter, sortProperties } from '../redux/features/listingSlice'
 
 const ListingsPage = () => {
   const dispatch = useAppDispatch()
-  const { listings } = useAppSelector((state: RootState) => state.listing)
+  const { originalListings, searchedListings, sortedListings, toggleFilter } = useAppSelector(
+    (state: RootState) => state.listing
+  )
   const { inputs, setInputs } = useForm(['sortingOption'])
-  const [toggleFilter, setToggleFilter] = useState<boolean>(false)
+
+  useEffect(() => {
+    dispatch(resetSearch())
+  }, [dispatch])
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -30,12 +35,19 @@ const ListingsPage = () => {
     dispatch(sortProperties(value))
   }
 
+  const displayListings =
+    sortedListings !== null
+      ? sortedListings
+      : searchedListings !== null
+      ? searchedListings
+      : originalListings
+
   return (
     <div className="pb-60">
       <FilterDrawer toggleFilter={toggleFilter} setToggleFilter={setToggleFilter} />
       <Banner src="/images/listings.jpg" title="Listings" breadcrumb="Properties" />
       <div
-        onClick={() => setToggleFilter(true)}
+        onClick={() => dispatch(setToggleFilter(true))}
         className="fixed left-0 top-80 z-20 flex lg:hidden bg-white p-2.5 rounded-tr-md rounded-br-md shadow-[1px_2px_4px_rgba(0,0,0,.4)] items-center justify-center cursor-pointer"
       >
         <FontAwesomeIcon icon={filterIcon} className="w-3 h-3" />
@@ -45,9 +57,12 @@ const ListingsPage = () => {
           <PropertySearchForm type="listings" />
         </div>
         <div className="col-span-12 lg:col-span-9 px-3 sm:px-10 md:px-12 lg:px-0">
-          <h2 className={`uppercase text-4xl font-bold relative pb-4 mb-6 ${orangeUnderline}`}>
-            Properties
-          </h2>
+          <div className="flex gap-x-2">
+            <h2 className={`uppercase text-4xl font-bold relative pb-4 mb-6 ${orangeUnderline}`}>
+              Properties
+            </h2>
+            <span className="text-xl">({displayListings?.length})</span>
+          </div>
           <div className="flex items-center justify-between mb-3">
             <div></div>
             <div className="flex items-center">
@@ -69,7 +84,7 @@ const ListingsPage = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-8">
-            {listings?.map((property: any, i: number) => (
+            {displayListings?.map((property: any, i: number) => (
               <ListingsPropertyCard key={i} property={property} index={i} />
             ))}
           </div>

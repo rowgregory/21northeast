@@ -1,3 +1,5 @@
+import { Property } from '@/app/data/listing-types'
+
 interface AgentCardProps {
   agent: {
     img: string
@@ -11,20 +13,7 @@ interface AgentCardProps {
 }
 
 interface PropertyCardProps {
-  property: {
-    propertyId: string
-    img: string
-    propertyType: string
-    housePrice: string
-    address: string
-    builtYear: number
-    sqft: number
-    bedrooms: number
-    bathrooms: number
-    city: string
-    state: string
-    propertySubType: string
-  }
+  property: Property
   index: number
 }
 
@@ -34,7 +23,7 @@ interface PropertySearchFormProps {
 
 interface PropertyCardBottomBoxProps {
   index: number
-  sqft: number
+  sqFt: string
   bedrooms: number
   bathrooms: number
 }
