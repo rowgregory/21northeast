@@ -18,7 +18,7 @@ const ScrollToTopButton = () => {
       }
       className={`${
         isAtTop ? 'translate-x-14' : 'translate-x-0'
-      } fixed bottom-3 right-3 z-30 p-4 bg-zinc-800 flex items-center justify-center duration-200 cursor-pointer hover:bg-orange-500`}
+      } fixed bottom-3 right-3 z-30 p-3 bg-zinc-800 flex items-center justify-center duration-200 cursor-pointer hover:bg-orange-500`}
     >
       <FontAwesomeIcon icon={chevronUpIcon} className="text-white w-3 h-3" />
     </div>

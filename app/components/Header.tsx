@@ -98,7 +98,10 @@ const Header = () => {
                   `}
               >
                 <a href="tel:7817187665">
-                  <AwesomeIcon icon={phoneIcon} className="text-white w-7 h-7 rotate-[137deg]" />
+                  <AwesomeIcon
+                    icon={phoneIcon}
+                    className="text-white w-7 h-7 rotate-[137deg] phone-icon"
+                  />
                 </a>
               </div>
             </div>

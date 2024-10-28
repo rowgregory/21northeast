@@ -1,15 +1,13 @@
-import PropertySearchForm from "@/app/forms/PropertySearchForm";
-import React from "react";
+import PropertySearchForm from '@/app/forms/PropertySearchForm'
+import React from 'react'
 
 const PropertySearch = () => {
   return (
     <div className="bg-[#1a1a1a] w-full overflow-hidden">
       <div className="max-w-[1200px] w-full mx-auto grid grid-cols-12">
-        <div className="col-span-12 md:col-span-3 py-12 flex flex-col items-center sm:pt-28">
+        <div className="col-span-12 md:col-span-3 py-12 flex flex-col items-center xl:items-start sm:pt-28">
           <h1 className="text-4xl lg:text-5xl text-white uppercase font-bold text-center md:text-left">
-            <div className="text-center sm:text-lg md:text-left font-normal">
-              Discover Your
-            </div>
+            <div className="text-center sm:text-lg md:text-left font-normal">Discover Your</div>
             <span className="text-orange-500">E</span>pic <br />
             <span className="text-orange-500">J</span>ourney
           </h1>
@@ -27,7 +25,7 @@ const PropertySearch = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PropertySearch;
+export default PropertySearch
