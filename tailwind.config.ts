@@ -18,7 +18,10 @@ const config: Config = {
         15: '0.9375rem'
       },
       fontFamily: {
-        Poppins: [`"Poppins", sans-serif`]
+        Poppins: [`"Poppins", sans-serif`],
+        'Poppins-Medium': ['Poppins-Medium', 'sans-serif'],
+        'Poppins-SemiBold': ['Poppins-SemiBold', 'sans-serif'],
+        'Poppins-Bold': ['Poppins-Bold', 'sans-serif']
       },
       maxWidth: {
         1160: '1160px',

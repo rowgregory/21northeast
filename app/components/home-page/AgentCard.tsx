@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Picture from "../common/Picture";
-import { AgentCardProps } from "@/app/types/pages/home-page-types";
+import React, { FC } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Picture from '../common/Picture'
+import { AgentCardProps } from '@/app/types/pages/home-page-types'
 
 const AgentCard: FC<AgentCardProps> = ({ agent }) => {
   return (
@@ -9,7 +9,7 @@ const AgentCard: FC<AgentCardProps> = ({ agent }) => {
       <Picture
         src={agent.img}
         alt={agent.name}
-        className="w-full h-[420px] sm:h-[360px] object-contain md:object-cover"
+        className="w-full h-[420px] sm:h-[360px] object-cover"
         priority={true}
       />
       <div className="bg-zinc-900 text-white w-full text-center pt-[18px] pb-8">
@@ -30,7 +30,7 @@ const AgentCard: FC<AgentCardProps> = ({ agent }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AgentCard;
+export default AgentCard

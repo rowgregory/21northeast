@@ -1,39 +1,21 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import PropertyCard from './PropertyCard'
-import useCarousel from '@/app/hooks/useCarousel'
 import { chevronLeftIcon, chevronRightIcon } from '@/app/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { orangeUnderline } from '../common/styles'
 import { RootState, useAppSelector } from '@/app/redux/store'
-import { Property } from '@/app/data/listing-types'
+import SingleItemCarousel from '../SingleItemCarousel'
+import useSingleItemCarousel from '@/app/hooks/useSingleItemCarousel'
 
 const FindAProperty = () => {
   const { listings, loading } = useAppSelector((state: RootState) => state.listing)
-  const { previous, next, items, currentIndex } = useCarousel(listings)
-  const [translateX, setTranslateX] = useState('0px')
-
-  useEffect(() => {
-    const updateTransform = () => {
-      if (window.innerWidth < 768) {
-        setTranslateX(`translateX(-${currentIndex * (window.innerWidth - 6)}px)`)
-      } else {
-        setTranslateX(`translateX(-${currentIndex * 400}px)`)
-      }
-    }
-
-    updateTransform()
-    window.addEventListener('resize', updateTransform)
-
-    return () => {
-      window.removeEventListener('resize', updateTransform)
-    }
-  }, [currentIndex])
+  const { next, previous, currentIndex, totalItems, setCurrentIndex } =
+    useSingleItemCarousel(listings)
 
   return (
-    <div className="py-24">
+    <div className="pt-24 pb-36">
       <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center sm:justify-between mb-10 sm:mb-12">
         <div className={`pb-4 relative ${orangeUnderline}`}>
           <h1 className="text-3xl mb-1 uppercase font-semibold text-[#232323]">Find a Property</h1>
@@ -72,31 +54,25 @@ const FindAProperty = () => {
           </div>
           <Link
             href="/listings"
-            className="bg-black text-sm flex items-center justify-center px-4 h-full text-white"
+            className="bg-zinc-900 border-2 border-zinc-900 text-sm flex items-center justify-center px-4 h-full text-white duration-200 hover:border-2 hover:bg-white hover:text-zinc-900"
           >
             View All
           </Link>
         </div>
       </div>
       {loading ? (
-        <div className="w-full flex justify-center items-center h-[364px]">
-          <div className="loader"></div>
-        </div>
-      ) : (
-        <div
-          className={`relative w-full h-full flex overflow-hidden max-w-[${
-            items?.length * 400
-          }px] mx-auto`}
-        >
-          <div
-            className="flex transition-transform duration-300 ease-in-out snap-x"
-            style={{ transform: translateX }}
-          >
-            {items?.map((obj: Property, index: number) => (
-              <PropertyCard key={index} property={obj} index={index} />
-            ))}
+        <div className="h-[388px] w-full">
+          <div className="flex h-full justify-center items-center">
+            <div className="loader"></div>
           </div>
         </div>
+      ) : (
+        <SingleItemCarousel
+          items={listings}
+          setCurrentIndex={setCurrentIndex}
+          currentIndex={currentIndex}
+          totalItems={totalItems}
+        />
       )}
     </div>
   )
