@@ -51,7 +51,7 @@ const Services = () => {
               key={i}
               className="col-span-12 sm:col-span-6 lg:col-span-3 flex flex-col items-center"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-1">
                 <AwesomeIcon icon={stat.icon} className="w-8 h-8 text-orange-500" />
                 <h3 className="font-bold text-5xl">{stat.value}</h3>
               </div>

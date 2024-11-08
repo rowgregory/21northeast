@@ -3,17 +3,17 @@ import { briefCaseIcon, checkIcon, gemIcon, handshakeIcon } from '../icons'
 const servicesStatsData = [
   {
     icon: checkIcon,
-    value: '1B',
-    textKey: 'Projects Completed'
+    value: '500+',
+    textKey: 'Home Sold'
   },
   {
     icon: gemIcon,
-    value: '500K',
-    textKey: 'Web Awards'
+    value: '14 Days',
+    textKey: 'Avg Time to Sell'
   },
   {
     icon: handshakeIcon,
-    value: '1M',
+    value: '5000+',
     textKey: 'Happy Clients'
   },
   {
