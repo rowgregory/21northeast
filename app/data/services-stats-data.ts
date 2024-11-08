@@ -4,7 +4,7 @@ const servicesStatsData = [
   {
     icon: checkIcon,
     value: '500+',
-    textKey: 'Home Sold'
+    textKey: 'Homes Sold'
   },
   {
     icon: gemIcon,
