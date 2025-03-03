@@ -4,7 +4,6 @@ import React from 'react'
 import SqFtBedroomsAndBathroomsBox from '@/app/components/home-page/SqFtBedroomsAndBathroomsBox'
 import PropertyIdAndBarcode from '@/app/components/listings/PropertyIdAndBarcode'
 import TitleWithOrangeLine from '@/app/components/listings/TitleWithOrangeLine'
-import SingleListingMap from '@/app/components/SingleMapListing'
 import PropertySearchForm from '@/app/forms/PropertySearchForm'
 import ListingDetailsImageCarousel from '@/app/components/listings/ListingImageCarousel'
 import DetailsGridOne from '@/app/components/listings/DetailsGridOne'
@@ -14,6 +13,8 @@ import Picture from '@/app/components/common/Picture'
 import { RootState, useAppSelector } from '@/app/redux/store'
 import Roller from '@/app/components/loaders/Roller'
 import addCommas from '@/app/utils/addCommas'
+import dynamic from 'next/dynamic'
+const SingleListingMap = dynamic(() => import('@/app/components/SingleMapListing'), { ssr: false })
 
 const Listing = ({ listingID }: { listingID: string }) => {
   const { listings } = useAppSelector((state: RootState) => state.listing)
