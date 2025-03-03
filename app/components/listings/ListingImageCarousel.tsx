@@ -9,7 +9,7 @@ interface ListingImageCarouselProps {
 }
 
 const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
-  const imageRef = useRef<HTMLImageElement>(null)
+  const imageRef = useRef(null) as any
   const [translateX, setTranslateX] = useState('0px')
   const [translateSmallerX, setTranslateSmallerX] = useState('0px')
   const { previous, next, items, currentIndex, setCurrentIndex } = useCarousel(images)

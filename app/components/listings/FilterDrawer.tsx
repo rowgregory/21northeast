@@ -7,7 +7,7 @@ import BlackPageOverlay from '../common/BlackPageOverlay'
 import FilterDrawerProps from '@/app/types/pages/listings-types'
 
 const FilterDrawer: FC<FilterDrawerProps> = ({ toggleFilter, setToggleFilter }) => {
-  const overlayRef = useRef(null)
+  const overlayRef = useRef(null) as any
   const handleClose = useCallback(() => setToggleFilter(false), [setToggleFilter])
   useOutsideDetect(overlayRef, handleClose)
 
