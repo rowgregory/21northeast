@@ -14,8 +14,15 @@ import Picture from '@/app/components/common/Picture'
 import { RootState, useAppSelector } from '@/app/redux/store'
 import Roller from '@/app/components/loaders/Roller'
 import addCommas from '@/app/utils/addCommas'
+import { NextPage } from 'next'
 
-const ListingDetails = ({ params }: { params: { listingID: string } }) => {
+interface ListingDetailsProps {
+  params: {
+    listingID: string
+  }
+}
+
+const ListingDetails: NextPage<ListingDetailsProps> = ({ params }) => {
   const { listings } = useAppSelector((state: RootState) => state.listing)
   const listing = listings?.find((item) => String(item.listingID) === String(params?.listingID))
 
