@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import './animations.css'
+import 'ol/ol.css'
 import PageWrapper from './page-wrapper'
 
 export const metadata: Metadata = {
