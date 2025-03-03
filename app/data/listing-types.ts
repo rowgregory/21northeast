@@ -149,7 +149,7 @@ interface Property {
   idxPropType?: string
   idxStatus?: string
   idxYN?: string
-  image: {}
+  image: object
   images: [{ url: string }]
   internalID?: string
   latitude?: number

@@ -12,7 +12,7 @@ import { RootState, useAppSelector } from '@/app/redux/store'
 
 const HomePageBanner = () => {
   const { videoRef } = useVideo()
-  let { listing, loading } = useAppSelector((state: RootState) => state.listing)
+  const { listing, loading } = useAppSelector((state: RootState) => state.listing)
 
   const noListings = Object.values(listing)?.length === 0
 

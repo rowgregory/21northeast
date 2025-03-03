@@ -15,7 +15,7 @@ const NavigationDrawer = () => {
   const dispatch = useAppDispatch()
   const pathname = usePathname()
   const navigate = useRouter()
-  const overlayRef = useRef(null)
+  const overlayRef = useRef(null) as any
   const { inputs, handleInput } = useForm(['keyword'])
   const handleClose = useCallback(() => dispatch(closeNavigationDrawer()), [dispatch])
   const { navigationDrawer } = useAppSelector((state: RootState) => state.header)
