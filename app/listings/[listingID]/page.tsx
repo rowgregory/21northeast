@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Fragment } from 'react'
+import React, { FC, Fragment } from 'react'
 import SqFtBedroomsAndBathroomsBox from '@/app/components/home-page/SqFtBedroomsAndBathroomsBox'
 import PropertyIdAndBarcode from '@/app/components/listings/PropertyIdAndBarcode'
 import TitleWithOrangeLine from '@/app/components/listings/TitleWithOrangeLine'
@@ -14,7 +14,6 @@ import Picture from '@/app/components/common/Picture'
 import { RootState, useAppSelector } from '@/app/redux/store'
 import Roller from '@/app/components/loaders/Roller'
 import addCommas from '@/app/utils/addCommas'
-import { NextPage } from 'next'
 
 interface ListingDetailsProps {
   params: {
@@ -22,7 +21,7 @@ interface ListingDetailsProps {
   }
 }
 
-const ListingDetails: NextPage<ListingDetailsProps> = ({ params }) => {
+const ListingDetails: FC<ListingDetailsProps> = ({ params }) => {
   const { listings } = useAppSelector((state: RootState) => state.listing)
   const listing = listings?.find((item) => String(item.listingID) === String(params?.listingID))
 
