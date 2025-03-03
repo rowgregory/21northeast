@@ -2,7 +2,7 @@ const apiKey = process.env.NEXT_PUBLIC_IDX_BROKER_ACCOUNT_API_KEY
 
 const headers = {
   'Content-Type': 'application/x-www-form-urlencoded',
-  accesskey: apiKey
+  accesskey: apiKey || ''
 }
 
 const IDX_BROKER_BASE_URL = 'https://api.idxbroker.com'

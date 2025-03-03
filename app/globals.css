@@ -64,21 +64,6 @@ span {
   scrollbar-width: none;
 }
 
-/* Webkit browsers (Chrome, Safari) */
-::-webkit-scrollbar {
-  width: 6px; /* Set the width of the scrollbar */
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #f97316; /* Orange-500 color */
-  border-radius: 6px; /* Rounded thumb */
-  border: 3px solid rgba(0, 0, 0, 0);
-}
-
-::-webkit-scrollbar-track {
-  background-color: #3f3f46; /* Zinc-700 color */
-}
-
 .footer-after:before {
   background-image: url("/images/paven.png");
 }
@@ -120,8 +105,7 @@ input[type="checkbox"]:checked::before {
   width: calc(12 * var(--b));
   aspect-ratio: 1;
   border-radius: 50%;
-  background:
-    repeating-radial-gradient(
+  background: repeating-radial-gradient(
         calc(2 * var(--b)) at top,
         #0000 -1px,
         #fa7317 0 calc(50% - 1px),
@@ -137,8 +121,7 @@ input[type="checkbox"]:checked::before {
       50% 0;
   background-size: 150% 50%;
   background-repeat: no-repeat;
-  mask:
-    radial-gradient(
+  mask: radial-gradient(
         calc(1.5 * var(--b)) at calc(100% - var(--b) / 2) 0,
         #0000 calc(100% / 3),
         #fa7317 calc(100% / 3 + 1px) 110%,

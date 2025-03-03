@@ -14,6 +14,8 @@ const FindAProperty = () => {
   const { next, previous, currentIndex, totalItems, setCurrentIndex } =
     useSingleItemCarousel(listings)
 
+  if (listings?.length === 0) return <div className="pt-24 pb-36"></div>
+
   return (
     <div className="pt-24 pb-36">
       <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center sm:justify-between mb-10 sm:mb-12">

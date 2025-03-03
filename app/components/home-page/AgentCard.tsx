@@ -14,10 +14,12 @@ const AgentCard: FC<AgentCardProps> = ({ agent }) => {
       />
       <div className="bg-zinc-900 text-white w-full text-center pt-[18px] pb-8">
         <h2 className="text-xl font-bold">{agent.name}</h2>
-        <p className="text-gray-400 mt-1">{agent.activeListings} properties</p>
+        {agent?.name === 'Eileen Jonah' && agent?.activeListings > 0 && (
+          <p className="text-gray-400 mt-1">{agent.activeListings} properties</p>
+        )}
       </div>
       <div className="bg-orange-500 w-5/6 -mt-5 flex justify-center py-1.5 items-center h-9">
-        {agent.socialMedia.map((social, index) => (
+        {agent?.socialMedia.map((social, index) => (
           <a
             key={index}
             href={social.externalLink}

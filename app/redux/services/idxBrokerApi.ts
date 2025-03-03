@@ -15,39 +15,16 @@ export const idxBrokerApi = createApi({
   reducerPath: 'idxBrokerApi',
   baseQuery: baseQuery,
   endpoints: (builder) => ({
-    getAccountInfo: builder.query({
-      query: () => ({
-        url: `/idxBroker/get?endpoint=GET_ACCOUNT_INFO`,
-        method: 'GET'
-      }),
-      transformResponse: (response: unknown): any => {
-        return response
-      }
-    }),
-    getAccountType: builder.query({
-      query: () => ({
-        url: `/idxBroker/get?endpoint=GET_ACCOUNT_TYPE`,
-        method: 'GET'
-      }),
-      transformResponse: (response: unknown): any => {
-        return response
-      }
-    }),
-    getSoldPending: builder.query({
-      query: () => ({
-        url: `/idxBroker/get?endpoint=GET_SOLD_PENDING`,
-        method: 'GET'
-      }),
-      transformResponse: (response: unknown): any => {
-        return response
-      }
-    }),
     getFeatured: builder.query({
       query: () => ({
-        url: `/idxBroker/get?endpoint=GET_FEATURED`,
+        url: `/idxBroker/get-featured`,
         method: 'GET'
       }),
       transformResponse: (response: { data: { [key: string]: Property } }): any => {
+        if (Object.values(response.data).length === 0) {
+          return { listings: [], mostRecentListing: {} }
+        }
+
         const listings = Object.values(response.data).map((property) => {
           const newProp = {
             ...property,
@@ -56,7 +33,7 @@ export const idxBrokerApi = createApi({
           return newProp
         })
 
-        const mostRecentListing = listings.reduce(
+        const mostRecentListing = listings?.reduce(
           (latest: unknown | any, current: unknown | any) => {
             return new Date(current.dateAdded) > new Date(latest.dateAdded) ? current : latest
           }
@@ -64,7 +41,7 @@ export const idxBrokerApi = createApi({
 
         return { listings, mostRecentListing }
       },
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled
 
@@ -77,9 +54,4 @@ export const idxBrokerApi = createApi({
   })
 }) as any
 
-export const {
-  useGetAccountInfoQuery,
-  useGetAccountTypeQuery,
-  useGetSoldPendingQuery,
-  useGetFeaturedQuery
-} = idxBrokerApi
+export const { useGetFeaturedQuery } = idxBrokerApi

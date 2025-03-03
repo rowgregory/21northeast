@@ -29,7 +29,8 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
   const navigate = useRouter()
   const dispatch = useAppDispatch()
   const { inputs, handleInput, handleSelect, setInputs } = useForm(ADVANCED_SEARCH_FIELDS)
-  const { hasSearched } = useAppSelector((state: RootState) => state.listing)
+  const { hasSearched, listings } = useAppSelector((state: RootState) => state.listing)
+  const noListings = listings?.length === 0
 
   const styles = getPropertySearchFormStyles(type)
 
@@ -209,18 +210,21 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           aria-label="Property Id"
           placeholder="Property Id"
         />
-        <button
-          type="submit"
-          className={`${styles.button} gap-1.5 flex justify-center items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent`}
-        >
-          <FontAwesomeIcon
-            icon={type === 'listings' ? filterIcon : magnifyingGlassIcon}
-            className="text-white group-hover:text-orange-500 w-3 h-3"
-          />
-          <p className="text-sm text-white group-hover:text-orange-500">
-            {type === 'listings' ? 'Filter' : 'Search'}
-          </p>
-        </button>
+        <div className={`${styles.button} flex gap-x-2 items-center w-full justify-end`}>
+          {noListings && <div className="text-xs whitespace-nowrap">No active listings</div>}
+          <button
+            type="submit"
+            className={`gap-1.5 flex justify-center w-28 flex-shrink-0 items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent`}
+          >
+            <FontAwesomeIcon
+              icon={type === 'listings' ? filterIcon : magnifyingGlassIcon}
+              className="text-white group-hover:text-orange-500 w-3 h-3"
+            />
+            <p className="text-sm text-white group-hover:text-orange-500">
+              {type === 'listings' ? 'Filter' : 'Search'}
+            </p>
+          </button>
+        </div>
         {hasSearched && type === 'listings' && (
           <button
             onClick={handleReset}
