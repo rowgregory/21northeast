@@ -185,11 +185,11 @@ export const listingSlice = createSlice({
     },
     setFeaturedListings: (state, { payload }) => {
       state.loading = false
-      state.listings = payload.listings
-      state.activeListings = payload.listings.length
-      state.originalListings = payload.listings
-      state.listing = payload.mostRecentListing
-      state.sortedListings = payload.listings
+      state.listings = payload?.listings
+      state.activeListings = payload?.listings.length
+      state.originalListings = payload?.listings
+      state.listing = payload?.mostRecentListing
+      state.sortedListings = payload?.listings
     },
     setHasDispatched: (state, { payload }) => {
       state.hasDispatched = payload
