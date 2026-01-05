@@ -1,29 +1,36 @@
 'use client'
 
-import React, { ReactNode, Suspense, useEffect } from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ReactNode, useEffect } from 'react'
 import { Provider } from 'react-redux'
 import Hotjar from '@hotjar/browser'
-import { store } from './redux/store'
+import { store } from './lib/redux/store'
 import PageSlideWrapper from './page-slide-wrapper'
-import Loading from './loading'
+import { setFeaturedListings } from './lib/redux/features/listingSlice'
 
 const siteId = 5189124
 const hotjarVersion = 6
 
-const PageWrapper = ({ children }: { children: ReactNode }) => {
+const PageWrapper = ({
+  children,
+  featuredListings
+}: {
+  children: ReactNode
+  featuredListings: any
+}) => {
   useEffect(() => {
     Hotjar.init(siteId, hotjarVersion)
   }, [])
 
+  useEffect(() => {
+    if (featuredListings) {
+      store.dispatch(setFeaturedListings(featuredListings))
+    }
+  }, [featuredListings])
+
   return (
-    <Suspense fallback={<Loading />}>
-      <Provider store={store}>
-        <ChakraProvider>
-          <PageSlideWrapper>{children}</PageSlideWrapper>
-        </ChakraProvider>
-      </Provider>
-    </Suspense>
+    <Provider store={store}>
+      <PageSlideWrapper>{children}</PageSlideWrapper>
+    </Provider>
   )
 }
 

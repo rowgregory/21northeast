@@ -1,18 +1,19 @@
-import { FC, Fragment, useCallback, useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useOutsideDetect from '../../hooks/useOutsideDetect'
-import { timesIcon } from '../../icons'
-import PropertySearchForm from '../../forms/PropertySearchForm'
+import { FC, useCallback, useRef } from 'react'
+import useOutsideDetect from '@/app/lib/hooks/useOutsideDetect'
+import PropertySearchForm from '@/app/components/forms/PropertySearchForm'
 import BlackPageOverlay from '../common/BlackPageOverlay'
-import FilterDrawerProps from '@/app/types/pages/listings-types'
+import { X } from 'lucide-react'
 
-const FilterDrawer: FC<FilterDrawerProps> = ({ toggleFilter, setToggleFilter }) => {
+const FilterDrawer: FC<{
+  toggleFilter: boolean
+  setToggleFilter: (toggleFilter: boolean) => void
+}> = ({ toggleFilter, setToggleFilter }) => {
   const overlayRef = useRef(null) as any
   const handleClose = useCallback(() => setToggleFilter(false), [setToggleFilter])
   useOutsideDetect(overlayRef, handleClose)
 
   return (
-    <Fragment>
+    <>
       <BlackPageOverlay open={toggleFilter} />
       <div
         ref={overlayRef}
@@ -23,17 +24,13 @@ const FilterDrawer: FC<FilterDrawerProps> = ({ toggleFilter, setToggleFilter }) 
         } px-3 py-6 overflow-y-auto h-screen fixed z-[70] top-0 bottom:0 transition-all duration-300 bg-white`}
       >
         <div className="mb-7 flex items-center justify-end">
-          <FontAwesomeIcon
-            onClick={handleClose}
-            icon={timesIcon}
-            className="w-3 h-3 text-zinc-800 cursor-pointer"
-          />
+          <X onClick={handleClose} className="w-3 h-3 text-zinc-800 cursor-pointer" />
         </div>
         <div className="bg-[#f8f8f8] p-2.5">
           <PropertySearchForm type="listings" />
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 

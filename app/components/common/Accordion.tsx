@@ -1,5 +1,5 @@
-import { RootState, useAppSelector } from '@/app/redux/store'
-import { ChildrenProps } from '@/app/types/common-types'
+import { RootState, useAppSelector } from '@/app/lib/redux/store'
+import { ChildrenProps } from '@/app/lib/types/common-types'
 import React, { FC, useEffect, useRef, useState } from 'react'
 
 const Accordion: FC<ChildrenProps> = ({ children }) => {

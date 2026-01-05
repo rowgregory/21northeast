@@ -1,19 +1,17 @@
 'use client'
 
-import React, { FormEvent } from 'react'
 import Picture from './components/common/Picture'
 import Link from 'next/link'
-import AwesomeIcon from './components/common/AwesomeIcon'
-import { magnifyingGlassIcon } from './icons'
-import useForm from './hooks/useForm'
 import { useRouter } from 'next/navigation'
-import { FourZeroFour, NotFoundBg } from './data/hosted-image-links'
+import { FourZeroFour, NotFoundBg } from './lib/constants/hosted-image-links'
+import useForm from './lib/hooks/useForm'
+import { Search } from 'lucide-react'
 
 const NotFound = () => {
   const { inputs, handleInput } = useForm(['keyword'])
   const { push } = useRouter()
 
-  const handleKeywordSearch = (e: FormEvent) => {
+  const handleKeywordSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     push(`/listings?keyword=${inputs.keyword}`)
   }
@@ -60,10 +58,7 @@ const NotFound = () => {
               value={inputs.keyword as string}
             />
             <button type="submit">
-              <AwesomeIcon
-                icon={magnifyingGlassIcon}
-                className="w-4 h-4 text-white duration-200 hover:text-orange-500"
-              />
+              <Search className="w-4 h-4 text-white duration-200 hover:text-orange-500" />
             </button>
           </form>
         </div>

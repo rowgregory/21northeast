@@ -1,82 +1,133 @@
 'use client'
 
-import React from 'react'
 import Link from 'next/link'
-import { chevronLeftIcon, chevronRightIcon } from '@/app/icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { orangeUnderline } from '../common/styles'
-import { RootState, useAppSelector } from '@/app/redux/store'
+import { useListingSelector } from '@/app/lib/redux/store'
 import SingleItemCarousel from '../SingleItemCarousel'
-import useSingleItemCarousel from '@/app/hooks/useSingleItemCarousel'
+import useSingleItemCarousel from '@/app/lib/hooks/useSingleItemCarousel'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { buttonVariants, containerVariants, titleVariants } from '@/app/lib/constants/motion'
 
 const FindAProperty = () => {
-  const { listings, loading } = useAppSelector((state: RootState) => state.listing)
+  const { listings } = useListingSelector()
   const { next, previous, currentIndex, totalItems, setCurrentIndex } =
     useSingleItemCarousel(listings)
 
-  if (listings?.length === 0) return <div className="pt-24 pb-36"></div>
+  if (listings?.length === 0) {
+    return (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="pt-24 pb-36"
+      >
+        <div className="max-w-[1200px] mx-auto w-full px-3">
+          {/* Header */}
+          <motion.div variants={titleVariants} className={`pb-4 relative ${orangeUnderline} mb-12`}>
+            <h1 className="text-3xl mb-1 uppercase font-semibold text-[#232323]">
+              Find a Property
+            </h1>
+            <p className="uppercase font-normal text-[#989898] text-sm">Your Perfect Home Awaits</p>
+          </motion.div>
+
+          {/* Empty State */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white border border-gray-200 p-12 text-center"
+          >
+            <p className="text-[#4a4a4a] text-lg font-medium mb-3">
+              No listings available at this time.
+            </p>
+            <p className="text-[#989898] text-base mb-8">
+              Please check back soon or contact Eileen for more information.
+            </p>
+            <motion.div whileHover="hover" whileTap="tap">
+              <a
+                href="tel:7817187665"
+                className="inline-block bg-orange-500 text-white font-bold uppercase text-sm px-6 py-3 hover:bg-orange-600 transition-colors w-fit"
+              >
+                Contact Eileen
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
-    <div className="pt-24 pb-36">
-      <div className="max-w-[1200px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center sm:justify-between mb-10 sm:mb-12">
-        <div className={`pb-4 relative ${orangeUnderline}`}>
-          <h1 className="text-3xl mb-1 uppercase font-semibold text-[#232323]">Find a Property</h1>
-          <p className="uppercase font-normal text-[#989898]">Your Perfect Home Awaits</p>
-        </div>
-        <div className="flex items-start sm:items-center h-9 gap-3 mt-8 md:mt-0">
-          <div className="flex items-center h-9">
-            <div
-              className={`bg-gray-100 h-full w-7 flex items-center justify-center relative
-                before:absolute before:content-[''] before:left-full before:z-20 before:bottom-0 before:top-0   
-                before:border-b-transparent before:border-b-0
-                before:border-t-gray-100 before:border-t-[36px]
-                before:border-r-transparent before:border-r-[10px]
-              `}
-            >
-              <FontAwesomeIcon
-                icon={chevronLeftIcon}
-                className="w-3 h-3 cursor-pointer p-2"
-                onClick={previous}
-              />
-            </div>
-            <div
-              className={`bg-orange-500 h-full w-9 flex items-center justify-center relative
-                before:absolute before:content-[''] before:right-full before:z-10 before:bottom-0 before:top-0   
-                before:border-b-orange-500 before:border-b-[36px]
-                before:border-t-transparent before:border-t-0
-                before:border-l-transparent before:border-l-0
-              `}
-            >
-              <FontAwesomeIcon
-                icon={chevronRightIcon}
-                className="w-3 h-3 text-white cursor-pointer p-2"
-                onClick={next}
-              />
-            </div>
-          </div>
-          <Link
-            href="/listings"
-            className="bg-zinc-900 border-2 border-zinc-900 text-sm flex items-center justify-center px-4 h-full text-white duration-200 hover:border-2 hover:bg-white hover:text-zinc-900"
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="pt-24 pb-36"
+    >
+      <div className="max-w-[1200px] mx-auto w-full px-3">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 gap-8">
+          {/* Title */}
+          <motion.div variants={titleVariants} className={`pb-4 relative ${orangeUnderline}`}>
+            <h1 className="text-3xl mb-1 uppercase font-semibold text-[#232323]">
+              Find a Property
+            </h1>
+            <p className="uppercase font-normal text-[#989898] text-sm">Your Perfect Home Awaits</p>
+          </motion.div>
+
+          {/* Controls */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center gap-3"
           >
-            View All
-          </Link>
+            {/* Navigation Buttons */}
+            <div className="flex items-center h-10 border border-gray-200">
+              <motion.button
+                whileHover={{ backgroundColor: '#f3f4f6' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={previous}
+                className="h-full px-3 flex items-center justify-center bg-white hover:bg-gray-50 transition-colors"
+                aria-label="Previous listing"
+              >
+                <ChevronLeft className="w-4 h-4 text-[#232323]" />
+              </motion.button>
+              <motion.button
+                whileHover={{ backgroundColor: '#ea580c' }}
+                whileTap={{ scale: 0.95 }}
+                onClick={next}
+                className="h-full px-3 flex items-center justify-center bg-orange-500 transition-colors"
+                aria-label="Next listing"
+              >
+                <ChevronRight className="w-4 h-4 text-white" />
+              </motion.button>
+            </div>
+
+            {/* View All Button */}
+            <motion.div whileHover="hover" whileTap="tap" variants={buttonVariants}>
+              <Link
+                href="/listings"
+                className="bg-[#232323] text-white text-sm font-semibold uppercase px-6 py-2.5 transition-colors"
+              >
+                View All
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
+
+        {/* Carousel */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+          <SingleItemCarousel
+            items={listings}
+            setCurrentIndex={setCurrentIndex}
+            currentIndex={currentIndex}
+            totalItems={totalItems}
+          />
+        </motion.div>
       </div>
-      {loading ? (
-        <div className="h-[388px] w-full">
-          <div className="flex h-full justify-center items-center">
-            <div className="loader"></div>
-          </div>
-        </div>
-      ) : (
-        <SingleItemCarousel
-          items={listings}
-          setCurrentIndex={setCurrentIndex}
-          currentIndex={currentIndex}
-          totalItems={totalItems}
-        />
-      )}
-    </div>
+    </motion.div>
   )
 }
 

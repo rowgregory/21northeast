@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { VideoProps } from '@/app/types/common-types'
+import { VideoProps } from '@/app/lib/types/common-types'
 
 const Video: FC<VideoProps> = ({ videoRef, src }) => {
   return (

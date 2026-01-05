@@ -1,24 +1,48 @@
 import { NextResponse } from 'next/server'
-import { CLIENTS, headers, IDX_BROKER_BASE_URL, FEATURED } from '../../../utils/apiUtils'
 
 export async function GET() {
   try {
-    const response = await fetch(`${IDX_BROKER_BASE_URL}/${CLIENTS}/${FEATURED}`, {
-      headers
-    })
+    const headers = new Headers()
+    const apiKey = process.env.IDX_BROKER_API_KEY || ''
 
+    if (!apiKey) {
+      return NextResponse.json({ listings: [], count: 0 })
+    }
+
+    headers.set('accesskey', apiKey)
+
+    const url = `https://api.idxbroker.com/clients/featured`
+
+    const response = await fetch(url, { headers })
+
+    // Handle 204 No Content
     if (response.status === 204) {
-      return NextResponse.json({ data: {} }, { status: 200 })
+      return NextResponse.json({ listings: [], count: 0 })
     }
 
     if (!response.ok) {
-      const errorBody = await response.text()
-      return NextResponse.json({ message: errorBody }, { status: response.status })
+      return NextResponse.json({ listings: [], count: 0 }, { status: response.status })
     }
 
-    const data = await response.json()
-    return NextResponse.json(data)
-  } catch {
-    return NextResponse.json({ message: 'Failed to fetch listings' }, { status: 500 })
+    const responseText = await response.text()
+
+    if (!responseText) {
+      return NextResponse.json({ listings: [], count: 0 })
+    }
+
+    const data = JSON.parse(responseText)
+
+    if (!data.data || Object.values(data.data).length === 0) {
+      return NextResponse.json({ listings: [], count: 0 })
+    }
+
+    const listings = Object.values(data.data).map((property: any) => ({
+      ...property,
+      images: property.image ? Object.values(property.image) : []
+    }))
+
+    return NextResponse.json({ listings, count: listings.length })
+  } catch (error) {
+    return NextResponse.json({ listings: [], count: 0 }, { status: 500 })
   }
 }

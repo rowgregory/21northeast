@@ -1,11 +1,10 @@
 import React, { useCallback } from 'react'
 import Picture from './common/Picture'
-import { Property } from '../data/listing-types'
-import AwesomeIcon from './common/AwesomeIcon'
-import addCommas from '../utils/addCommas'
 import Link from 'next/link'
 import PropertyCardBottomBox from './property-card/PropertyCardBottomBox'
-import { locationDotIcon } from '../icons'
+import addCommas from '../lib/utils/addCommas'
+import { Property } from '../lib/types/listing-types'
+import { MapPin } from 'lucide-react'
 
 interface SingleItemCarouselProps {
   items: Property[]
@@ -64,7 +63,7 @@ const SingleItemCarousel: React.FC<SingleItemCarouselProps> = ({
                         <div className="text-white bg-red-500 px-3 text-sm py-0.5">For Sale</div>
                       </div>
                       <div className="flex items-center gap-1 mb-5">
-                        <AwesomeIcon icon={locationDotIcon} className="w-3 h-3 text-orange-500" />
+                        <MapPin className="w-3 h-3 text-orange-500" />
                         <p className="text-gray-600 text-sm mb-1 truncate">
                           {property?.address} {property?.cityName},{' '}
                           {property?.state?.substring(0, 2).toUpperCase()} {property?.zip4}

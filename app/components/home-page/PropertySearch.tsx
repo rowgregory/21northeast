@@ -1,5 +1,4 @@
-import PropertySearchForm from '@/app/forms/PropertySearchForm'
-import React from 'react'
+import PropertySearchForm from '@/app/components/forms/PropertySearchForm'
 
 const PropertySearch = () => {
   return (

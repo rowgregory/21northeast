@@ -1,8 +1,8 @@
-import listingOverviewData from '@/app/data/listing-overview-data'
-import listingAdditionalData from '@/app/data/listing-additional-data'
+import listingOverviewData from '@/app/lib/utils/listing-overview-data'
+import listingAdditionalData from '@/app/lib/utils/listing-additional-data'
 import React, { FC, useState } from 'react'
-import listingLocationData from '@/app/data/listing-location-data'
-import { Property } from '@/app/data/listing-types'
+import listingLocationData from '@/app/lib/utils/listing-location-data'
+import { Property } from '@/app/lib/types/listing-types'
 
 interface DetailsDridOneProps {
   listing: Property | undefined

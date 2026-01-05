@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
-import listingFinancialData from '@/app/data/listing-financial-data'
-import { Property } from '@/app/data/listing-types'
+import listingFinancialData from '@/app/lib/utils/listing-financial-data'
+import { Property } from '@/app/lib/types/listing-types'
 
 interface DetailsGridThreeProps {
   listing: Property | undefined

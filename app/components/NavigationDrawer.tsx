@@ -1,15 +1,14 @@
 import { FormEvent, Fragment, useCallback, useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useOutsideDetect from '../hooks/useOutsideDetect'
-import { RootState, useAppDispatch, useAppSelector } from '../redux/store'
-import { closeNavigationDrawer } from '../redux/features/headerSlice'
+import { useAppDispatch, useHeaderSeletor } from '../lib/redux/store'
+import { closeNavigationDrawer } from '../lib/redux/features/headerSlice'
 import BlackPageOverlay from './common/BlackPageOverlay'
-import { magnifyingGlassIcon } from '../icons'
-import useForm from '../hooks/useForm'
 import Link from 'next/link'
-import useRemoveScroll from '../hooks/useRemoveScroll'
-import headerLinksData from '../data/header-links-data'
+import headerLinksData from '../lib/utils/header-links-data'
 import { usePathname, useRouter } from 'next/navigation'
+import useForm from '../lib/hooks/useForm'
+import useOutsideDetect from '../lib/hooks/useOutsideDetect'
+import useRemoveScroll from '../lib/hooks/useRemoveScroll'
+import { Search } from 'lucide-react'
 
 const NavigationDrawer = () => {
   const dispatch = useAppDispatch()
@@ -18,7 +17,7 @@ const NavigationDrawer = () => {
   const overlayRef = useRef(null) as any
   const { inputs, handleInput } = useForm(['keyword'])
   const handleClose = useCallback(() => dispatch(closeNavigationDrawer()), [dispatch])
-  const { navigationDrawer } = useAppSelector((state: RootState) => state.header)
+  const { navigationDrawer } = useHeaderSeletor()
   useOutsideDetect(overlayRef, handleClose)
   useRemoveScroll(navigationDrawer)
 
@@ -52,7 +51,7 @@ const NavigationDrawer = () => {
               type="submit"
               className="flex items-center gap-2 bg-orange-500 h-full px-4 border-[1px] border-orange-500"
             >
-              <FontAwesomeIcon icon={magnifyingGlassIcon} className="w-4 h-4 text-white" />
+              <Search className="w-4 h-4 text-white" />
             </button>
           </form>
         </div>

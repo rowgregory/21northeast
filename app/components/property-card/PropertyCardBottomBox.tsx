@@ -1,7 +1,6 @@
-import React, { FC } from 'react'
-import { bedIcon, draftingCompassIcon, showerIcon } from '@/app/icons'
-import { PropertyCardBottomBoxProps } from '@/app/types/pages/home-page-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FC } from 'react'
+import { PropertyCardBottomBoxProps } from '@/app/lib/types/home-page-types'
+import { Bed, DraftingCompass, ShowerHead } from 'lucide-react'
 
 const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
   index,
@@ -16,15 +15,15 @@ const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
       } h-8 w-full flex items-center justify-between px-3 text-xs text-white`}
     >
       <div className="flex items-center gap-2">
-        <FontAwesomeIcon icon={draftingCompassIcon} className="w-4 h-4 text-white" />
+        <DraftingCompass className="w-4 h-4 text-white" />
         <p className="text-white font-bold leading-4">{sqFt} SqFt</p>
       </div>
       <div className="flex items-center gap-2">
-        <FontAwesomeIcon icon={bedIcon} className="w-4 h-4 text-white" />
+        <Bed className="w-4 h-4 text-white" />
         <p className="text-white font-bold leading-4">{bedrooms || 0}</p>
       </div>
       <div className="flex items-center gap-2 pr-6">
-        <FontAwesomeIcon icon={showerIcon} className="w-4 h-4 text-white" />
+        <ShowerHead className="w-4 h-4 text-white" />
         <p className="text-white font-bold leading-4">{bathrooms || 0}</p>
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { FC } from 'react'
-import { BannerProps } from '@/app/types/common-types'
+import { BannerProps } from '@/app/lib/types/common-types'
 import Picture from './Picture'
 import Breadcrumb from './Breadcrumb'
 

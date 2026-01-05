@@ -1,6 +1,6 @@
 {
   "name": "21northeast",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,16 +9,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.2",
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^3.1.1",
     "@hotjar/browser": "^1.0.9",
     "@prisma/client": "^5.22.0",
     "@reduxjs/toolkit": "^2.5.0",
+    "framer-motion": "^12.4.3",
+    "lucide-react": "^0.511.0",
     "next": "^16.0.10",
+    "next-sitemap": "^4.2.3",
     "ol": "^10.2.1",
     "prisma": "^5.22.0",
     "react": "^19.2.3",

@@ -1,4 +1,4 @@
-import { DynamicInputProps } from '@/app/types/search-types'
+import { DynamicInputProps } from '@/app/lib/types/search-types'
 import { FC } from 'react'
 
 const styles = {

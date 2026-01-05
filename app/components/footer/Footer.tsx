@@ -1,18 +1,16 @@
 'use client'
 
-import React from 'react'
 import { logoOrangeLines } from '../common/styles'
 import Logo from '../common/Logo'
-import { caretRightIcon, envelopeIcon, instaIcon, locationDotIcon, phoneIcon } from '@/app/icons'
-import servicedCities from '@/app/data/serviced-cities'
-import headerLinksData from '@/app/data/header-links-data'
-import useCustomPathname from '@/app/utils/useCustomPathname'
+import servicedCities from '@/app/lib/constants/serviced-cities'
+import headerLinksData from '@/app/lib/utils/header-links-data'
 import Link from 'next/link'
-import AwesomeIcon from '../common/AwesomeIcon'
-import { eileenInsta } from '@/app/data/social-media-links'
+import { eileenInsta } from '@/app/lib/constants/social-media-links'
 import { useRouter } from 'next/navigation'
-import { useAppDispatch } from '@/app/redux/store'
-import { setHasDispatched } from '@/app/redux/features/listingSlice'
+import { useAppDispatch } from '@/app/lib/redux/store'
+import { setHasDispatched } from '@/app/lib/redux/features/listingSlice'
+import useCustomPathname from '@/app/lib/utils/useCustomPathname'
+import { ChevronRight, Mail, MapPin, Phone, PictureInPicture } from 'lucide-react'
 
 const Footer = () => {
   const navigate = useRouter()
@@ -61,25 +59,22 @@ const Footer = () => {
                 onClick={() => window.open(eileenInsta, '_blank')}
                 className="w-10 h-10 rounded-full bg-[#28292b] hover:bg-[#f8f8f8] duration-200 flex items-center justify-center group cursor-pointer"
               >
-                <AwesomeIcon
-                  icon={instaIcon}
-                  className="text-orange-500 w-4 h-4 group-hover:text-[#28292b]"
-                />
+                <PictureInPicture className="text-orange-500 w-4 h-4 group-hover:text-[#28292b]" />
               </div>
             </div>
           </div>
           <div className="col-span-12 md:col-span-4">
             <h5 className="text-white text-lg font-bold mb-5">Get in touch</h5>
             <div className="flex items-center gap-2 mb-1.5">
-              <AwesomeIcon icon={locationDotIcon} className="text-orange-500 w-3 h-3" />
+              <MapPin className="text-orange-500 w-3 h-3" />
               <p className="text-footer-p text-sm">100 Sagamore St Lynn, MA 01902</p>
             </div>
             <div className="flex items-center gap-2 mb-1.5">
-              <AwesomeIcon icon={phoneIcon} className="text-orange-500 w-3 h-3" />
+              <Phone className="text-orange-500 w-3 h-3" />
               <p className="text-footer-p text-sm">(781) 718-7665</p>
             </div>
             <div className="flex items-center gap-2 mb-1.5">
-              <AwesomeIcon icon={envelopeIcon} className="text-orange-500 w-3 h-3" />
+              <Mail className="text-orange-500 w-3 h-3" />
               <p className="text-footer-p text-sm">ejonah@c21ne.com</p>
             </div>
           </div>
@@ -92,7 +87,7 @@ const Footer = () => {
                   key={i}
                   className="col-span-6 flex items-center gap-1 cursor-pointer"
                 >
-                  <AwesomeIcon icon={caretRightIcon} className="text-orange-500 w-3 h-3" />
+                  <ChevronRight className="text-orange-500 w-3 h-3" />
                   <p className="text-[#a6a6a6] text-sm">{obj.city}</p>
                 </div>
               ))}

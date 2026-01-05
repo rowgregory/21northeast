@@ -1,8 +1,7 @@
-import useCarousel from '@/app/hooks/useCarousel'
-import React, { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import Picture from '../common/Picture'
-import AwesomeIcon from '../common/AwesomeIcon'
-import { chevronLeftIcon, chevronRightIcon } from '@/app/icons'
+import useCarousel from '@/app/lib/hooks/useCarousel'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ListingImageCarouselProps {
   images: any
@@ -56,13 +55,13 @@ const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
             onClick={previous}
             className=" w-12 h-[58px] p-2 bg-white hover:bg-gray-200 transition cursor-pointer"
           >
-            <AwesomeIcon icon={chevronLeftIcon} className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={next}
             className="w-12 h-[58px] p-2 bg-orange-500 transition cursor-pointer"
           >
-            <AwesomeIcon icon={chevronRightIcon} className="w-4 h-4 text-white" />
+            <ChevronRight className="w-4 h-4 text-white" />
           </button>
         </div>
       </div>

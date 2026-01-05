@@ -1,23 +1,21 @@
 'use client'
 
-import React, { FC, Fragment } from 'react'
-import { ChildrenProps } from './types/common-types'
-import Header from './components/Header'
-import KeywordModal from './modals/KeywordModal'
+import { FC } from 'react'
+import Header from './components/header/Header'
+import KeywordModal from './components/modals/KeywordModal'
 import NavigationDrawer from './components/NavigationDrawer'
 import ScrollToTopButton from './components/ScrollToTopButton'
 import Footer from './components/footer/Footer'
-import { RootState, useAppSelector } from './redux/store'
-import { useGetFeaturedQuery } from './redux/services/idxBrokerApi'
-import useScrollToTop from './hooks/useScrollTop'
+import { useHeaderSeletor } from './lib/redux/store'
+import useScrollToTop from '@/app/lib/hooks/useScrollTop'
+import { ChildrenProps } from './lib/types/common-types'
 
 const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
-  const { navigationDrawer } = useAppSelector((state: RootState) => state.header)
-  useGetFeaturedQuery()
+  const { navigationDrawer } = useHeaderSeletor()
   useScrollToTop()
 
   return (
-    <Fragment>
+    <>
       <NavigationDrawer />
       <Header />
       <KeywordModal />
@@ -30,7 +28,7 @@ const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
         <Footer />
       </div>
       <ScrollToTopButton />
-    </Fragment>
+    </>
   )
 }
 

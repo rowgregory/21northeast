@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FC } from 'react'
+import { ChangeEvent, FC } from 'react'
 import DynamicInput from './DynamicInput'
-import { DynamicInputGroupProps } from '@/app/types/search-types'
+import { DynamicInputGroupProps } from '@/app/lib/types/search-types'
 
 const DynamicInputGroup: FC<DynamicInputGroupProps> = ({
   inputNames,

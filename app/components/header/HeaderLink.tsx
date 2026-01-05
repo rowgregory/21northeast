@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
-import { HeaderLinkProps } from '@/app/types/header-types'
+import { HeaderLinkProps } from '@/app/lib/types/header-types'
 import { largeOrangeUpChevron } from '../common/styles'
 
 const HeaderLink: FC<HeaderLinkProps> = ({ linkKey, active, textKey }) => {

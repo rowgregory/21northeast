@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
-import listingExteriorData from '@/app/data/listing-exterior-data'
-import listingInteriorData from '@/app/data/listing-interior-data'
-import { Property } from '@/app/data/listing-types'
+import listingExteriorData from '@/app/lib/utils/listing-exterior-data'
+import listingInteriorData from '@/app/lib/utils/listing-interior-data'
+import { Property } from '@/app/lib/types/listing-types'
 
 interface DetailsDridTwoProps {
   listing: Property | undefined

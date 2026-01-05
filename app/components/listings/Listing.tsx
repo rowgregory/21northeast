@@ -1,18 +1,17 @@
 'use client'
 
-import React from 'react'
 import SqFtBedroomsAndBathroomsBox from '@/app/components/home-page/SqFtBedroomsAndBathroomsBox'
 import PropertyIdAndBarcode from '@/app/components/listings/PropertyIdAndBarcode'
 import TitleWithOrangeLine from '@/app/components/listings/TitleWithOrangeLine'
-import PropertySearchForm from '@/app/forms/PropertySearchForm'
+import PropertySearchForm from '@/app/components/forms/PropertySearchForm'
 import ListingDetailsImageCarousel from '@/app/components/listings/ListingImageCarousel'
 import DetailsGridOne from '@/app/components/listings/DetailsGridOne'
 import DetailsGridTwo from '@/app/components/listings/DetailsGridTwo'
 import DetailsGridThree from '@/app/components/listings/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
-import { RootState, useAppSelector } from '@/app/redux/store'
+import { RootState, useAppSelector } from '@/app/lib/redux/store'
 import Roller from '@/app/components/loaders/Roller'
-import addCommas from '@/app/utils/addCommas'
+import addCommas from '@/app/lib/utils/addCommas'
 import dynamic from 'next/dynamic'
 const SingleListingMap = dynamic(() => import('@/app/components/SingleMapListing'), { ssr: false })
 
