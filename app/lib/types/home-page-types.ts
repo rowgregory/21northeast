@@ -1,5 +1,3 @@
-import { Property } from '@/app/lib/types/listing-types'
-
 interface AgentCardProps {
   agent: {
     img: string
@@ -10,11 +8,6 @@ interface AgentCardProps {
       externalLink: string
     }[]
   }
-}
-
-interface PropertyCardProps {
-  property: Property
-  index: number
 }
 
 interface PropertySearchFormProps {
@@ -28,9 +21,4 @@ interface PropertyCardBottomBoxProps {
   bathrooms: number
 }
 
-export type {
-  AgentCardProps,
-  PropertyCardProps,
-  PropertySearchFormProps,
-  PropertyCardBottomBoxProps
-}
+export type { AgentCardProps, PropertySearchFormProps, PropertyCardBottomBoxProps }

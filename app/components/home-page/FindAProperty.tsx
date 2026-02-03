@@ -2,19 +2,18 @@
 
 import Link from 'next/link'
 import { orangeUnderline } from '../common/styles'
-import { useListingSelector } from '@/app/lib/redux/store'
 import SingleItemCarousel from '../SingleItemCarousel'
 import useSingleItemCarousel from '@/app/lib/hooks/useSingleItemCarousel'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { buttonVariants, containerVariants, titleVariants } from '@/app/lib/constants/motion'
+import { RepliersListing } from '@/app/lib/types/repliers'
 
-const FindAProperty = () => {
-  const { listings } = useListingSelector()
+const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {
   const { next, previous, currentIndex, totalItems, setCurrentIndex } =
-    useSingleItemCarousel(listings)
+    useSingleItemCarousel(allListings)
 
-  if (listings?.length === 0) {
+  if (allListings?.length === 0) {
     return (
       <motion.div
         initial="hidden"
@@ -120,7 +119,7 @@ const FindAProperty = () => {
         {/* Carousel */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <SingleItemCarousel
-            items={listings}
+            items={allListings}
             setCurrentIndex={setCurrentIndex}
             currentIndex={currentIndex}
             totalItems={totalItems}

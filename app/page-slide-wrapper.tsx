@@ -5,10 +5,10 @@ import Header from './components/header/Header'
 import KeywordModal from './components/modals/KeywordModal'
 import NavigationDrawer from './components/NavigationDrawer'
 import ScrollToTopButton from './components/ScrollToTopButton'
-import Footer from './components/footer/Footer'
 import { useHeaderSeletor } from './lib/redux/store'
 import useScrollToTop from '@/app/lib/hooks/useScrollTop'
 import { ChildrenProps } from './lib/types/common-types'
+import Footer from './components/Footer'
 
 const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
   const { navigationDrawer } = useHeaderSeletor()

@@ -22,11 +22,6 @@ const headerLinksData = (path: string): HeaderLinkProps[] => [
     active: path === '/services'
   },
   {
-    textKey: 'Search',
-    linkKey: '/search',
-    active: path === '/search'
-  },
-  {
     textKey: 'Contact',
     linkKey: '/contact',
     active: path === '/contact'

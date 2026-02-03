@@ -13,7 +13,7 @@ const Services = () => {
         breadcrumb="Real Estate Services"
       />
       <div className="px-3">
-        <div className="mt-20 max-w-screen-md 990:max-w-[990px] xl:max-w-1200 mx-auto w-full grid grid-cols-12 lg:gap-x-6 xl:gap-x-10">
+        <div className="mt-20 max-w-screen-md 990:max-w-[990px] xl:max-w-1200 mx-auto w-full grid grid-cols-12 lg:gap-x-6 xl:gap-x-10 gap-y-8">
           <div className="col-span-12 990:col-span-6">
             <h2 className="text-3xl font-col font-bold text-zinc-900 mb-7">
               Let Us Guide You Through Your Real Estate Journey
@@ -29,11 +29,11 @@ const Services = () => {
               </div>
             ))}
           </div>
-          <div className="col-span-6 flex self-end justify-center mx-auto col-start-4 990:col-start-auto items-center w-full">
+          <div className="col-span-12 990:col-span-6 flex items-center justify-center">
             <Picture
-              src="/images/eileen-removebg.png"
+              src="/images/eileen-jonah-2026.jpg"
               alt="Eileen Jonah"
-              className="w-full h-full object-contain max-w-[550px]"
+              className="w-full max-w-md 990:max-w-full h-auto object-cover rounded-lg shadow-lg"
               priority={false}
             />
           </div>

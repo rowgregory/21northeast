@@ -1,34 +1,29 @@
-import { DynamicInputConfig } from '../types/search-types'
 import {
   ALL_TYPES_OPTIONS,
   BATHROOM_OPTIONS,
   BEDROOM_OPTIONS,
-  MAX_ACREAGE_OPTIONS,
   MAX_PRICE_OPTIONS,
-  MAX_SQFT_OPTIONS,
-  MIN_ACREAGE_OPTIONS,
   MIN_PRICE_OPTIONS,
-  MIN_SQFT_OPTIONS,
   PROPERTY_SUB_TYPE_OPTIONS,
   STATUS_OPTIONS
 } from './form-select-options'
 
-const inputConfig: DynamicInputConfig[] = [
+const inputConfig = [
   {
     type: 'select',
-    name: 'propType',
+    name: 'class',
     label: 'Property Type',
     options: ALL_TYPES_OPTIONS
   },
   {
     type: 'select',
-    name: 'totalBaths',
+    name: 'numBathrooms',
     label: 'Bathrooms',
     options: BATHROOM_OPTIONS
   },
   {
     type: 'select',
-    name: 'bedrooms',
+    name: 'numBedrooms',
     label: 'Bedrooms',
     options: BEDROOM_OPTIONS
   },
@@ -52,7 +47,7 @@ const inputConfig: DynamicInputConfig[] = [
   },
   {
     type: 'select',
-    name: 'propStatus',
+    name: 'status',
     label: 'Status',
     options: STATUS_OPTIONS
   },
@@ -76,33 +71,9 @@ const inputConfig: DynamicInputConfig[] = [
   },
   {
     type: 'input',
-    name: 'listingID',
+    name: 'mlsNumber',
     label: 'PropertyID',
     placeholder: 'Property ID'
-  },
-  {
-    type: 'select',
-    name: 'rangeValue1',
-    label: 'Min SqFt',
-    options: MIN_SQFT_OPTIONS
-  },
-  {
-    type: 'select',
-    name: 'rangeValue2',
-    label: 'Max SqFt',
-    options: MAX_SQFT_OPTIONS
-  },
-  {
-    type: 'select',
-    name: 'rangeValue3',
-    label: 'Min Acreage',
-    options: MIN_ACREAGE_OPTIONS
-  },
-  {
-    type: 'select',
-    name: 'rangeValue4',
-    label: 'Max Acreage',
-    options: MAX_ACREAGE_OPTIONS
   }
 ]
 

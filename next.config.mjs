@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.repliers.io",
+      },
     ],
   },
   async headers() {

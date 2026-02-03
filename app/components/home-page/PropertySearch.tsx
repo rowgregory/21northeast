@@ -15,10 +15,10 @@ const PropertySearch = () => {
           className={`col-span-12 md:col-span-9 bg-[#2c2c2c] relative px-3 pt-1.5 pb-5
           after:absolute after:content-[''] after:z-0 
           after:w-[1000%] after:bg-[#2c2c2c]
-          after:left:-0 after:bottom-0 after:top-0
+          after:left:-0 after:bottom-0 after:top-0 flex items-center
         `}
         >
-          <div className="relative z-10">
+          <div className="relative z-10 w-full">
             <PropertySearchForm type="home" />
           </div>
         </div>

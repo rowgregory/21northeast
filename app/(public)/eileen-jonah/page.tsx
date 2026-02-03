@@ -2,21 +2,18 @@
 
 import Banner from '@/app/components/common/Banner'
 import Picture from '@/app/components/common/Picture'
-import { useListingSelector } from '@/app/lib/redux/store'
 import { FacebookIcon } from '@/public/svg/social-media'
 import { useState } from 'react'
 
-const eileenFb = 'https://facebook.com/eileen' // Update with actual link
+const eileenFb = 'https://www.facebook.com/EileenJonahDaly'
 
 const EileenJonah = () => {
   const [bioExpanded, setBioExpanded] = useState(false)
-  const { activeListings } = useListingSelector()
 
   const eileenData = {
     img: '/images/eileen-jonah-2026.jpg',
     name: 'Eileen Jonah',
     title: 'Realtor® | Century 21 North East',
-    activeListings: activeListings,
     socialMedia: [
       {
         icon: FacebookIcon,
@@ -79,11 +76,6 @@ const EileenJonah = () => {
             <p className="uppercase font-normal text-sm text-[#989898] mb-4">
               Realtor® | Century 21 North East
             </p>
-            {eileenData.activeListings > 0 && (
-              <p className="text-[#6e6e6e] text-base">
-                {eileenData.activeListings} Active Properties
-              </p>
-            )}
           </div>
 
           {/* Bio Content */}

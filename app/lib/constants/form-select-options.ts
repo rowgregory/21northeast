@@ -1,32 +1,32 @@
 const ALL_TYPES_OPTIONS = [
-  'Property Type',
-  'Residential',
-  'Residential Income',
-  'Residential Lease',
-  'Land',
-  'Commercial Lease',
-  'Commercial Sale',
-  'Business Opportunity'
+  { label: 'Property Type', value: '' },
+  { label: 'Residential', value: 'ResidentialProperty' },
+  { label: 'Condo', value: 'CondoProperty' },
+  { label: 'Commercial', value: 'CommercialProperty' }
 ]
 
-const BEDROOM_OPTIONS = ['Bedrooms', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+const BEDROOM_OPTIONS = ['Bedrooms', '1+', '2+', '3+', '4+', '5+', '6+', '7+', '8+']
 
-const BATHROOM_OPTIONS = ['Bathrooms', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+const BATHROOM_OPTIONS = ['Bathrooms', '1+', '2+', '3+', '4+', '5+', '6+']
 
 const MIN_PRICE_OPTIONS = [
   'Min Price',
   '0',
+  '50000',
   '100000',
+  '150000',
   '200000',
+  '250000',
   '300000',
+  '350000',
   '400000',
+  '450000',
   '500000',
   '600000',
   '700000',
   '800000',
   '900000',
   '1000000',
-  '1200000',
   '1500000',
   '2000000'
 ]
@@ -34,16 +34,19 @@ const MIN_PRICE_OPTIONS = [
 const MAX_PRICE_OPTIONS = [
   'Max Price',
   '100000',
+  '150000',
   '200000',
+  '250000',
   '300000',
+  '350000',
   '400000',
+  '450000',
   '500000',
   '600000',
   '700000',
   '800000',
   '900000',
   '1000000',
-  '1200000',
   '1500000',
   '2000000',
   '2500000',
@@ -53,15 +56,15 @@ const MAX_PRICE_OPTIONS = [
 ]
 
 const LISTINGS_SORTING_OPTIONS = [
-  'Default Order',
-  'Newest Listings',
-  'Oldest Listings',
-  'Least expensive to most',
-  'Most expensive to least',
-  'Bedrooms (Low to High)',
-  'Bedrooms (High to Low)',
-  'Bathrooms (Low to High)',
-  'Bathrooms (High to Low)'
+  { label: 'Recently Updated', value: 'updatedOnDesc' },
+  { label: 'Newest Listings', value: 'listDateDesc' },
+  { label: 'Oldest Listings', value: 'listDateAsc' },
+  { label: 'Price (Low to High)', value: 'listPriceAsc' },
+  { label: 'Price (High to Low)', value: 'listPriceDesc' },
+  { label: 'Bedrooms (Low to High)', value: 'bedsAsc' },
+  { label: 'Bedrooms (High to Low)', value: 'bedsDesc' },
+  { label: 'Square Feet (Low to High)', value: 'sqftAsc' },
+  { label: 'Square Feet (High to Low)', value: 'sqftDesc' }
 ]
 
 const PRICE_REDUCTION_OPTIONS = [
@@ -73,49 +76,58 @@ const PRICE_REDUCTION_OPTIONS = [
   'Reduced in the last month'
 ]
 
-const STATUS_OPTIONS = ['Status', 'Active', 'Active Under Contract', 'Pending', 'Closed']
+const STATUS_OPTIONS = [
+  { label: 'Status', value: '' },
+  { label: 'Active', value: 'Active' },
+  { label: 'Pending', value: 'Pending' },
+  { label: 'Sold/Closed', value: 'Closed' }
+]
 
 const PROPERTY_SUB_TYPE_OPTIONS = [
   'Property Sub Type',
-  'Condex',
+  'Single Family',
   'Condominium',
-  'Equestrian',
-  'Farm',
+  'Townhouse',
+  'Multi-Family',
+  'Apartment',
   'Mobile Home',
-  'Single Family Residence',
-  'Stock Cooperative'
+  'Farm',
+  'Land',
+  'Commercial'
 ]
 
 const MIN_SQFT_OPTIONS = [
-  'Min',
+  'Min Sqft',
   '0',
-  '100',
-  '300',
   '500',
-  '700',
-  '900',
-  '1100',
-  '1300',
+  '750',
+  '1000',
+  '1250',
   '1500',
-  '1700',
-  '1900'
+  '1750',
+  '2000',
+  '2500',
+  '3000',
+  '3500',
+  '4000',
+  '5000'
 ]
 
 const MAX_SQFT_OPTIONS = [
-  'Max',
+  'Max Sqft',
   '1000',
   '1500',
   '2000',
   '2500',
   '3000',
+  '3500',
   '4000',
+  '4500',
   '5000',
   '6000',
   '7000',
   '8000',
-  '9000',
   '10000',
-  '12000',
   '15000'
 ]
 
@@ -126,76 +138,30 @@ const MIN_ACREAGE_OPTIONS = [
   '0.5',
   '0.75',
   '1',
-  '1.25',
-  '1.5',
-  '1.75',
   '2',
-  '2.25',
-  '2.5',
-  '2.75',
   '3',
-  '3.25',
-  '3.5',
-  '3.75',
   '4',
-  '4.25',
-  '4.5',
-  '4.75',
   '5',
-  '6',
-  '7',
-  '8',
-  '9',
   '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20'
+  '20',
+  '50',
+  '100'
 ]
 
 const MAX_ACREAGE_OPTIONS = [
   'Max Acreage',
-  '0.25',
   '0.5',
-  '0.75',
   '1',
-  '1.25',
-  '1.5',
-  '1.75',
   '2',
-  '2.25',
-  '2.5',
-  '2.75',
   '3',
-  '3.25',
-  '3.5',
-  '3.75',
   '4',
-  '4.25',
-  '4.5',
-  '4.75',
   '5',
-  '6',
-  '7',
-  '8',
-  '9',
   '10',
-  '11',
-  '12',
-  '13',
-  '14',
-  '15',
-  '16',
-  '17',
-  '18',
-  '19',
-  '20'
+  '20',
+  '50',
+  '100',
+  '200',
+  '500'
 ]
 
 export {

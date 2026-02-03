@@ -5,18 +5,28 @@ import useVideo from '@/app/lib/hooks/useVideo'
 import Video from '../common/Video'
 import Link from 'next/link'
 import addCommas from '@/app/lib/utils/addCommas'
-import { useListingSelector } from '@/app/lib/redux/store'
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
+import { RepliersListing } from '@/app/lib/types/repliers'
 
-export default function HomeHero() {
+export default function HomeHero({ listing }: { listing: RepliersListing | null }) {
   const { videoRef } = useVideo()
-  const { listing } = useListingSelector()
 
   const noListings = !listing || Object.keys(listing).length === 0
 
+  // Build full address
+  const fullAddress = listing
+    ? [listing?.address?.streetNumber, listing?.address?.streetName, listing?.address?.streetSuffix]
+        .filter(Boolean)
+        .join(' ')
+    : ''
+
+  const cityState = listing
+    ? `${listing?.address?.city}, ${listing?.address?.state?.substring(0, 2).toUpperCase()}`
+    : ''
+
   return (
-    <div className="relative w-full h-[800px]">
+    <div className="relative w-full h-[500px]">
       <Video videoRef={videoRef} src="/videos/home-banner-video.mp4" />
 
       {!noListings ? (
@@ -27,7 +37,7 @@ export default function HomeHero() {
           className="px-0 md:px-3 md:absolute md:z-10 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 relative flex-col w-full md:h-full flex justify-center bg-black/50"
         >
           <div className="max-w-1200 mx-auto w-full flex flex-col">
-            <Link href={`/listings/${listing?.listingID}`} className="w-full cursor-pointer">
+            <Link href={`/listings/${listing?.mlsNumber}`} className="w-full cursor-pointer">
               {/* Top Content Box */}
               <motion.div
                 initial={{ opacity: 0, y: -30 }}
@@ -42,7 +52,7 @@ export default function HomeHero() {
                     transition={{ delay: 0.3 }}
                     className="text-[29px] mb-1 sm:mb-0 sm:text-[32px] font-semibold block sm:hidden duration-200 hover:text-orange-500"
                   >
-                    {listing?.propType}
+                    {listing?.details?.style || listing?.class}
                   </motion.h1>
 
                   <motion.h1
@@ -51,8 +61,7 @@ export default function HomeHero() {
                     transition={{ delay: 0.3 }}
                     className="text-[32px] font-semibold mb-3 hidden sm:block duration-200 hover:text-orange-500"
                   >
-                    {listing?.propType} {listing?.address} {listing?.cityName},{' '}
-                    {listing?.state?.substring(0, 2).toUpperCase()}
+                    {listing?.details?.style || listing?.class} {fullAddress} {cityState}
                   </motion.h1>
 
                   <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-y-2 md:gap-0">
@@ -63,10 +72,12 @@ export default function HomeHero() {
                       className="flex items-end sm:mr-28"
                     >
                       <h3 className="font-bold text-2xl leading-6">
-                        ${addCommas(`${listing?.price}`)}
+                        ${addCommas(listing?.listPrice)}
                       </h3>
                       <span className="text-orange-500 text-sm mr-3"></span>
-                      <p className="font-normal px-3 py-0.5 bg-sky-500 text-sm">For Sale</p>
+                      <p className="font-normal px-3 py-0.5 bg-sky-500 text-sm">
+                        {listing?.type === 'Sale' ? 'For Sale' : 'For Rent'}
+                      </p>
                     </motion.div>
 
                     <motion.div
@@ -77,7 +88,8 @@ export default function HomeHero() {
                     >
                       <MapPin className="text-orange-500 w-3 h-3" />
                       <p className="text-sm font-normal">
-                        {listing?.propType} {listing?.address} {listing?.cityName}
+                        {listing?.details?.style || listing?.class} {fullAddress}{' '}
+                        {listing?.address?.city}
                       </p>
                     </motion.div>
                   </div>
@@ -93,9 +105,9 @@ export default function HomeHero() {
               >
                 <div className="bg-white/80 px-6 py-3 w-full md:w-fit">
                   <SqFtBedroomsAndBathroomsBox
-                    sqFt={listing?.sqFt}
-                    bedrooms={Number(listing?.bedrooms)}
-                    bathrooms={Number(listing?.fullBaths)}
+                    sqFt={listing?.details?.sqft || ''}
+                    bedrooms={Number(listing?.details?.numBedrooms) || 0}
+                    bathrooms={Number(listing?.details?.numBathrooms) || 0}
                     iconColor="text-zinc-700"
                   />
                 </div>

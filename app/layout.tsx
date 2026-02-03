@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import 'ol/ol.css'
-import PageWrapper from './page-wrapper'
+import RootLayoutWrapper from './root-layout'
 
 export const metadata: Metadata = {
   title: 'Eileen Jonah - Realtor® | Century 21 North East | Massachusetts Real Estate',
@@ -62,27 +62,49 @@ export const metadata: Metadata = {
   }
 }
 
-async function getFeaturedListings() {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-
-    const response = await fetch(`${baseUrl}/api/idxBroker/get-featured`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      next: { revalidate: 3600 }
-    })
-
-    if (!response.ok) {
-      return null
+const realEstateJsonLd = {
+  __html: JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: 'Eileen Jonah',
+    image:
+      'https://firebasestorage.googleapis.com/v0/b/devon-hunt-nextjs.appspot.com/o/images%2Feileen-rp-4.png?alt=media&token=a9b5b5e8-1a69-4baa-8a86-49addbe1f973',
+    jobTitle: 'Realtor®',
+    url: 'https://jonahgroupre.com',
+    affiliation: {
+      '@type': 'Organization',
+      name: 'Century 21 North East'
+    },
+    areaServed: [
+      {
+        '@type': 'State',
+        name: 'Massachusetts'
+      }
+    ],
+    knowsLanguage: 'English',
+    hasCredential: {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'Realtor®',
+      credentialCategory: 'professional license'
     }
+  })
+}
 
-    return await response.json()
-  } catch (error) {
-    return null
-  }
+const companyContextJsonLd = {
+  __html: JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateOffice',
+    name: 'Century 21 North East',
+    brand: {
+      '@type': 'Brand',
+      name: 'Century 21'
+    },
+    employee: {
+      '@type': 'Person',
+      name: 'Eileen Jonah',
+      jobTitle: 'Realtor®'
+    }
+  })
 }
 
 export default async function RootLayout({
@@ -90,66 +112,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const featuredListings = await getFeaturedListings()
   return (
     <html lang="en">
       <head>
         <meta property="fb:app_id" content="857941673220898" />
         {/* Structured Data - RealEstateAgent Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'RealEstateAgent',
-              name: 'Eileen Jonah',
-              image:
-                'https://firebasestorage.googleapis.com/v0/b/devon-hunt-nextjs.appspot.com/o/images%2Feileen-rp-4.png?alt=media&token=a9b5b5e8-1a69-4baa-8a86-49addbe1f973',
-              jobTitle: 'Realtor®',
-              url: 'https://jonahgroupre.com',
-              affiliation: {
-                '@type': 'Organization',
-                name: 'Century 21 North East'
-              },
-              areaServed: [
-                {
-                  '@type': 'State',
-                  name: 'Massachusetts'
-                }
-              ],
-              knowsLanguage: 'English',
-              hasCredential: {
-                '@type': 'EducationalOccupationalCredential',
-                name: 'Realtor®',
-                credentialCategory: 'professional license'
-              }
-            })
-          }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={realEstateJsonLd} />
 
         {/* Organization Schema for Company Context */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'RealEstateOffice',
-              name: 'Century 21 North East',
-              brand: {
-                '@type': 'Brand',
-                name: 'Century 21'
-              },
-              employee: {
-                '@type': 'Person',
-                name: 'Eileen Jonah',
-                jobTitle: 'Realtor®'
-              }
-            })
-          }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={companyContextJsonLd} />
       </head>
       <body>
-        <PageWrapper featuredListings={featuredListings}>{children}</PageWrapper>
+        <RootLayoutWrapper>{children}</RootLayoutWrapper>
       </body>
     </html>
   )

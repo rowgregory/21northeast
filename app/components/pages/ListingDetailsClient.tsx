@@ -9,40 +9,42 @@ import DetailsGridOne from '@/app/components/listings/DetailsGridOne'
 import DetailsGridTwo from '@/app/components/listings/DetailsGridTwo'
 import DetailsGridThree from '@/app/components/listings/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
-import { RootState, useAppSelector } from '@/app/lib/redux/store'
-import Roller from '@/app/components/loaders/Roller'
 import addCommas from '@/app/lib/utils/addCommas'
 import dynamic from 'next/dynamic'
 const SingleListingMap = dynamic(() => import('@/app/components/SingleMapListing'), { ssr: false })
 
-const Listing = ({ listingID }: { listingID: string }) => {
-  const { listings } = useAppSelector((state: RootState) => state.listing)
-  const listing = listings?.find((item) => String(item.listingID) === String(listingID))
+const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
+  // Build full address
+  const fullAddress = listing
+    ? [
+        listing?.address?.streetNumber,
+        listing?.address?.streetName,
+        listing?.address?.neighborhood,
+        listing?.address?.zip
+      ]
+        .filter(Boolean)
+        .join(' ')
+    : ''
 
-  if (!listing) {
-    return (
-      <div className="relative w-full mb-20 990:mb-[120px] -mt-20 990:mt-[-120px] min-h-[calc(100vh-80px)] 990:min-h-[calc(100vh-120px)]">
-        <div className="absolute inset-0 flex items-center justify-center z-50">
-          <Roller />
-        </div>
-      </div>
-    )
-  }
-
+  const cityState = listing ? `${listing?.address?.city}, ${listing?.address?.state}` : ''
+  // console.log(listing)
   return (
     <>
       <div className="h-[420px] w-full relative">
-        <SingleListingMap latitude={listing?.latitude || 0} longitude={listing?.longitude || 0} />
+        <SingleListingMap
+          latitude={listing?.map?.latitude || 0}
+          longitude={listing?.map?.longitude || 0}
+        />
         <div className="max-w-screen-md px-3 1240:px-0 990:max-w-[990px] lg:max-w-1200 absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full">
           <div className="max-w-screen-sm bg-black bg-opacity-70">
             <div className=" text-white p-4">
               <h2 className="text-4xl font-bold mb-2">
-                {listing?.address}, {listing?.cityName}
+                {fullAddress}, {listing?.address?.city}
               </h2>
               <div className="flex items-end gap-2">
-                <p className="text-2xl font-bold leading-6">${addCommas(listing?.price)}</p>
+                <p className="text-2xl font-bold leading-6">${addCommas(listing?.listPrice)}</p>
                 <div className="bg-red-500 text-white font-normal py-1 px-2 w-fit text-sm">
-                  For Sale
+                  {listing?.type === 'Sale' ? 'For Sale' : 'For Rent'}
                 </div>
               </div>
             </div>
@@ -53,12 +55,12 @@ const Listing = ({ listingID }: { listingID: string }) => {
         <div className="bg-[#f8f8f8] gap-y-3 px-5 py-3 mb-16 flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="gap-y-4 sm:gap-8 flex flex-col sm:flex-row sm:items-center">
             <SqFtBedroomsAndBathroomsBox
-              sqFt={listing?.sqFt}
-              bedrooms={Number(listing?.bedrooms)}
-              bathrooms={Number(listing?.fullBaths)}
+              sqFt={listing?.details?.sqft || ''}
+              bedrooms={Number(listing?.details?.numBedrooms) || 0}
+              bathrooms={Number(listing?.details?.numBathrooms) || 0}
               iconColor="text-orange-500"
             />
-            <PropertyIdAndBarcode id={listing?.listingID} />
+            <PropertyIdAndBarcode id={listing?.mlsNumber} />
           </div>
         </div>
         <div className="grid grid-cols-12 gap-y-8 sm:gap-8">
@@ -67,7 +69,7 @@ const Listing = ({ listingID }: { listingID: string }) => {
             <div className="mb-16">
               <TitleWithOrangeLine section="Description" />
               <p className="text-[#959595] text-sm leading-6 font-normal">
-                {listing?.remarksConcat}
+                {listing?.details?.description || 'No description available'}
               </p>
             </div>
             <div className="mb-16 text-sm flex flex-col gap-y-1.5">
@@ -75,11 +77,14 @@ const Listing = ({ listingID }: { listingID: string }) => {
               <strong className="text-[#959595]">
                 Address:{' '}
                 <span className="text-[#959595] font-normal">
-                  {listing?.address} {listing?.cityName} {listing?.state} {listing?.zip4}
+                  {fullAddress} {cityState}
                 </span>
               </strong>
               <strong className="text-[#959595]">
-                Country: <span className="text-[#959595] font-normal">United States</span>
+                Country:{' '}
+                <span className="text-[#959595] font-normal">
+                  {listing?.address?.country || 'United States'}
+                </span>
               </strong>
             </div>
             <DetailsGridOne listing={listing} />
@@ -104,12 +109,21 @@ const Listing = ({ listingID }: { listingID: string }) => {
               prospective properties which such consumers may have a good faith interest in
               purchasing or leasing. MLS Property Information Network, Inc. and its subscribers
               disclaim any and all representations and warranties as to the accuracy of the property
-              listing data and information set forth herein. This information was last updated on
-              Monday, October 21st, 2024. Some properties which appear for sale on this web site may
-              subsequently have sold or may no longer be available. The listing broker’s offer of
-              compensation is made only to participants of the MLS where the listing is filed.
-              Please contact Century 21 North East directly for additional information pertaining to
-              the status and availability of properties displayed on this website.
+              listing data and information set forth herein. This information was last updated on{' '}
+              {new Date(
+                listing?.timestamps?.listingUpdated || listing?.updatedOn
+              ).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+              . Some properties which appear for sale on this web site may subsequently have sold or
+              may no longer be available. The listing broker's offer of compensation is made only to
+              participants of the MLS where the listing is filed. Please contact{' '}
+              {listing?.agents?.[0]?.name || 'the listing agent'} directly for additional
+              information pertaining to the status and availability of properties displayed on this
+              website.
             </div>
           </div>
           <div className="hidden md:flex col-span-12 lg:col-span-3 flex-col gap-y-7">
@@ -128,4 +142,4 @@ const Listing = ({ listingID }: { listingID: string }) => {
   )
 }
 
-export default Listing
+export default ListingDetailsClient

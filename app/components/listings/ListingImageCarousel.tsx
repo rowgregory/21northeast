@@ -1,88 +1,158 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useState } from 'react'
 import Picture from '../common/Picture'
-import useCarousel from '@/app/lib/hooks/useCarousel'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface ListingImageCarouselProps {
   images: any
 }
 
 const ListingImageCarousel: FC<ListingImageCarouselProps> = ({ images }) => {
-  const imageRef = useRef(null) as any
-  const [translateX, setTranslateX] = useState('0px')
-  const [translateSmallerX, setTranslateSmallerX] = useState('0px')
-  const { previous, next, items, currentIndex, setCurrentIndex } = useCarousel(images)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
-  useEffect(() => {
-    const updateTransform = () => {
-      if (imageRef.current) {
-        const imgWidth = imageRef.current.offsetWidth
+  if (!images || images.length === 0) {
+    return (
+      <div className="mb-16 w-full h-96 bg-gray-200 flex items-center justify-center">
+        <span className="text-gray-400">No images available</span>
+      </div>
+    )
+  }
 
-        setTranslateX(`translateX(-${currentIndex * imgWidth}px)`)
-        setTranslateSmallerX(`translateX(-${currentIndex * 153.92}px)`)
-      }
-    }
+  const next = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length)
+  }
 
-    updateTransform()
-    window.addEventListener('resize', updateTransform)
-
-    return () => {
-      window.removeEventListener('resize', updateTransform)
-    }
-  }, [currentIndex])
+  const previous = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
+  }
 
   return (
-    <div className="mb-16">
-      <div className="mb-2.5 relative overflow-hidden w-full bg-[#f8f8f8]">
-        <div
-          className="flex transition-transform duration-300 ease-in-out snap-x"
-          style={{ transform: translateX }}
-        >
-          {items?.map((img: { url: string }, index: number) => (
-            <div key={index} className="flex-shrink-0 w-full min-w-full">
+    <>
+      <div className="mb-16">
+        {/* Main Image */}
+        <div className="mb-4 relative overflow-hidden w-full bg-gray-100 aspect-video rounded-lg">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full"
+            >
               <Picture
-                src={img.url || '/images/eileen-agent.jpg'}
-                alt={`${index}`}
-                className="max-w-full w-full max-h-full object-contain"
                 priority={true}
-                imgRef={imageRef}
+                src={`https://cdn.repliers.io/${images[currentIndex]}`}
+                alt={`Property image ${currentIndex + 1}`}
+                className="w-full h-full object-contain cursor-pointer"
+                onClick={() => setIsFullscreen(true)}
               />
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Buttons */}
+          <div className="absolute inset-0 flex items-center justify-between p-4 pointer-events-none">
+            <button
+              onClick={previous}
+              className="pointer-events-auto w-12 h-12 flex items-center justify-center bg-white/90 hover:bg-white shadow-lg rounded-full transition-all hover:scale-110"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-800" />
+            </button>
+            <button
+              onClick={next}
+              className="pointer-events-auto w-12 h-12 flex items-center justify-center bg-orange-500 hover:bg-orange-600 shadow-lg rounded-full transition-all hover:scale-110"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </div>
+
+          {/* Image Counter */}
+          <div className="absolute top-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+            {currentIndex + 1} / {images.length}
+          </div>
         </div>
-        <div className="flex items-center gap-2 absolute z-20 left-2 bottom-2">
-          <button
-            onClick={previous}
-            className=" w-12 h-[58px] p-2 bg-white hover:bg-gray-200 transition cursor-pointer"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            onClick={next}
-            className="w-12 h-[58px] p-2 bg-orange-500 transition cursor-pointer"
-          >
-            <ChevronRight className="w-4 h-4 text-white" />
-          </button>
-        </div>
-      </div>
-      <div className="flex items-center mt-2.5 w-full overflow-hidden">
-        <div
-          className="flex gap-2.5 transition-transform duration-300 ease-in-out snap-x"
-          style={{ transform: translateSmallerX }}
-        >
-          {items?.map((img: { url: string }, i: number) => (
-            <Picture
-              onClick={() => setCurrentIndex(i)}
+
+        {/* Thumbnail Grid */}
+        <div className="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
+          {images.map((img: string, i: number) => (
+            <button
               key={i}
-              src={img.url || '/images/eileen-agent.jpg'}
-              alt={`${i}`}
-              className="w-full h-24 object-cover cursor-pointer"
-              priority={true}
-            />
+              onClick={() => setCurrentIndex(i)}
+              className={`aspect-square overflow-hidden rounded-lg transition-all ${
+                i === currentIndex
+                  ? 'ring-2 ring-orange-500 ring-offset-2 scale-105'
+                  : 'opacity-60 hover:opacity-100'
+              }`}
+            >
+              <Picture
+                priority={false}
+                src={`https://cdn.repliers.io/${img}`}
+                alt={`Thumbnail ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
           ))}
         </div>
       </div>
-    </div>
+
+      {/* Fullscreen Modal */}
+      <AnimatePresence>
+        {isFullscreen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <button
+              onClick={() => setIsFullscreen(false)}
+              className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-colors z-10"
+              aria-label="Close fullscreen"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            <div className="absolute inset-0 flex items-center justify-between p-4">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  previous()
+                }}
+                className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  next()
+                }}
+                className="w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
+            </div>
+
+            <img
+              src={`https://cdn.repliers.io/${images[currentIndex]}`}
+              alt={`Property image ${currentIndex + 1}`}
+              className="max-w-[90%] max-h-[90%] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-4 py-2 rounded-full text-sm">
+              {currentIndex + 1} / {images.length}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

@@ -17,6 +17,103 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: '2.0.0',
+    date: '2026-02-03',
+    changes: [
+      {
+        type: 'breaking',
+        title: 'Migrated to Repliers MLS API',
+        description:
+          'Complete platform migration from IDX Broker to Repliers API for real-time MLS data access. All listing data, property details, and search functionality now powered by Repliers with improved data accuracy and performance.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Enhanced Property Search with Advanced Filters',
+        description:
+          'Redesigned property search with comprehensive filters including property class (Residential, Condo, Commercial), status (Active, Pending, Sold), price ranges, bedrooms, bathrooms, square footage, and lot size. All searches now use industry-standard RESO-compliant status values.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Real-Time CDN Image Delivery',
+        description:
+          'Implemented Repliers CDN for optimized property image delivery with automatic responsive sizing, WebP format support, and progressive JPEG optimization for faster page loads.',
+        impact: 'medium'
+      },
+      {
+        type: 'improvement',
+        title: 'Redesigned Property Detail Pages',
+        description:
+          'Complete overhaul of listing detail pages with tabbed information sections (Overview, Location, Additional, Interior, Exterior, Financial), interactive image carousel with fullscreen mode, and comprehensive property specifications including HOA fees, taxes, and amenities.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Advanced Pagination System',
+        description:
+          'Implemented server-side pagination with 24 listings per page, replacing the previous approach of loading all 18,000+ listings. Includes URL-based state management for shareable filtered searches.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Modern Image Carousel with Fullscreen Support',
+        description:
+          'New property image carousel featuring smooth fade transitions, thumbnail grid navigation, image counter overlay, and click-to-fullscreen functionality with keyboard navigation support.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Enhanced Property Cards',
+        description:
+          'Redesigned property listing cards with improved layout, property badges (Featured, For Sale/Rent), photo count indicators, agent information, and year built details.',
+        impact: 'medium'
+      },
+      {
+        type: 'feature',
+        title: 'Comprehensive Property Details',
+        description:
+          'Expanded property information display including 80+ detail fields: construction details, lot dimensions, exterior materials, interior features, heating/cooling systems, parking information, HOA fees, property taxes, and financial breakdowns.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Smart Filter Preselection',
+        description:
+          'URL parameters now automatically populate search filters, allowing users to share specific property searches and return to previous search results with all filters intact.',
+        impact: 'medium'
+      },
+      {
+        type: 'refactor',
+        title: 'TypeScript Interface Modernization',
+        description:
+          'Created comprehensive TypeScript interfaces for Repliers listing data structure with 80+ typed fields including address components, property details, lot information, financial data, and timestamps.',
+        impact: 'low'
+      },
+      {
+        type: 'improvement',
+        title: 'Optimized Search Performance',
+        description:
+          'Implemented efficient query parameter filtering to only send defined values to the API, reducing payload size and improving response times. Added type=Sale filter to exclude rental properties by default.',
+        impact: 'medium'
+      },
+      {
+        type: 'bugfix',
+        title: 'Fixed Status Filter Functionality',
+        description:
+          'Resolved issues with Pending and Sold property filters by implementing standardStatus parameter instead of legacy status codes. All property statuses now work correctly.',
+        impact: 'high'
+      },
+      {
+        type: 'ui',
+        title: 'Social Media Integration',
+        description:
+          'Added Facebook, Instagram, and YouTube social media icons to the footer with hover effects and dark mode support.',
+        impact: 'low'
+      }
+    ]
+  },
+  {
     version: '1.2.0',
     date: '2026-01-05',
     changes: [
@@ -239,8 +336,8 @@ const ChangelogPage = () => {
                                   change.impact === 'high'
                                     ? 'bg-red-100 text-red-700'
                                     : change.impact === 'medium'
-                                    ? 'bg-yellow-100 text-yellow-700'
-                                    : 'bg-green-100 text-green-700'
+                                      ? 'bg-yellow-100 text-yellow-700'
+                                      : 'bg-green-100 text-green-700'
                                 }`}
                               >
                                 {change.impact} Impact

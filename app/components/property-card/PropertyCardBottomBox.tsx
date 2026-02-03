@@ -12,7 +12,7 @@ const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
     <div
       className={`${
         index % 2 === 0 ? 'bg-orange-500' : 'bg-zinc-900'
-      } h-8 w-full flex items-center justify-between px-3 text-xs text-white`}
+      } mt-auto h-8 w-full flex items-center justify-between px-3 text-xs text-white`}
     >
       <div className="flex items-center gap-2">
         <DraftingCompass className="w-4 h-4 text-white" />

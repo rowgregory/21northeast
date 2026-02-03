@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, FormEvent } from 'react'
+import { FC, FormEvent, useEffect } from 'react'
 import useForm from '@/app/lib/hooks/useForm'
 import {
   ALL_TYPES_OPTIONS,
@@ -8,121 +8,113 @@ import {
   BEDROOM_OPTIONS,
   MAX_PRICE_OPTIONS,
   MIN_PRICE_OPTIONS,
-  PROPERTY_SUB_TYPE_OPTIONS,
   STATUS_OPTIONS
 } from '@/app/lib/constants/form-select-options'
 import { ADVANCED_SEARCH_FIELDS } from '@/app/lib/constants/form-input-fields'
-import { useRouter } from 'next/navigation'
-import { useAppDispatch, useListingSelector } from '@/app/lib/redux/store'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { PropertySearchFormProps } from '@/app/lib/types/home-page-types'
 import getPropertySearchFormStyles from '@/app/lib/utils/getPropertySearchFormStylts'
-import {
-  propertySearch,
-  resetSearch,
-  setHasDispatched
-} from '@/app/lib/redux/features/listingSlice'
 import cleanInputs from '@/app/lib/utils/cleanInputs'
-import PropertyStatusButton from '../common/PropertyStatusButton'
-import DualSlider from '../common/DualSlider'
 import { Filter, Rotate3d, Search } from 'lucide-react'
 
 const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
-  const navigate = useRouter()
-  const dispatch = useAppDispatch()
+  const router = useRouter()
   const { inputs, handleInput, handleSelect, setInputs } = useForm(ADVANCED_SEARCH_FIELDS)
-  const { hasSearched, listings } = useListingSelector()
-  const noListings = listings?.length === 0
-
+  const searchParams = useSearchParams()
   const styles = getPropertySearchFormStyles(type)
 
-  const handleSqFtSliderChange = (values: [number, number]) => {
-    setInputs((prev: any) => ({
-      ...prev,
-      rangeValue1: values[0],
-      rangeValue2: values[1]
-    }))
-  }
-  const handleLandAreaSliderChange = (values: [number, number]) => {
-    setInputs((prev: any) => ({
-      ...prev,
-      rangeValue3: values[0],
-      rangeValue4: values[1]
-    }))
-  }
+  // Sync URL params with form inputs on mount and when URL changes
+  useEffect(() => {
+    const urlInputs: any = {}
+
+    // Map Repliers API params back to form field names
+    if (searchParams.get('class')) urlInputs.class = searchParams.get('class')
+    if (searchParams.get('status')) urlInputs.status = searchParams.get('status')
+    if (searchParams.get('numBedrooms'))
+      urlInputs.numBedrooms = searchParams.get('numBedrooms') + '+'
+    if (searchParams.get('numBathrooms'))
+      urlInputs.numBathrooms = searchParams.get('numBathrooms') + '+'
+    if (searchParams.get('minPrice')) urlInputs.minPrice = searchParams.get('minPrice')
+    if (searchParams.get('maxPrice')) urlInputs.maxPrice = searchParams.get('maxPrice')
+    if (searchParams.get('minSqft'))
+      urlInputs.minSqft = parseInt(searchParams.get('minSqft') || '0')
+    if (searchParams.get('maxSqft'))
+      urlInputs.maxSqft = parseInt(searchParams.get('maxSqft') || '10000')
+    if (searchParams.get('city')) urlInputs.city = searchParams.get('city')
+    if (searchParams.get('mlsNumber')) urlInputs.mlsNumber = searchParams.get('mlsNumber')
+
+    if (Object.keys(urlInputs).length > 0) {
+      setInputs((prev: any) => ({ ...prev, ...urlInputs }))
+    }
+  }, [searchParams, setInputs])
 
   const handleSubmitPropertySearch = (e: FormEvent) => {
     e.preventDefault()
-    dispatch(setHasDispatched(false))
     const cleanedInputs = cleanInputs(inputs)
+
     if (Object.keys(cleanedInputs).length > 0) {
-      if (type === 'listings') {
-        dispatch(propertySearch({ searchCriteria: cleanedInputs }))
-      } else {
-        const queryString = new URLSearchParams(cleanedInputs).toString()
-        navigate.push(`/search?${queryString}`)
+      // Map old field names to new Repliers API params
+      const mappedInputs: Record<string, string> = {}
+
+      if (cleanedInputs.class) mappedInputs.class = String(cleanedInputs.class)
+      if (cleanedInputs.status) mappedInputs.standardStatus = cleanedInputs.status
+
+      // CRITICAL: Strip the "+" before sending to API
+      if (cleanedInputs.bedrooms) {
+        mappedInputs.minBedrooms = String(cleanedInputs.bedrooms).replace('+', '')
       }
+      if (cleanedInputs.totalBaths) {
+        mappedInputs.minBaths = String(cleanedInputs.totalBaths).replace('+', '')
+      }
+
+      if (cleanedInputs.minPrice) mappedInputs.minPrice = String(cleanedInputs.minPrice)
+      if (cleanedInputs.maxPrice) mappedInputs.maxPrice = String(cleanedInputs.maxPrice)
+      if (cleanedInputs.minSqft) mappedInputs.minSqft = String(cleanedInputs.minSqft)
+      if (cleanedInputs.maxSqft) mappedInputs.maxSqft = String(cleanedInputs.maxSqft)
+      if (cleanedInputs.mlsNumber) mappedInputs.mlsNumber = String(cleanedInputs.mlsNumber)
+      if (cleanedInputs.city) mappedInputs.city = String(cleanedInputs.city)
+
+      const queryString = new URLSearchParams(mappedInputs).toString()
+      router.push(`/listings?${queryString}`)
     }
   }
 
   const handleReset = (e: FormEvent) => {
     e.preventDefault()
-
-    dispatch(resetSearch())
     setInputs({})
+    router.push('/listings')
   }
 
   return (
     <form onSubmit={handleSubmitPropertySearch}>
-      <div
-        className={`flex items-center gap-2 mb-10 ${
-          type === 'listings' || type === 'listing-details' ? 'bg-zinc-900' : ''
-        }`}
-      >
-        <PropertyStatusButton text="For Sale" active={true} />
-      </div>
       <div className={styles.form}>
         <select
-          name="propType"
-          id="propType"
+          name="class"
+          id="class"
           onChange={handleSelect}
-          value={inputs.propType as string}
+          value={(inputs.class as string) || ''}
           className={`${styles.inputs}`}
           aria-label="Property Type"
           tabIndex={0}
         >
-          {ALL_TYPES_OPTIONS.map((type, index) => (
-            <option key={type} value={index === 0 ? '' : type}>
-              {type}
+          {ALL_TYPES_OPTIONS.map((type) => (
+            <option key={type.value} value={type.value}>
+              {type.label}
             </option>
           ))}
         </select>
         <select
-          name="propStatus"
-          id="propStatus"
+          name="status"
+          id="status"
           onChange={handleSelect}
-          value={inputs.propStatus as string}
+          value={(inputs.status as string) || ''}
           className={`${styles.inputs}`}
           aria-label="Property Status"
           tabIndex={0}
         >
-          {STATUS_OPTIONS.map((status, index) => (
-            <option key={status} value={index === 0 ? '' : status}>
-              {status}
-            </option>
-          ))}
-        </select>
-        <select
-          name="propSubType"
-          id="propSubType"
-          onChange={handleSelect}
-          value={inputs.propSubType as string}
-          className={`${styles.inputs}`}
-          aria-label="Property Sub Type"
-          tabIndex={0}
-        >
-          {PROPERTY_SUB_TYPE_OPTIONS.map((subType, index) => (
-            <option key={subType} value={index === 0 ? '' : subType}>
-              {subType}
+          {STATUS_OPTIONS.map((status) => (
+            <option key={status.value} value={status.value}>
+              {status.label}
             </option>
           ))}
         </select>
@@ -130,7 +122,7 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           name="bedrooms"
           id="bedrooms"
           onChange={handleSelect}
-          value={inputs.bedrooms as number}
+          value={(inputs.bedrooms as string) || ''}
           className={` ${styles.inputs}`}
           aria-label="Bedrooms"
           tabIndex={0}
@@ -145,7 +137,7 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
           name="totalBaths"
           id="totalBaths"
           onChange={handleSelect}
-          value={inputs.totalBaths as string}
+          value={(inputs.totalBaths as string) || ''}
           className={` ${styles.inputs}`}
           aria-label="Bathrooms"
           tabIndex={0}
@@ -156,12 +148,13 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
             </option>
           ))}
         </select>
+
         <div className={`${styles.minMaxContainer}`}>
           <select
             name="minPrice"
             id="minPrice"
             onChange={handleSelect}
-            value={inputs.minPrice as string}
+            value={(inputs.minPrice as string) || ''}
             className={`w-full ${styles.inputs}`}
             aria-label="Min Price"
             tabIndex={0}
@@ -176,7 +169,7 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
             name="maxPrice"
             id="maxPrice"
             onChange={handleSelect}
-            value={inputs.maxPrice as string}
+            value={(inputs.maxPrice as string) || ''}
             className={`w-full ${styles.inputs}`}
             aria-label="Max Price"
             tabIndex={0}
@@ -188,49 +181,46 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
             ))}
           </select>
         </div>
-        <DualSlider
+        {/* <DualSlider
           min={0}
           max={10000}
-          value={[inputs.rangeValue1 as number, inputs.rangeValue2 as number]}
+          value={[(inputs.minSqft as number) || 0, (inputs.maxSqft as number) || 10000]}
           onInputChange={handleSqFtSliderChange}
-          text="Size"
+          text="Size (sqft)"
         />
         <DualSlider
           min={0}
           max={10}
-          value={[inputs.rangeValue3 as number, inputs.rangeValue4 as number]}
+          value={[(inputs.minAcres as number) || 0, (inputs.maxAcres as number) || 10]}
           onInputChange={handleLandAreaSliderChange}
-          text="Land Area"
-        />
+          text="Land Area (acres)"
+        /> */}
         <input
-          name="listingID"
-          id="listingID"
+          name="mlsNumber"
+          id="mlsNumber"
           onChange={handleInput}
-          value={(inputs.listingID as string) || ''}
+          value={(inputs.mlsNumber as string) || ''}
           className={` ${styles.inputs}`}
-          aria-label="Property Id"
-          placeholder="Property Id"
+          aria-label="MLS Number"
+          placeholder="MLS Number"
         />
         <div className={`${styles.button} flex gap-x-2 items-center w-full justify-end`}>
-          {noListings && (
-            <div className="text-xs whitespace-nowrap text-white">No active listings</div>
-          )}
           <button
-            disabled={noListings}
             type="submit"
-            className={`gap-1.5 flex justify-center w-28 flex-shrink-0 items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent disabled:hover:bg-orange-500 disabled:cursor-not-allowed`}
+            className={`gap-1.5 flex justify-center w-28 flex-shrink-0 items-center py-2.5 bg-orange-500 border-2 border-orange-500 group duration-200 hover:bg-transparent`}
           >
             {type === 'listings' ? (
-              <Filter className="text-sm text-white group-hover:text-orange-500 group-disabled:text-white" />
+              <Filter className="text-sm text-white group-hover:text-orange-500" />
             ) : (
-              <Search className="text-sm text-white group-hover:text-orange-500 group-disabled:text-white" />
+              <Search className="text-sm text-white group-hover:text-orange-500" />
             )}
           </button>
         </div>
-        {hasSearched && type === 'listings' && (
+        {type === 'listings' && (
           <button
             onClick={handleReset}
-            className="bg-gray-200 flex items-center justify-center gap-x-1 px-5 py-2.5 text-white text-center w-full"
+            type="button"
+            className="bg-gray-200 flex items-center justify-center gap-x-1 px-5 py-2.5 text-gray-700 text-center w-full hover:bg-gray-300 transition-colors"
           >
             <Rotate3d className="w-3 h-3" />
             <span className="text-sm">Reset</span>
