@@ -2,7 +2,6 @@
 
 import { FC } from 'react'
 import Header from './components/header/Header'
-import KeywordModal from './components/modals/KeywordModal'
 import NavigationDrawer from './components/NavigationDrawer'
 import ScrollToTopButton from './components/ScrollToTopButton'
 import { useHeaderSeletor } from './lib/redux/store'
@@ -18,10 +17,9 @@ const PageSlideWrapper: FC<ChildrenProps> = ({ children }) => {
     <>
       <NavigationDrawer />
       <Header />
-      <KeywordModal />
       <div
         className={`transform transition-transform duration-200 ease-in-out overflow-hidden ${
-          navigationDrawer ? 'translate-x-0  sm:translate-x-[280px] mt-20' : 'translate-x-0'
+          navigationDrawer ? 'translate-x-0  lg:translate-x-[280px] mt-20' : 'translate-x-0'
         }`}
       >
         <main>{children}</main>

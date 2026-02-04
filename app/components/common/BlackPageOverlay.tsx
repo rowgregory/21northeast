@@ -3,9 +3,9 @@ const BlackPageOverlay = ({ open }: { open: boolean }) => {
     <div
       className={`${
         open ? 'block' : 'hidden'
-      } fixed top-0 left-0 h-screen w-screen  bg-black/80 z-40 animate-fadeIn`}
+      } fixed top-0 left-0 h-screen w-screen  bg-black/80 z-[90] animate-fadeIn`}
     ></div>
-  );
-};
+  )
+}
 
-export default BlackPageOverlay;
+export default BlackPageOverlay

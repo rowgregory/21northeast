@@ -1,64 +1,31 @@
-import { FormEvent, Fragment, useCallback, useRef } from 'react'
-import { useAppDispatch, useHeaderSeletor } from '../lib/redux/store'
+import { store, useHeaderSeletor } from '../lib/redux/store'
 import { closeNavigationDrawer } from '../lib/redux/features/headerSlice'
 import BlackPageOverlay from './common/BlackPageOverlay'
 import Link from 'next/link'
 import headerLinksData from '../lib/utils/header-links-data'
-import { usePathname, useRouter } from 'next/navigation'
-import useForm from '../lib/hooks/useForm'
-import useOutsideDetect from '../lib/hooks/useOutsideDetect'
+import { usePathname } from 'next/navigation'
 import useRemoveScroll from '../lib/hooks/useRemoveScroll'
-import { Search } from 'lucide-react'
 
 const NavigationDrawer = () => {
-  const dispatch = useAppDispatch()
   const pathname = usePathname()
-  const navigate = useRouter()
-  const overlayRef = useRef(null) as any
-  const { inputs, handleInput } = useForm(['keyword'])
-  const handleClose = useCallback(() => dispatch(closeNavigationDrawer()), [dispatch])
   const { navigationDrawer } = useHeaderSeletor()
-  useOutsideDetect(overlayRef, handleClose)
   useRemoveScroll(navigationDrawer)
-
-  const handleKeywordSearch = (e: FormEvent) => {
-    e.preventDefault()
-    dispatch(closeNavigationDrawer())
-    navigate.push(`/search?keyword=${inputs.keyword}`)
-  }
+  const onClose = () => store.dispatch(closeNavigationDrawer())
 
   return (
-    <Fragment>
-      <BlackPageOverlay open={navigationDrawer} />
+    <>
+      <div onClick={onClose}>
+        <BlackPageOverlay open={navigationDrawer} />
+      </div>
       <div
-        ref={overlayRef}
         className={`${
           navigationDrawer ? 'translate-x-0' : '-translate-x-[280px]'
-        } duration-200 w-[280px] fixed top-0 left-0 bottom-0 z-40 transition-all bg-[#212121]`}
+        } duration-200 w-[280px] fixed top-0 left-0 bottom-0 z-[100] transition-all bg-[#212121]`}
       >
-        <div className="bg-[#111] p-5">
-          <form onSubmit={handleKeywordSearch} className="flex items-center h-10 w-full">
-            <input
-              id="keyword"
-              name="keyword"
-              onChange={handleInput}
-              placeholder="ENTER YOUR KEYWORD"
-              className="form-control h-full w-full bg-[#333333] pl-3 focus:outline-none placeholder:text-sm text-[#ededed]"
-              aria-label="Keyword"
-              value={(inputs.keyword as string) || ''}
-            />
-            <button
-              type="submit"
-              className="flex items-center gap-2 bg-orange-500 h-full px-4 border-[1px] border-orange-500"
-            >
-              <Search className="w-4 h-4 text-white" />
-            </button>
-          </form>
-        </div>
         <div className="flex flex-col">
           {headerLinksData(pathname).map((link, i) => (
             <Link
-              onClick={handleClose}
+              onClick={onClose}
               key={i}
               href={link.linkKey}
               className="text-white text-sm uppercase font-bold py-3 px-4 border-t-[1px] border-[#404040] hover:text-orange-500 duration-200"
@@ -68,7 +35,7 @@ const NavigationDrawer = () => {
           ))}
         </div>
       </div>
-    </Fragment>
+    </>
   )
 }
 

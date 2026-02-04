@@ -17,6 +17,40 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: '2.0.1',
+    date: '2026-02-05',
+    changes: [
+      {
+        type: 'ui',
+        title: 'Mobile-Optimized Filter Interface',
+        description:
+          'Redesigned property listing filters with collapsible accordion on mobile devices. Filters now hide behind an orange "Filter Properties" button on mobile screens, providing a cleaner interface while maintaining full functionality on desktop.',
+        impact: 'medium'
+      },
+      {
+        type: 'feature',
+        title: 'Horizontal Scrolling Property Cards',
+        description:
+          'Introduced new horizontal scroll card layout for featured property displays. Cards maintain consistent heights with fixed dimensions, smooth scrolling behavior, and touch-friendly navigation for mobile users.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Enhanced No-Image Fallback',
+        description:
+          'Added professional placeholder UI for properties without images, featuring a gradient background, camera icon, and "No Image Available" message while maintaining card structure and property badges.',
+        impact: 'low'
+      },
+      {
+        type: 'improvement',
+        title: 'Consistent Card Heights',
+        description:
+          'Standardized property card heights across all displays to prevent layout shifts caused by varying content lengths. Bottom statistics box now consistently anchors to the bottom of each card.',
+        impact: 'low'
+      }
+    ]
+  },
+  {
     version: '2.0.0',
     date: '2026-02-03',
     changes: [

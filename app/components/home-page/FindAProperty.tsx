@@ -2,17 +2,12 @@
 
 import Link from 'next/link'
 import { orangeUnderline } from '../common/styles'
-import SingleItemCarousel from '../SingleItemCarousel'
-import useSingleItemCarousel from '@/app/lib/hooks/useSingleItemCarousel'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { buttonVariants, containerVariants, titleVariants } from '@/app/lib/constants/motion'
 import { RepliersListing } from '@/app/lib/types/repliers'
+import HorizontalScrollCards from '../HorizontalScrollCards'
 
 const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {
-  const { next, previous, currentIndex, totalItems, setCurrentIndex } =
-    useSingleItemCarousel(allListings)
-
   if (allListings?.length === 0) {
     return (
       <motion.div
@@ -82,28 +77,6 @@ const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {
             transition={{ delay: 0.2 }}
             className="flex items-center gap-3"
           >
-            {/* Navigation Buttons */}
-            <div className="flex items-center h-10 border border-gray-200">
-              <motion.button
-                whileHover={{ backgroundColor: '#f3f4f6' }}
-                whileTap={{ scale: 0.95 }}
-                onClick={previous}
-                className="h-full px-3 flex items-center justify-center bg-white hover:bg-gray-50 transition-colors"
-                aria-label="Previous listing"
-              >
-                <ChevronLeft className="w-4 h-4 text-[#232323]" />
-              </motion.button>
-              <motion.button
-                whileHover={{ backgroundColor: '#ea580c' }}
-                whileTap={{ scale: 0.95 }}
-                onClick={next}
-                className="h-full px-3 flex items-center justify-center bg-orange-500 transition-colors"
-                aria-label="Next listing"
-              >
-                <ChevronRight className="w-4 h-4 text-white" />
-              </motion.button>
-            </div>
-
             {/* View All Button */}
             <motion.div whileHover="hover" whileTap="tap" variants={buttonVariants}>
               <Link
@@ -118,12 +91,7 @@ const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {
 
         {/* Carousel */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-          <SingleItemCarousel
-            items={allListings}
-            setCurrentIndex={setCurrentIndex}
-            currentIndex={currentIndex}
-            totalItems={totalItems}
-          />
+          <HorizontalScrollCards items={allListings} />
         </motion.div>
       </div>
     </motion.div>
