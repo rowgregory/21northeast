@@ -44,8 +44,6 @@ export async function getAgentListings(
       queryParams.set('listOfficeKey', officeId)
     }
 
-    console.log('Fetching listings to filter:', queryParams.toString())
-
     const response = await fetch(`https://api.repliers.io/listings?${queryParams.toString()}`, {
       method: 'GET',
       headers: {
@@ -56,7 +54,6 @@ export async function getAgentListings(
     })
 
     if (!response.ok) {
-      console.error('Repliers API error:', response.status, response.statusText)
       return null
     }
 
@@ -73,10 +70,6 @@ export async function getAgentListings(
       return hasAgent || hasOfficeName
     })
 
-    console.log(
-      `Found ${agentListings.length} listings for ${agentName} out of ${data.listings.length} total`
-    )
-
     // Implement manual pagination
     const startIndex = (page - 1) * resultsPerPage
     const endIndex = startIndex + resultsPerPage
@@ -90,7 +83,6 @@ export async function getAgentListings(
       listings: paginatedListings
     }
   } catch (error) {
-    console.error('Error fetching agent listings:', error)
     return null
   }
 }

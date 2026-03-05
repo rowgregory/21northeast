@@ -36,24 +36,28 @@ export async function getListings(
   try {
     const { page = 1, resultsPerPage = 24, ...filters } = params
 
-    // Use standardStatus if provided, otherwise default to 'Active'
-    const cleanParams: Record<string, string> = {
-      standardStatus: filters.standardStatus || 'Active',
-      pageNum: page.toString(),
-      resultsPerPage: resultsPerPage.toString(),
-      type: 'Sale'
-    }
+    const queryParams = new URLSearchParams()
+
+    // Base params
+    queryParams.append('standardStatus', filters.standardStatus || 'Active')
+    queryParams.append('pageNum', page.toString())
+    queryParams.append('resultsPerPage', resultsPerPage.toString())
+    queryParams.append('type', 'Sale')
 
     // Add filters only if they have actual values
     Object.entries(filters).forEach(([key, value]) => {
-      if (key !== 'standardStatus' && value !== undefined && value !== null && value !== '') {
-        cleanParams[key] = String(value)
+      if (key === 'standardStatus' || key === 'city') return
+      if (value !== undefined && value !== null && value !== '') {
+        queryParams.append(key, String(value))
       }
     })
 
-    const queryParams = new URLSearchParams(cleanParams)
-
-    console.log('Fetching listings:', queryParams.toString())
+    // Handle city (string or array)
+    if (Array.isArray(filters.city)) {
+      filters.city.forEach((c) => queryParams.append('city', c))
+    } else if (filters.city) {
+      queryParams.append('city', filters.city)
+    }
 
     const response = await fetch(`https://api.repliers.io/listings?${queryParams.toString()}`, {
       method: 'GET',
@@ -65,15 +69,12 @@ export async function getListings(
     })
 
     if (!response.ok) {
-      console.error('Repliers API error:', response.status, response.statusText)
       return null
     }
 
     const data = await response.json()
-    console.log('Fetched page:', data.page, 'Total:', data.count)
     return data
   } catch (error) {
-    console.error('Error fetching listings:', error)
     return null
   }
 }

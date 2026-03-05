@@ -80,7 +80,7 @@ const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {
             {/* View All Button */}
             <motion.div whileHover="hover" whileTap="tap" variants={buttonVariants}>
               <Link
-                href="/listings"
+                href="/listings?page=1&county=Essex"
                 className="bg-[#232323] text-white text-sm font-semibold uppercase px-6 py-2.5 transition-colors"
               >
                 View All

@@ -5,6 +5,7 @@ import ListingsPropertyCard from '../listings/ListingsPropertyCard'
 import { RepliersListing } from '@/app/lib/types/repliers'
 import { useState } from 'react'
 import { ChevronDown, Filter } from 'lucide-react'
+import { MA_COUNTIES } from '@/app/(public)/listings/page'
 
 interface ListingsClientProps {
   data: {
@@ -72,10 +73,29 @@ export default function ListingsClient({ data }: ListingsClientProps) {
               className={`w-5 h-5 transition-transform ${filtersOpen ? 'rotate-180' : ''}`}
             />
           </button>
-
           {/* Filters Container - Hidden on mobile unless toggled */}
           <div className={`${filtersOpen ? 'block' : 'hidden'} lg:block space-y-4`}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* County */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">County</label>
+                <select
+                  defaultValue={searchParams.get('county') || ''}
+                  onChange={(e) => handleFilterChange('county', e.target.value)}
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors"
+                >
+                  <option value="" disabled>
+                    All Counties
+                  </option>
+                  {Object.keys(MA_COUNTIES)
+                    .sort()
+                    .map((county) => (
+                      <option key={county} value={county}>
+                        {county} County
+                      </option>
+                    ))}
+                </select>
+              </div>
               {/* City */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
@@ -159,10 +179,8 @@ export default function ListingsClient({ data }: ListingsClientProps) {
                   <option value="4">4+ Baths</option>
                 </select>
               </div>
-            </div>
 
-            {/* Property Type and Status */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Property Type and Status */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Property Type
@@ -223,7 +241,7 @@ export default function ListingsClient({ data }: ListingsClientProps) {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {data.listings.map((listing, index) => (
+            {data?.listings?.map((listing, index) => (
               <ListingsPropertyCard key={listing.mlsNumber} property={listing} index={index} />
             ))}
           </div>

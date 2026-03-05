@@ -13,8 +13,8 @@ const headerLinksData = (path: string): HeaderLinkProps[] => [
   },
   {
     textKey: 'Listings',
-    linkKey: '/listings',
-    active: path === '/listings'
+    linkKey: '/listings?page=1&county=Essex',
+    active: path.includes('/listing')
   },
   {
     textKey: 'Services',

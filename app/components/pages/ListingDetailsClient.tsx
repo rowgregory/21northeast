@@ -27,7 +27,7 @@ const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
     : ''
 
   const cityState = listing ? `${listing?.address?.city}, ${listing?.address?.state}` : ''
-  // console.log(listing)
+
   return (
     <>
       <div className="h-[420px] w-full relative">

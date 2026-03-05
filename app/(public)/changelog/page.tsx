@@ -17,6 +17,26 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: '2.0.2',
+    date: '2026-03-05',
+    changes: [
+      {
+        type: 'feature',
+        title: 'County Filter with Dynamic City Dropdown',
+        description:
+          'Added a Massachusetts county selector to the listings filters. Selecting a county dynamically populates the city dropdown with only the cities within that county, and passes the full city list to the API for accurate server-side filtering with correct pagination.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Listings Nav Link Pre-filtered to Essex County',
+        description:
+          'Updated the header navigation listings link to append the Essex County filter param by default. Clicking "Listings" from anywhere on the site now lands the user directly on Essex County properties instead of the unfiltered MA-wide results.',
+        impact: 'medium'
+      }
+    ]
+  },
+  {
     version: '2.0.1',
     date: '2026-02-05',
     changes: [
@@ -290,8 +310,6 @@ const ChangelogPage = () => {
     setExpandedChanges(newExpanded)
   }
 
-  const release = changelogData[0]
-
   return (
     <div className="pb-20 bg-white">
       <Banner src="/images/team.jpg" title="Changelog" breadcrumb="Release History" />
@@ -306,100 +324,94 @@ const ChangelogPage = () => {
             </p>
           </div>
 
-          {/* Version Card */}
-          <div className="border border-gray-300 p-8 mb-12">
-            {/* Version Header */}
-            <div className="mb-8 pb-8 border-b border-gray-300">
-              <div className="flex items-center justify-between gap-6 flex-wrap">
-                <div>
-                  <h2 className="text-4xl font-bold text-[#232323] mb-2">v{release.version}</h2>
-                  <p className="text-sm text-[#989898] uppercase tracking-wide font-semibold">
-                    Released{' '}
-                    {new Date(release.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-[#989898] uppercase tracking-wide font-semibold">
-                    {release.changes.length} Updates
-                  </p>
+          {changelogData.map((release) => (
+            <div key={release.version} className="border border-gray-300 p-8 mb-12">
+              {/* Version Header */}
+              <div className="mb-8 pb-8 border-b border-gray-300">
+                <div className="flex items-center justify-between gap-6 flex-wrap">
+                  <div>
+                    <h2 className="text-4xl font-bold text-[#232323] mb-2">v{release.version}</h2>
+                    <p className="text-sm text-[#989898] uppercase tracking-wide font-semibold">
+                      Released{' '}
+                      {new Date(release.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm text-[#989898] uppercase tracking-wide font-semibold">
+                      {release.changes.length} Updates
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Changes List */}
-            <div className="space-y-4">
-              {release.changes.map((change, idx) => {
-                const config = typeConfig[change.type]
-                const changeKey = `${release.version}-${idx}`
-                const isExpanded = expandedChanges.has(changeKey)
-                const IconComponent = config.icon
-                return (
-                  <div
-                    key={idx}
-                    className={`border border-gray-300 transition-colors ${
-                      isExpanded ? 'bg-gray-50' : 'bg-white hover:bg-gray-50'
-                    }`}
-                  >
-                    {/* Change Header */}
-                    <button
-                      onClick={() => toggleChange(changeKey)}
-                      className="w-full p-6 flex items-start justify-between gap-6 text-left"
+              {/* Changes List */}
+              <div className="space-y-4">
+                {release.changes.map((change, idx) => {
+                  const config = typeConfig[change.type]
+                  const changeKey = `${release.version}-${idx}`
+                  const isExpanded = expandedChanges.has(changeKey)
+                  const IconComponent = config.icon
+                  return (
+                    <div
+                      key={idx}
+                      className={`border border-gray-300 transition-colors ${
+                        isExpanded ? 'bg-gray-50' : 'bg-white hover:bg-gray-50'
+                      }`}
                     >
-                      <div className="flex items-start gap-4 flex-1 min-w-0">
-                        {/* Icon */}
-                        <div className={`${config.bgColor} p-3 flex-shrink-0`}>
-                          <IconComponent className={`${config.color} text-lg`} />
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-3 flex-wrap mb-2">
-                            <h3 className="text-lg font-bold text-[#232323]">{change.title}</h3>
-                            <span
-                              className={`text-xs font-bold uppercase tracking-wide ${config.color}`}
-                            >
-                              {config.label}
-                            </span>
-                            {change.impact && (
+                      <button
+                        onClick={() => toggleChange(changeKey)}
+                        className="w-full p-6 flex items-start justify-between gap-6 text-left"
+                      >
+                        <div className="flex items-start gap-4 flex-1 min-w-0">
+                          <div className={`${config.bgColor} p-3 flex-shrink-0`}>
+                            <IconComponent className={`${config.color} text-lg`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-3 flex-wrap mb-2">
+                              <h3 className="text-lg font-bold text-[#232323]">{change.title}</h3>
                               <span
-                                className={`text-xs font-bold uppercase tracking-wide px-2 py-1 ${
-                                  change.impact === 'high'
-                                    ? 'bg-red-100 text-red-700'
-                                    : change.impact === 'medium'
-                                      ? 'bg-yellow-100 text-yellow-700'
-                                      : 'bg-green-100 text-green-700'
-                                }`}
+                                className={`text-xs font-bold uppercase tracking-wide ${config.color}`}
                               >
-                                {change.impact} Impact
+                                {config.label}
                               </span>
-                            )}
+                              {change.impact && (
+                                <span
+                                  className={`text-xs font-bold uppercase tracking-wide px-2 py-1 ${
+                                    change.impact === 'high'
+                                      ? 'bg-red-100 text-red-700'
+                                      : change.impact === 'medium'
+                                        ? 'bg-yellow-100 text-yellow-700'
+                                        : 'bg-green-100 text-green-700'
+                                  }`}
+                                >
+                                  {change.impact} Impact
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
+                        <div className="text-[#989898] flex-shrink-0 text-xl">
+                          {isExpanded ? '−' : '+'}
+                        </div>
+                      </button>
 
-                      {/* Toggle Indicator */}
-                      <div className="text-[#989898] flex-shrink-0 text-xl">
-                        {isExpanded ? '−' : '+'}
-                      </div>
-                    </button>
-
-                    {/* Change Description */}
-                    {isExpanded && (
-                      <div className="px-6 pb-6 pt-0 border-t border-gray-200">
-                        <p className="text-[#4a4a4a] text-base leading-7 font-light">
-                          {change.description}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
+                      {isExpanded && (
+                        <div className="px-6 pb-6 pt-0 border-t border-gray-200">
+                          <p className="text-[#4a4a4a] text-base leading-7 font-light">
+                            {change.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
