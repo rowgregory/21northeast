@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import PortalClient from './PortalClient'
-import { auth } from '@/app/lib/auth'
+import { auth } from '@/app/lib/auth/auth'
 import prisma from '@/prisma/client'
 import { getUsers } from '@/app/lib/actions/user/getUsers'
 

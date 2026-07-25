@@ -2,16 +2,11 @@ import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: 'facebookexternalhit',
-        allow: '/'
-      },
-      {
-        userAgent: '*',
-        allow: '/'
-      }
-    ],
-    sitemap: 'https://jonahgroupre.com/sitemap.xml'
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: ['/login', '/admin', '/api/']
+    },
+    sitemap: 'https://www.jonahgroupre.com/sitemap.xml'
   }
 }

@@ -10,9 +10,11 @@ import DetailsGridThree from '@/app/components/listings/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
 import addCommas from '@/app/lib/utils/addCommas'
 import dynamic from 'next/dynamic'
-import { Send } from 'lucide-react'
-import { ContactForm } from '../forms/ContactForm'
+import { ChevronRight, Send } from 'lucide-react'
+import { ContactForm } from '../../../components/forms/ContactForm'
 import { useState } from 'react'
+import Link from 'next/link'
+
 const SingleListingMap = dynamic(() => import('@/app/components/SingleMapListing'), { ssr: false })
 
 const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
@@ -31,8 +33,70 @@ const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
 
   const cityState = listing ? `${listing?.address?.city}, ${listing?.address?.state}` : ''
 
+  const SITE_URL = 'https://www.jonahgroupre.com'
+
+  const breadcrumbJsonLd = {
+    __html: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: SITE_URL
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Listings',
+          item: `${SITE_URL}/listings`
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: `${fullAddress}, ${listing?.address?.city}`,
+          item: `${SITE_URL}/listings/${listing?.mlsNumber}`
+        }
+      ]
+    })
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={breadcrumbJsonLd} />
+      {/* Breadcrumb Nav */}
+      <nav
+        aria-label="Breadcrumb"
+        className="max-w-3xl px-3 1240:px-0 990:max-w-247.5 lg:max-w-300 mx-auto w-full pt-4 pb-2"
+      >
+        <ol className="flex items-center flex-wrap gap-1.5 text-xs text-muted-light dark:text-muted-dark">
+          <li className="flex items-center gap-1.5">
+            <Link
+              href="/"
+              className="hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200"
+            >
+              Home
+            </Link>
+            <ChevronRight className="w-3 h-3" aria-hidden="true" />
+          </li>
+          <li className="flex items-center gap-1.5">
+            <Link
+              href="/listings"
+              className="hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200"
+            >
+              Listings
+            </Link>
+            <ChevronRight className="w-3 h-3" aria-hidden="true" />
+          </li>
+          <li
+            className="text-text-light dark:text-text-dark font-medium truncate max-w-70 sm:max-w-none"
+            aria-current="page"
+          >
+            {fullAddress}, {listing?.address?.city}
+          </li>
+        </ol>
+      </nav>
       {/* Map + Address Overlay */}
       <div className="h-105 w-full relative">
         <SingleListingMap
@@ -57,7 +121,6 @@ const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
           </div>
         </div>
       </div>
-
       <div className="max-w-3xl px-3 1240:px-0 990:max-w-247.5 lg:max-w-300 mx-auto w-full">
         {/* Stats Bar */}
         <div className="bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark gap-y-3 px-5 py-4 mb-12 flex flex-col md:flex-row md:items-center md:justify-between">

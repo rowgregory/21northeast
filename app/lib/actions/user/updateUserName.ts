@@ -1,8 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/client'
-import { auth } from '../../auth'
-
+import { auth } from '../../auth/auth'
 export async function updateUserName(firstName: string, lastName: string) {
   const session = await auth()
   if (!session) return { success: false, error: 'Unauthorized' }

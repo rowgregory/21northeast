@@ -1,12 +1,19 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { HeaderLinkProps } from '@/app/lib/types/header-types'
 import { largeChevron } from '../common/styles'
 
-const HeaderLink: FC<HeaderLinkProps> = ({ linkKey, active, textKey }) => {
+interface HeaderLinkProps {
+  linkKey: string
+  active: boolean
+  textKey: string
+  ariaLabel?: string
+}
+
+const HeaderLink: FC<HeaderLinkProps> = ({ linkKey, active, textKey, ariaLabel }) => {
   return (
     <Link
       href={linkKey}
+      aria-label={ariaLabel}
       className={`text-13 font-medium relative duration-200 text-text-light dark:text-text-dark
       ${
         active

@@ -17,6 +17,89 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: '2.3.0',
+    date: '2026-07-25',
+    changes: [
+      {
+        type: 'feature',
+        title: 'Dynamic Sitemap with Live MLS Listings',
+        description:
+          'Replaced next-sitemap with a native app/sitemap.ts that fetches active and agent listings at build time, deduping by mlsNumber, so every individual property page is discoverable — not just static routes.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Native robots.ts',
+        description:
+          'Replaced the static generated robots.txt with app/robots.ts, removing the stray /robots.txt entry that was incorrectly appearing as a page in the sitemap.',
+        impact: 'medium'
+      },
+      {
+        type: 'feature',
+        title: 'Page-Level Metadata Across the Site',
+        description:
+          'Added unique title/description metadata to the About (Eileen Jonah), Services, Contact, Listings, and Sold pages, replacing the single site-wide fallback metadata that every page previously inherited.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Per-Listing Dynamic Metadata',
+        description:
+          'Added generateMetadata to the listing detail page, building a unique title, description, and Open Graph/Twitter image from live listing data (address, price, beds/baths) for every property.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'RealEstateListing Structured Data Per Listing',
+        description:
+          'Added RealEstateListing JSON-LD (with nested SingleFamilyResidence and Offer schema) to every listing page, exposing price, address, geo coordinates, and specs directly to search engines and AI agents.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Breadcrumb Navigation + Schema',
+        description:
+          'Added a visible Home / Listings / [address] breadcrumb trail to listing pages, paired with matching BreadcrumbList JSON-LD.',
+        impact: 'medium'
+      },
+      {
+        type: 'improvement',
+        title: 'North Shore Local Discoverability Overhaul',
+        description:
+          'Replaced statewide areaServed with explicit North Shore towns (Swampscott, Lynn, Marblehead, Salem, Peabody, Beverly, Danvers, Nahant, Saugus, Revere) across RealEstateAgent, RealEstateOffice, and FAQPage schema, and added matching visible copy to the About page.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Descriptive Nav Anchor Context',
+        description:
+          'Added aria-label attributes to primary navigation links (e.g. "North Shore Massachusetts Homes for Sale") to strengthen anchor-text signal for crawlers without changing visible nav copy.',
+        impact: 'low'
+      },
+      {
+        type: 'feature',
+        title: 'llms.txt for AI Crawler Discovery',
+        description:
+          'Added a public llms.txt summarizing the site, key pages, and North Shore service area for AI agents and crawlers that support the emerging convention.',
+        impact: 'low'
+      },
+      {
+        type: 'refactor',
+        title: 'Server/Client Page Splits for Metadata Support',
+        description:
+          'Split eileen-jonah, services, and contact routes into a server page.tsx (handling metadata) wrapping the existing "use client" components, since generateMetadata/metadata exports are disallowed in Client Components.',
+        impact: 'medium'
+      },
+      {
+        type: 'refactor',
+        title: 'Deduped Listing Fetch via React cache()',
+        description:
+          'Wrapped getListingByMlsNumber in React\u2019s cache() so generateMetadata and the page body share a single Repliers API call per request instead of fetching the same listing twice.',
+        impact: 'low'
+      }
+    ]
+  },
+  {
     version: '2.2.0',
     date: '2026-07-25',
     changes: [

@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/prisma/client'
-import { auth } from '../../auth'
+import { auth } from '../../auth/auth'
 
 export async function updateSubmissionStatus(id: string, status: string) {
   const session = await auth()

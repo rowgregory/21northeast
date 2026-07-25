@@ -1,8 +1,8 @@
 'use server'
 
 import prisma from '@/prisma/client'
-import { auth } from '../../auth'
 import { createLog } from '../log/createLog'
+import { auth } from '../../auth/auth'
 
 export async function deleteUser(userId: string) {
   const session = await auth()

@@ -2,8 +2,8 @@ import prisma from '@/prisma/client'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Role } from '@prisma/client'
 import NextAuth from 'next-auth'
-import googleProvider from './providers/googleProvider'
-import { handleGoogleCallback } from './callbacks/handleGoogleCallback'
+import googleProvider from '../providers/googleProvider'
+import { handleGoogleCallback } from '../callbacks/handleGoogleCallback'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   debug: false,
