@@ -17,6 +17,117 @@ interface ChangelogEntry {
 
 const changelogData: ChangelogEntry[] = [
   {
+    version: '2.2.0',
+    date: '2026-07-25',
+    changes: [
+      {
+        type: 'feature',
+        title: 'Global Property Search Modal',
+        description:
+          'Added a cmd+k / ctrl+k searchable modal that queries the full Repliers MLS in real time via the search + searchFields params, returning address, price, and photo — not just the 24 pre-fetched homepage listings.',
+        impact: 'high'
+      },
+      {
+        type: 'feature',
+        title: 'Debounced MLS Search Server Action',
+        description:
+          'Added searchListings server action with a 300ms debounce, hitting Repliers directly by address/city/MLS# so search results reflect the entire active Massachusetts inventory.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Header Search Trigger Replaces Mail Button',
+        description:
+          'Replaced the header phone/mail CTA with a search icon that opens the property search modal, plus a persistent ⌘K hint in the desktop top bar.',
+        impact: 'medium'
+      },
+      {
+        type: 'improvement',
+        title: 'Repliers Image CDN Helper',
+        description:
+          'Added getListingImageUrl utility to correctly prefix relative Repliers image paths with the cdn.repliers.io base URL across listing cards and search results.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Home Page Loading Skeleton',
+        description:
+          'Added route-level loading.tsx with a HomeSkeleton matching the hero, property search, and listings grid layout exactly, eliminating blank-page flash during data fetch.',
+        impact: 'medium'
+      },
+      {
+        type: 'bugfix',
+        title: 'Footer Layout Shift on Page Load',
+        description:
+          'Fixed the footer jumping up against the header during the loading-to-loaded transition by adding min-h-screen to the root <main> wrapper.',
+        impact: 'high'
+      },
+      {
+        type: 'bugfix',
+        title: 'Hero Video Layout Shift',
+        description:
+          'Fixed mobile layout shift caused by the hero video being in document flow (md:absolute) instead of always absolutely positioned within its fixed-height container.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Hero Entrance Animation Polish',
+        description:
+          'Reworked HomeHero framer-motion into a single orchestrated container with staggered children and smooth custom easing, replacing the previous per-element manual delays.',
+        impact: 'low'
+      },
+      {
+        type: 'ui',
+        title: 'Mobile-Responsive Listing Details Grid',
+        description:
+          'Rebuilt DetailsGridOne to work down to 320px — scrollable tab bar, single-column stacked rows below 480px, and word-break handling for long addresses and URLs.',
+        impact: 'medium'
+      },
+      {
+        type: 'feature',
+        title: 'Contact Submission Email Notifications',
+        description:
+          'Added sendContactSubmission with a dark-mode branded HTML email template (Resend), notifying the office on every new contact form lead with reply/call CTAs.',
+        impact: 'high'
+      },
+      {
+        type: 'improvement',
+        title: 'Structured Data for Local AI/Search Discovery',
+        description:
+          'Replaced the single statewide areaServed with explicit North Shore towns (Swampscott, Lynn, Marblehead, Salem, Peabody, Beverly, Danvers, Nahant, Saugus, Revere), added address/geo/telephone/sameAs fields, and added FAQPage schema targeting "realtor near me" style queries.',
+        impact: 'high'
+      },
+      {
+        type: 'refactor',
+        title: 'Schema Split Into Dedicated Files',
+        description:
+          'Split the inline JSON-LD blocks out of layout.tsx into separate realEstateAgent.jsonld.ts, companyContext.jsonld.ts, and faq.jsonld.ts files, sharing a single north-shore-towns.ts source of truth.',
+        impact: 'low'
+      },
+      {
+        type: 'improvement',
+        title: 'Prisma v7 + Neon Driver Adapter Migration',
+        description:
+          'Migrated prisma/client.ts to the PrismaNeon driver adapter and .prisma/client generated import path required by Prisma v7, resolving breaking changes from the dependency upgrade.',
+        impact: 'medium'
+      },
+      {
+        type: 'bugfix',
+        title: 'Dependency Security Overrides',
+        description:
+          'Added postcss and sharp overrides to package.json to resolve npm audit vulnerabilities bundled transitively through Next.js 16, bringing the project to 0 known vulnerabilities.',
+        impact: 'medium'
+      },
+      {
+        type: 'ui',
+        title: 'Branding & Favicon Refresh',
+        description:
+          'Generated a full favicon/icon set (favicon.ico, apple-touch-icon, android-chrome icons, site.webmanifest) using the Century 21 mark on the site\u2019s dark theme background.',
+        impact: 'low'
+      }
+    ]
+  },
+  {
     version: '2.0.3',
     date: '2026-04-02',
     changes: [

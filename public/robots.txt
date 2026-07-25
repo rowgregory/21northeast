@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.jonahgroupre.com
+
+# Sitemaps
+Sitemap: https://www.jonahgroupre.com/sitemap.xml

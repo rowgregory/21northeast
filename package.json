@@ -1,13 +1,14 @@
 {
   "name": "21northeast",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "generate": "prisma generate"
+    "generate": "prisma generate",
+    "postbuild": "next-sitemap"
   },
   "overrides": {
     "postcss": "^8.5.10",
