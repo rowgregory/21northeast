@@ -14,6 +14,7 @@ interface HorizontalScrollCardsProps {
 }
 
 const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({ items, title }) => {
+  console.log(items)
   return (
     <div className="w-full max-w-300 mx-auto px-3 xl:px-0">
       {title && (
@@ -92,7 +93,10 @@ const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({ items, ti
                 <div className="p-4 flex-1 flex flex-col">
                   <div className="mb-3">
                     <h3 className="font-poppins-medium text-xl tracking-tight text-text-light dark:text-text-dark mb-2 hover:text-primary-light dark:hover:text-primary-dark duration-200 line-clamp-2">
-                      {property?.details?.style || property?.class} in {property?.address?.city}
+                      {property?.details?.style === 'Other'
+                        ? property?.details?.propertyType
+                        : property?.details?.style || property?.class}{' '}
+                      in {property?.address?.city}
                     </h3>
                     <div className="flex items-baseline mb-3">
                       <span className="font-bold text-primary-light dark:text-primary-dark mr-2 text-xs">
