@@ -1,13 +1,13 @@
-import { FC } from 'react'
-import { PropertyCardBottomBoxProps } from '@/app/lib/types/home-page-types'
 import { Bed, DraftingCompass, ShowerHead } from 'lucide-react'
 
-const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
-  index,
-  sqFt,
-  bedrooms,
-  bathrooms
-}) => {
+interface Props {
+  index: number
+  sqFt: string
+  bedrooms: number
+  bathrooms: number
+}
+
+export default function PropertyCardBottomBox({ index, sqFt, bedrooms, bathrooms }: Props) {
   return (
     <div
       className={`${
@@ -31,5 +31,3 @@ const PropertyCardBottomBox: FC<PropertyCardBottomBoxProps> = ({
     </div>
   )
 }
-
-export default PropertyCardBottomBox

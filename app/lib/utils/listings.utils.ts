@@ -1,4 +1,4 @@
-const getPropertySearchFormStyles = (type: string) => {
+export const getPropertySearchFormStyles = (type: string) => {
   let formStyles = {
     form: '',
     inputs: '',
@@ -29,5 +29,3 @@ const getPropertySearchFormStyles = (type: string) => {
 
   return formStyles
 }
-
-export default getPropertySearchFormStyles

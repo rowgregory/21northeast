@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, FormEvent, useEffect } from 'react'
+import { FormEvent, useEffect } from 'react'
 import useForm from '@/app/lib/hooks/useForm'
 import {
   ALL_TYPES_OPTIONS,
@@ -12,12 +12,11 @@ import {
 } from '@/app/lib/constants/form-select-options'
 import { ADVANCED_SEARCH_FIELDS } from '@/app/lib/constants/form-input-fields'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { PropertySearchFormProps } from '@/app/lib/types/home-page-types'
-import getPropertySearchFormStyles from '@/app/lib/utils/getPropertySearchFormStylts'
 import cleanInputs from '@/app/lib/utils/cleanInputs'
 import { Filter, Rotate3d, Search } from 'lucide-react'
+import { getPropertySearchFormStyles } from '@/app/lib/utils/listings.utils'
 
-const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
+export default function PropertySearchForm({ type }: { type: string }) {
   const router = useRouter()
   const { inputs, handleInput, handleSelect, setInputs } = useForm(ADVANCED_SEARCH_FIELDS)
   const searchParams = useSearchParams()
@@ -215,5 +214,3 @@ const PropertySearchForm: FC<PropertySearchFormProps> = ({ type }) => {
     </form>
   )
 }
-
-export default PropertySearchForm

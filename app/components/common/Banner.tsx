@@ -1,11 +1,15 @@
 'use client'
 
-import { FC } from 'react'
-import { BannerProps } from '@/app/lib/types/common-types'
 import Picture from './Picture'
 import Breadcrumb from './Breadcrumb'
 
-const Banner: FC<BannerProps> = ({ src, title, breadcrumb }) => {
+type Props = {
+  src: string
+  title: string
+  breadcrumb: string
+}
+
+export default function Banner({ src, title, breadcrumb }: Props) {
   return (
     <div className="relative w-full h-72">
       <Picture
@@ -28,5 +32,3 @@ const Banner: FC<BannerProps> = ({ src, title, breadcrumb }) => {
     </div>
   )
 }
-
-export default Banner

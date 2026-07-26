@@ -1,6 +1,6 @@
 import PropertySearchForm from '@/app/components/forms/PropertySearchForm'
 
-const PropertySearch = () => {
+export default function PropertySearch() {
   return (
     <div className="bg-surface-dark w-full overflow-hidden">
       <div className="max-w-300 w-full mx-auto grid grid-cols-12">
@@ -26,5 +26,3 @@ const PropertySearch = () => {
     </div>
   )
 }
-
-export default PropertySearch

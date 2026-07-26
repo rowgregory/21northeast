@@ -8,7 +8,7 @@ import DetailsGridOne from '@/app/(public)/listings/[mlsNumber]/_components/Deta
 import DetailsGridTwo from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridTwo'
 import DetailsGridThree from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
-import addCommas from '@/app/lib/utils/addCommas'
+import { addCommas } from '@/app/lib/utils/_shared.utils'
 import dynamic from 'next/dynamic'
 import { ChevronRight, Send } from 'lucide-react'
 import { ContactForm } from '../../../components/forms/ContactForm'

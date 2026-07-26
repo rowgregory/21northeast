@@ -1,8 +1,16 @@
 'use server'
 
-import { LogAction } from '@/app/lib/types/log.types'
 import { prisma } from '@/prisma/client'
 import { Prisma } from '@prisma/client'
+
+export type LogAction =
+  | 'CONTACT_FORM_SUBMITTED'
+  | 'USER_LOGIN'
+  | 'USER_LOGIN_DENIED'
+  | 'USER_CREATED'
+  | 'USER_DELETED'
+  | 'SUBMISSION_STATUS_CHANGED'
+  | 'SUBMISSION_DELETED'
 
 type LogMetadata = Record<string, string | number | boolean | null | undefined>
 

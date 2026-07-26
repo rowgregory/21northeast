@@ -2,7 +2,7 @@ import { store, useHeaderSeletor } from '../../lib/redux/store'
 import { closeNavigationDrawer } from '../../lib/redux/features/headerSlice'
 import BlackPageOverlay from '../common/BlackPageOverlay'
 import Link from 'next/link'
-import { headerLinksData } from '../../lib/utils/navigation'
+import { headerLinksData } from '../../lib/utils/navigation.utils'
 import { usePathname } from 'next/navigation'
 import useRemoveScroll from '../../lib/hooks/useRemoveScroll'
 

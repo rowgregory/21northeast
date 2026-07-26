@@ -1,6 +1,6 @@
 'use client'
 
-import { headerLinksData } from '@/app/lib/utils/navigation'
+import { headerLinksData } from '@/app/lib/utils/navigation.utils'
 import Link from 'next/link'
 import { eileenInsta } from '@/app/lib/constants/social-media-links'
 import { usePathname } from 'next/navigation'

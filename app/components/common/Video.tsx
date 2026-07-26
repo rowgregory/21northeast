@@ -1,7 +1,9 @@
-import { FC } from 'react'
-import { VideoProps } from '@/app/lib/types/common-types'
+type Props = {
+  videoRef: any
+  src: string
+}
 
-const Video: FC<VideoProps> = ({ videoRef, src }) => {
+export default function Video({ videoRef, src }: Props) {
   return (
     <video
       ref={videoRef}
@@ -16,5 +18,3 @@ const Video: FC<VideoProps> = ({ videoRef, src }) => {
     </video>
   )
 }
-
-export default Video
