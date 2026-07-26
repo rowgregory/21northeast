@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-const useRemoveScroll = (keywordModal: boolean) => {
+const useRemoveScroll = (hide: boolean) => {
   useEffect(() => {
-    if (keywordModal) {
-      document.body.style.overflow = "hidden";
+    if (hide) {
+      document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = ''
     }
 
     return () => {
-      document.body.style.overflow = "";
-    };
-  }, [keywordModal]);
-};
+      document.body.style.overflow = ''
+    }
+  }, [hide])
+}
 
-export default useRemoveScroll;
+export default useRemoveScroll

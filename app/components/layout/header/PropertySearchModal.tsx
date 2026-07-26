@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, MapPin, ChevronRight, Loader2 } from 'lucide-react'
 import { RepliersListing } from '@/app/lib/types/repliers.types'
 import { searchListings } from '@/app/lib/actions/repliers/searchListings'
-import Picture from '../common/Picture'
 import { getListingImageUrl } from '@/app/lib/utils/repliers.utils'
+import Picture from '../../common/Picture'
 
 interface PropertySearchModalProps {
   isOpen: boolean

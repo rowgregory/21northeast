@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { MapPin, Tag, User, Calendar } from 'lucide-react'
 import Picture from '@/app/components/common/Picture'
-import PropertyCardBottomBox from '../property-card/PropertyCardBottomBox'
+import PropertyCardBottomBox from './PropertyCardBottomBox'
 import { RepliersListing } from '@/app/lib/types/repliers.types'
 
 interface PropertyCardProps {

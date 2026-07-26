@@ -2,10 +2,6 @@
 
 import { Fragment, useState, useEffect } from 'react'
 import HeaderLink from './HeaderLink'
-import Logo from '../common/Logo'
-import { logoLines } from '../common/styles'
-import { useAppDispatch, useHeaderSeletor } from '../../lib/redux/store'
-import { openNavigationDrawer } from '../../lib/redux/features/headerSlice'
 import Link from 'next/link'
 import { LogIn, Search, Menu } from 'lucide-react'
 import { motion } from 'framer-motion'
@@ -13,6 +9,10 @@ import { headerVariants, topBarVariants } from '@/app/lib/constants/motion'
 import { headerLinksData } from '@/app/lib/utils/navigation'
 import { usePathname } from 'next/navigation'
 import PropertySearchModal from './PropertySearchModal'
+import { useAppDispatch, useHeaderSeletor } from '@/app/lib/redux/store'
+import { openNavigationDrawer } from '@/app/lib/redux/features/headerSlice'
+import { logoLines } from '../../common/styles'
+import Logo from '../../common/Logo'
 
 const Header = () => {
   const dispatch = useAppDispatch()

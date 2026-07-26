@@ -1,12 +1,12 @@
 'use client'
 
-import SqFtBedroomsAndBathroomsBox from '@/app/components/home-page/SqFtBedroomsAndBathroomsBox'
-import PropertyIdAndBarcode from '@/app/components/listings/PropertyIdAndBarcode'
-import TitleWithOrangeLine from '@/app/components/listings/TitleWithOrangeLine'
-import ListingDetailsImageCarousel from '@/app/components/listings/ListingImageCarousel'
-import DetailsGridOne from '@/app/components/listings/DetailsGridOne'
-import DetailsGridTwo from '@/app/components/listings/DetailsGridTwo'
-import DetailsGridThree from '@/app/components/listings/DetailsGridThree'
+import SqFtBedroomsAndBathroomsBox from '@/app/components/home/SqFtBedroomsAndBathroomsBox'
+import PropertyIdAndBarcode from '@/app/(public)/listings/[mlsNumber]/_components/PropertyIdAndBarcode'
+import TitleWithOrangeLine from '@/app/(public)/listings/[mlsNumber]/_components/TitleWithOrangeLine'
+import ListingDetailsImageCarousel from '@/app/(public)/listings/[mlsNumber]/_components/ListingImageCarousel'
+import DetailsGridOne from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridOne'
+import DetailsGridTwo from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridTwo'
+import DetailsGridThree from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridThree'
 import Picture from '@/app/components/common/Picture'
 import addCommas from '@/app/lib/utils/addCommas'
 import dynamic from 'next/dynamic'
@@ -15,7 +15,10 @@ import { ContactForm } from '../../../components/forms/ContactForm'
 import { useState } from 'react'
 import Link from 'next/link'
 
-const SingleListingMap = dynamic(() => import('@/app/components/SingleMapListing'), { ssr: false })
+const SingleListingMap = dynamic(
+  () => import('@/app/(public)/listings/[mlsNumber]/_components/SingleListingMap'),
+  { ssr: false }
+)
 
 const ListingDetailsClient = ({ listing }: { listing: any | null }) => {
   const [submitted, setSubmitted] = useState(false)

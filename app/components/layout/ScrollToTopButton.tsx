@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronUp } from 'lucide-react'
-import useAtTopOfPage from '../lib/hooks/useAtTopOfPage'
+import useAtTopOfPage from '../../lib/hooks/useAtTopOfPage'
 
 const ScrollToTopButton = () => {
   const isAtTop = useAtTopOfPage()

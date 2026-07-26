@@ -1,10 +1,10 @@
-import { store, useHeaderSeletor } from '../lib/redux/store'
-import { closeNavigationDrawer } from '../lib/redux/features/headerSlice'
-import BlackPageOverlay from './common/BlackPageOverlay'
+import { store, useHeaderSeletor } from '../../lib/redux/store'
+import { closeNavigationDrawer } from '../../lib/redux/features/headerSlice'
+import BlackPageOverlay from '../common/BlackPageOverlay'
 import Link from 'next/link'
-import { headerLinksData } from '../lib/utils/navigation'
+import { headerLinksData } from '../../lib/utils/navigation'
 import { usePathname } from 'next/navigation'
-import useRemoveScroll from '../lib/hooks/useRemoveScroll'
+import useRemoveScroll from '../../lib/hooks/useRemoveScroll'
 
 export const NavigationDrawer = () => {
   const pathname = usePathname()

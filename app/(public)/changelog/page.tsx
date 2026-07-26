@@ -543,7 +543,7 @@ const ChangelogPage = () => {
       <Banner src="/images/team.jpg" title="Changelog" breadcrumb="Release History" />
 
       <div className="px-3">
-        <div className="mt-20 max-w-screen-md 990:max-w-[990px] xl:max-w-3xl mx-auto w-full">
+        <div className="mt-20 max-w-3xl 990:max-w-247.5 xl:max-w-3xl mx-auto w-full">
           {/* Header */}
           <div className="mb-16 pb-8 border-b border-gray-300">
             <h1 className="text-5xl font-bold text-[#232323] mb-3">Changelog</h1>
@@ -595,7 +595,7 @@ const ChangelogPage = () => {
                         className="w-full p-6 flex items-start justify-between gap-6 text-left"
                       >
                         <div className="flex items-start gap-4 flex-1 min-w-0">
-                          <div className={`${config.bgColor} p-3 flex-shrink-0`}>
+                          <div className={`${config.bgColor} p-3 shrink-0`}>
                             <IconComponent className={`${config.color} text-lg`} />
                           </div>
                           <div className="flex-1 min-w-0">
@@ -622,7 +622,7 @@ const ChangelogPage = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="text-[#989898] flex-shrink-0 text-xl">
+                        <div className="text-[#989898] shrink-0 text-xl">
                           {isExpanded ? '−' : '+'}
                         </div>
                       </button>

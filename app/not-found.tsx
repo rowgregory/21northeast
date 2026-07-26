@@ -17,7 +17,7 @@ const NotFound = () => {
   }
 
   return (
-    <div className="relative w-full h-[725px] xl:h-[785px]">
+    <div className="relative w-full h-181.25 xl:h-196.25">
       <Picture
         src={NotFoundBg}
         alt="21 North East Listings"

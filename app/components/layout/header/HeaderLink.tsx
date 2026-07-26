@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { largeChevron } from '../common/styles'
+import { largeChevron } from '../../common/styles'
 
 interface HeaderLinkProps {
   linkKey: string
