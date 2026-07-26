@@ -11,7 +11,7 @@ import Picture from '@/app/components/common/Picture'
 import { addCommas } from '@/app/lib/utils/_shared.utils'
 import dynamic from 'next/dynamic'
 import { ChevronRight, Send } from 'lucide-react'
-import { ContactForm } from '../../../components/forms/ContactForm'
+import { ContactForm } from '../../contact/_components/ContactForm'
 import { useState } from 'react'
 import Link from 'next/link'
 

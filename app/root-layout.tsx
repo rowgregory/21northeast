@@ -3,7 +3,7 @@
 import { ReactNode } from 'react'
 import { Provider } from 'react-redux'
 import { store } from './lib/redux/store'
-import ThemeProvider from './lib/providers/ThemeProvider'
+import ThemeProvider from './lib/providers/theme.provider'
 import { NavigationDrawer } from './components/layout/NavigationDrawer'
 import { usePathname } from 'next/navigation'
 import Header from './components/layout/header/Header'

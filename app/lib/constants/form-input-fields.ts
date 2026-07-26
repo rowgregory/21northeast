@@ -1,23 +1,4 @@
-const PROPERTY_SEARCH_FIELDS = [
-  'status',
-  'class',
-  'propertyType',
-  'city',
-  'minBedrooms',
-  'maxBedrooms',
-  'minBaths',
-  'maxBaths',
-  'minSqft',
-  'maxSqft',
-  'minPrice',
-  'maxPrice',
-  'mlsNumber',
-  'minAcres',
-  'maxAcres',
-  'sortBy'
-]
-
-const ADVANCED_SEARCH_FIELDS = [
+export const ADVANCED_SEARCH_FIELDS = [
   'minSqft',
   'maxSqft',
   'minAcres',
@@ -70,5 +51,3 @@ const ADVANCED_SEARCH_FIELDS = [
   'minDaysOnMarket',
   'maxDaysOnMarket'
 ]
-
-export { PROPERTY_SEARCH_FIELDS, ADVANCED_SEARCH_FIELDS }

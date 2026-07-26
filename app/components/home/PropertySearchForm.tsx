@@ -9,7 +9,7 @@ import {
   MAX_PRICE_OPTIONS,
   MIN_PRICE_OPTIONS,
   STATUS_OPTIONS
-} from '@/app/lib/constants/form-select-options'
+} from '@/app/lib/constants/form-select-options.constants'
 import { ADVANCED_SEARCH_FIELDS } from '@/app/lib/constants/form-input-fields'
 import { useRouter, useSearchParams } from 'next/navigation'
 import cleanInputs from '@/app/lib/utils/cleanInputs'

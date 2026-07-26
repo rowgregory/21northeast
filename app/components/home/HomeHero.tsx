@@ -8,7 +8,13 @@ import { addCommas } from '@/app/lib/utils/_shared.utils'
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
 import { RepliersListing } from '@/app/lib/types/repliers.types'
-import { container, fadeDown, fadeLeft, fadeRight, fadeUp } from '@/app/lib/constants/motion'
+import {
+  container,
+  fadeDown,
+  fadeLeft,
+  fadeRight,
+  fadeUp
+} from '@/app/lib/constants/motion.constants'
 
 export default function HomeHero({ listing }: { listing: RepliersListing | null }) {
   const { videoRef } = useVideo()

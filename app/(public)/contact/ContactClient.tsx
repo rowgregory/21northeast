@@ -1,6 +1,6 @@
 'use client'
 
-import { ContactForm } from '@/app/components/forms/ContactForm'
+import { ContactForm } from '@/app/(public)/contact/_components/ContactForm'
 import { Send } from 'lucide-react'
 import { useState } from 'react'
 

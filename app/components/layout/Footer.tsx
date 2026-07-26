@@ -2,7 +2,7 @@
 
 import { headerLinksData } from '@/app/lib/utils/navigation.utils'
 import Link from 'next/link'
-import { eileenInsta } from '@/app/lib/constants/social-media-links'
+import { eileenInsta } from '@/app/lib/constants/social-media.constants'
 import { usePathname } from 'next/navigation'
 import { ChevronRight, ChevronUp, Mail, MapPin, Phone } from 'lucide-react'
 import { logoLines } from '../common/styles'
