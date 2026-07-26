@@ -14,7 +14,6 @@ interface HorizontalScrollCardsProps {
 }
 
 const HorizontalScrollCards: React.FC<HorizontalScrollCardsProps> = ({ items, title }) => {
-  console.log(items)
   return (
     <div className="w-full max-w-300 mx-auto px-3 xl:px-0">
       {title && (
