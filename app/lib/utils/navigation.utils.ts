@@ -25,6 +25,12 @@ export const headerLinksData = (path: string): Props[] => [
     ariaLabel: 'North Shore Massachusetts Homes for Sale'
   },
   {
+    textKey: 'Areas',
+    linkKey: '/areas',
+    active: path === '/areas',
+    ariaLabel: 'Areas of Services — North Shore Massachusetts'
+  },
+  {
     textKey: 'Sold',
     linkKey: '/sold',
     active: path.includes('/sold'),

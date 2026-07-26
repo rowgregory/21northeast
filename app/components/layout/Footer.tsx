@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { ChevronRight, ChevronUp, Mail, MapPin, Phone } from 'lucide-react'
 import { logoLines } from '../common/styles'
 import Logo from '../common/Logo'
+import { NORTH_SHORE_TOWNS_DATA } from '@/app/lib/schema/north-shore-towns'
 
 const InstagramIcon = () => {
   return (
@@ -30,7 +31,9 @@ const Footer = () => {
     /^\/listings\/\d+$/,
     '/services',
     '/contact',
-    '/search'
+    '/search',
+    '/areas',
+    /-realtor$/
   ]
 
   const isRouteMatched = routes.some((route) =>
@@ -70,44 +73,55 @@ const Footer = () => {
           </div>
 
           {/* Contact Col */}
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-6 md:col-span-2">
             <h5 className="text-text-dark text-lg font-bold mb-5">Get in touch</h5>
             <div className="flex items-center gap-2 mb-1.5">
-              <MapPin className="text-primary-light dark:text-primary-dark w-3 h-3" />
+              <MapPin className="text-primary-light dark:text-primary-dark w-3 h-3 shrink-0" />
               <p className="text-footer-text-light dark:text-footer-text-dark text-sm">
                 100 Sagamore St Lynn, MA 01902
               </p>
             </div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Phone className="text-primary-light dark:text-primary-dark w-3 h-3" />
+              <Phone className="text-primary-light dark:text-primary-dark w-3 h-3 shrink-0" />
               <p className="text-footer-text-light dark:text-footer-text-dark text-sm">
                 (781) 718-7665
               </p>
             </div>
             <div className="flex items-center gap-2 mb-1.5">
-              <Mail className="text-primary-light dark:text-primary-dark w-3 h-3" />
+              <Mail className="text-primary-light dark:text-primary-dark w-3 h-3 shrink-0" />
               <p className="text-footer-text-light dark:text-footer-text-dark text-sm">
                 ejonah@c21ne.com
               </p>
             </div>
           </div>
 
+          {/* Areas We Serve Col */}
+          <div className="col-span-6 md:col-span-3">
+            <h5 className="text-text-dark text-lg font-bold mb-5">Areas We Serve</h5>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+              {NORTH_SHORE_TOWNS_DATA.map((town) => (
+                <Link
+                  key={town.slug}
+                  href={`/${town.slug}-realtor`}
+                  className="text-footer-text-light dark:text-footer-text-dark hover:text-primary-light dark:hover:text-primary-dark text-sm transition-colors duration-200"
+                >
+                  {town.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Nav Links Col */}
-          <div className="col-span-12 md:col-span-4">
+          <div className="col-span-12 md:col-span-3">
             <h5 className="text-text-dark text-lg font-bold mb-5">Quick Links</h5>
             <div className="flex flex-col gap-2">
               {headerLinksData(pathname).map((link, i) => (
                 <Link
                   key={i}
                   href={link.linkKey}
-                  className={`flex items-center gap-1 group w-fit ${
-                    link.active
-                      ? 'text-primary-light dark:text-primary-dark'
-                      : 'text-footer-text-light dark:text-footer-text-dark'
-                  } hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200`}
+                  className="flex text-footer-text-light dark:text-footer-text-dark hover:text-primary-light dark:hover:text-primary-dark text-sm transition-colors duration-200"
                 >
-                  <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-150" />
-                  <span className="text-sm uppercase">{link.textKey}</span>
+                  {link.textKey}
                 </Link>
               ))}
             </div>
