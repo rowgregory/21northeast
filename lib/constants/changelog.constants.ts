@@ -547,44 +547,44 @@ export const changelogData: ChangelogEntry[] = [
 export const typeConfig = {
   feature: {
     icon: CheckCircle,
-    color: 'text-green-600',
-    bgColor: 'bg-green-50',
+    color: 'text-green-600 dark:text-green-400',
+    bgColor: 'bg-green-50 dark:bg-green-500/15',
     label: 'Feature'
   },
   improvement: {
     icon: Lightbulb,
-    color: 'text-blue-600',
-    bgColor: 'bg-blue-50',
+    color: 'text-blue-600 dark:text-blue-400',
+    bgColor: 'bg-blue-50 dark:bg-blue-500/15',
     label: 'Improvement'
   },
   bugfix: {
     icon: Bug,
-    color: 'text-red-600',
-    bgColor: 'bg-red-50',
+    color: 'text-red-600 dark:text-red-400',
+    bgColor: 'bg-red-50 dark:bg-red-500/15',
     label: 'Bug Fix'
   },
   breaking: {
     icon: AlertTriangle,
-    color: 'text-yellow-600',
-    bgColor: 'bg-yellow-50',
+    color: 'text-yellow-600 dark:text-yellow-400',
+    bgColor: 'bg-yellow-50 dark:bg-yellow-500/15',
     label: 'Breaking Change'
   },
   ui: {
     icon: Palette,
-    color: 'text-orange-600',
-    bgColor: 'bg-orange-50',
+    color: 'text-orange-600 dark:text-orange-400',
+    bgColor: 'bg-orange-50 dark:bg-orange-500/15',
     label: 'UI Update'
   },
   refactor: {
     icon: Code,
-    color: 'text-purple-600',
-    bgColor: 'bg-purple-50',
+    color: 'text-purple-600 dark:text-purple-400',
+    bgColor: 'bg-purple-50 dark:bg-purple-500/15',
     label: 'Refactor'
   },
   security: {
     icon: Shield,
-    color: 'text-red-700',
-    bgColor: 'bg-red-50',
+    color: 'text-red-700 dark:text-red-300',
+    bgColor: 'bg-red-50 dark:bg-red-500/15',
     label: 'Security'
   }
 }

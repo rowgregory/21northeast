@@ -16,11 +16,12 @@ import {
   Save,
   LogOut,
   Home,
-  LayoutGrid,
   UserPlus,
   Users,
   Loader2,
-  Trash2
+  Trash2,
+  FileClock,
+  Link2
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
 import { IContactSubmission } from '@/lib/types/contact-submission.types'
@@ -166,35 +167,47 @@ export default function PortalClient({ user, submissions, users }: PortalClientP
     <main className="min-h-screen bg-bg-light dark:bg-bg-dark px-4 py-10 sm:py-14">
       <div className="w-full max-w-170 mx-auto flex flex-col gap-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
           <div>
             <h1 className="text-xl sm:text-2xl font-bold uppercase text-text-light dark:text-text-dark tracking-tight">
               Portal
             </h1>
-            <p className="text-xs text-muted-light dark:text-muted-dark mt-0.5">{user.email}</p>
+            <p className="text-xs text-muted-light dark:text-muted-dark mt-0.5 break-all">
+              {user.email}
+            </p>
           </div>
-          <div className="flex items-center gap-4">
+
+          <div className="flex items-center flex-wrap gap-2">
             <Link
               href="/"
-              aria-label="Go to homepage"
-              className="text-xs uppercase font-semibold text-muted-light dark:text-muted-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark rounded"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold uppercase tracking-wide border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:border-primary-light dark:hover:border-primary-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark"
             >
-              <Home className="w-3.5 h-3.5" />
+              <Home className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Home</span>
             </Link>
+
             <Link
-              href="/listings"
-              aria-label="View listings"
-              className="text-xs uppercase font-semibold text-muted-light dark:text-muted-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark rounded"
+              href="/portal/changelog"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold uppercase tracking-wide border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:border-primary-light dark:hover:border-primary-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark"
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
+              <FileClock className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Changelog</span>
             </Link>
+
+            <Link
+              href="/portal/backlinks"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold uppercase tracking-wide border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:border-primary-light dark:hover:border-primary-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark"
+            >
+              <Link2 className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Backlinks</span>
+            </Link>
+
             <button
               onClick={() => signOut({ callbackUrl: '/login' })}
-              aria-label="Sign out"
-              className="flex items-center gap-1.5 text-xs uppercase font-semibold text-muted-light dark:text-muted-dark hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark rounded"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2.5 text-xs font-bold uppercase tracking-wide border border-border-light dark:border-border-dark text-muted-light dark:text-muted-dark hover:border-red-500 hover:text-red-600 dark:hover:border-red-500 dark:hover:text-red-400 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light dark:focus-visible:ring-primary-dark"
             >
-              <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Sign Out</span>
+              <LogOut className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Sign Out</span>
             </button>
           </div>
         </div>
