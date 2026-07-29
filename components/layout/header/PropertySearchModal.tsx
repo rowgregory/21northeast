@@ -4,9 +4,9 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, X, MapPin, ChevronRight, Loader2 } from 'lucide-react'
-import { RepliersListing } from '@/app/lib/types/repliers.types'
-import { searchListings } from '@/app/lib/actions/repliers/searchListings'
-import { getListingImageUrl } from '@/app/lib/utils/repliers.utils'
+import { RepliersListing } from '@/lib/types/repliers.types'
+import { searchListings } from '@/lib/actions/repliers/searchListings'
+import { getListingImageUrl } from '@/lib/utils/repliers.utils'
 import Picture from '../../common/Picture'
 
 interface PropertySearchModalProps {

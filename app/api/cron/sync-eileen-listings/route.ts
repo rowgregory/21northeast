@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
-import { getAgentListings } from '@/app/lib/actions/repliers/getAgentListings'
-import { createLog } from '@/app/lib/actions/log/createLog'
+import { getAgentListings } from '@/lib/actions/repliers/getAgentListings'
+import { createLog } from '@/lib/actions/log/createLog'
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get('authorization')

@@ -1,19 +1,19 @@
 'use client'
 
-import SqFtBedroomsAndBathroomsBox from '@/app/components/home/SqFtBedroomsAndBathroomsBox'
 import PropertyIdAndBarcode from '@/app/(public)/listings/[mlsNumber]/_components/PropertyIdAndBarcode'
 import TitleWithOrangeLine from '@/app/(public)/listings/[mlsNumber]/_components/TitleWithOrangeLine'
 import ListingDetailsImageCarousel from '@/app/(public)/listings/[mlsNumber]/_components/ListingImageCarousel'
 import DetailsGridOne from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridOne'
 import DetailsGridTwo from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridTwo'
 import DetailsGridThree from '@/app/(public)/listings/[mlsNumber]/_components/DetailsGridThree'
-import Picture from '@/app/components/common/Picture'
-import { addCommas } from '@/app/lib/utils/_shared.utils'
+import { addCommas } from '@/lib/utils/_shared.utils'
 import dynamic from 'next/dynamic'
 import { ChevronRight, Send } from 'lucide-react'
 import { ContactForm } from '../../contact/_components/ContactForm'
 import { useState } from 'react'
 import Link from 'next/link'
+import SqFtBedroomsAndBathroomsBox from '../../(home)/_components/SqFtBedroomsAndBathroomsBox'
+import Picture from '@/components/common/Picture'
 
 const SingleListingMap = dynamic(
   () => import('@/app/(public)/listings/[mlsNumber]/_components/SingleListingMap'),

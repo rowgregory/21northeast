@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getListings } from '@/app/lib/actions/repliers/getListings'
-import { NORTH_SHORE_TOWNS_DATA } from '@/app/lib/schema/north-shore-towns'
+import { getListings } from '@/lib/actions/repliers/getListings'
+import { NORTH_SHORE_TOWNS_DATA } from '@/lib/schema/north-shore-towns'
 import TownClient from './TownClient'
 
 // Pre-render every town at build time — /swampscott-realtor, /lynn-realtor, etc.

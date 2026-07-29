@@ -1,9 +1,9 @@
-import { getListings } from '@/app/lib/actions/repliers/getListings'
+import { getListings } from '@/lib/actions/repliers/getListings'
 import ListingsClient from '@/app/(public)/listings/ListingsClient'
 import { Suspense } from 'react'
 import { Metadata } from 'next'
-import { SearchParams } from '@/app/lib/types/listings.types'
-import { MA_COUNTIES } from '@/app/lib/constants/listings.constants'
+import { SearchParams } from '@/lib/types/listings.types'
+import { MA_COUNTIES } from '@/lib/constants/listings.constants'
 
 export async function generateMetadata({
   searchParams

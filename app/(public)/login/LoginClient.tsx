@@ -1,6 +1,6 @@
 'use client'
 
-import Logo from '@/app/components/common/Logo'
+import Logo from '@/components/common/Logo'
 import { signIn } from 'next-auth/react'
 
 export default function LoginClient({ accessDenied }: { accessDenied: boolean }) {

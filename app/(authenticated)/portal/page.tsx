@@ -2,9 +2,9 @@
 
 import { redirect } from 'next/navigation'
 import PortalClient from './PortalClient'
-import { auth } from '@/app/lib/auth/auth'
+import { auth } from '@/lib/auth/auth'
 import prisma from '@/prisma/client'
-import { getUsers } from '@/app/lib/actions/user/getUsers'
+import { getUsers } from '@/lib/actions/user/getUsers'
 
 export default async function PortalPage() {
   const session = await auth()

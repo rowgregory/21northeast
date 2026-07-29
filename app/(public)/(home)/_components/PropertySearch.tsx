@@ -1,4 +1,4 @@
-import PropertySearchForm from '@/app/components/home/PropertySearchForm'
+import PropertySearchForm from './PropertySearchForm'
 
 export default function PropertySearch() {
   return (

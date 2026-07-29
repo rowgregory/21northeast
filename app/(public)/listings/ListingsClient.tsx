@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import ListingsPropertyCard from '../../components/listings/ListingsPropertyCard'
-import { RepliersListing } from '@/app/lib/types/repliers.types'
+import ListingsPropertyCard from '@/components/listings/ListingsPropertyCard'
+import { RepliersListing } from '@/lib/types/repliers.types'
 import { useState } from 'react'
 import { ChevronDown, Filter, Rotate3d } from 'lucide-react'
-import { MA_COUNTIES } from '@/app/lib/constants/listings.constants'
+import { MA_COUNTIES } from '@/lib/constants/listings.constants'
 
 interface ListingsClientProps {
   data: {

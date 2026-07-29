@@ -1,13 +1,13 @@
 'use client'
 
-import { headerLinksData } from '@/app/lib/utils/navigation.utils'
+import { headerLinksData } from '@/lib/utils/navigation.utils'
 import Link from 'next/link'
-import { eileenInsta } from '@/app/lib/constants/social-media.constants'
+import { eileenInsta } from '@/lib/constants/social-media.constants'
 import { usePathname } from 'next/navigation'
 import { ChevronUp, Mail, MapPin, Phone } from 'lucide-react'
 import { logoLines } from '../common/styles'
 import Logo from '../common/Logo'
-import { NORTH_SHORE_TOWNS_DATA } from '@/app/lib/schema/north-shore-towns'
+import { NORTH_SHORE_TOWNS_DATA } from '@/lib/schema/north-shore-towns'
 
 const InstagramIcon = () => {
   return (

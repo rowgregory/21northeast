@@ -1,6 +1,6 @@
 'use client'
 
-import { RepliersListing } from '@/app/lib/types/repliers.types'
+import { RepliersListing } from '@/lib/types/repliers.types'
 import { useState } from 'react'
 
 const DetailsGridOne = ({ listing }: { listing: RepliersListing }) => {

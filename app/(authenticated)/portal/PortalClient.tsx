@@ -23,13 +23,13 @@ import {
   Trash2
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
-import { IContactSubmission } from '@/app/lib/types/contact-submission.types'
-import { updateUserName } from '@/app/lib/actions/user/updateUserName'
-import { updateSubmissionStatus } from '@/app/lib/actions/contact-submission/updateContactSubmission'
+import { IContactSubmission } from '@/lib/types/contact-submission.types'
+import { updateUserName } from '@/lib/actions/user/updateUserName'
+import { updateSubmissionStatus } from '@/lib/actions/contact-submission/updateContactSubmission'
 import Link from 'next/link'
-import { createAdminUser } from '@/app/lib/actions/user/createAdminUser'
-import { deleteUser } from '@/app/lib/actions/user/deleteUser'
-import { deleteContactSubmission } from '@/app/lib/actions/contact-submission/deleteContactSubmission'
+import { createAdminUser } from '@/lib/actions/user/createAdminUser'
+import { deleteUser } from '@/lib/actions/user/deleteUser'
+import { deleteContactSubmission } from '@/lib/actions/contact-submission/deleteContactSubmission'
 
 interface PortalClientProps {
   user: {

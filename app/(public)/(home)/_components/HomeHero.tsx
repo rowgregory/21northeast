@@ -1,20 +1,14 @@
 'use client'
 
 import SqFtBedroomsAndBathroomsBox from './SqFtBedroomsAndBathroomsBox'
-import useVideo from '@/app/lib/hooks/useVideo'
-import Video from '../common/Video'
+import useVideo from '@/lib/hooks/useVideo'
+import Video from '../../../../components/common/Video'
 import Link from 'next/link'
-import { addCommas } from '@/app/lib/utils/_shared.utils'
+import { addCommas } from '@/lib/utils/_shared.utils'
 import { motion } from 'framer-motion'
 import { MapPin } from 'lucide-react'
-import { RepliersListing } from '@/app/lib/types/repliers.types'
-import {
-  container,
-  fadeDown,
-  fadeLeft,
-  fadeRight,
-  fadeUp
-} from '@/app/lib/constants/motion.constants'
+import { RepliersListing } from '@/lib/types/repliers.types'
+import { container, fadeDown, fadeLeft, fadeRight, fadeUp } from '@/lib/constants/motion.constants'
 
 export default function HomeHero({ listing }: { listing: RepliersListing | null }) {
   const { videoRef } = useVideo()

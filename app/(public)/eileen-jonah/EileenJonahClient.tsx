@@ -1,6 +1,6 @@
 'use client'
 
-import Picture from '@/app/components/common/Picture'
+import Picture from '@/components/common/Picture'
 import { ContactForm } from '@/app/(public)/contact/_components/ContactForm'
 import { FacebookIcon } from '@/public/svg/social-media'
 import { Send } from 'lucide-react'

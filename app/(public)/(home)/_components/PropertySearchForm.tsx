@@ -1,7 +1,7 @@
 'use client'
 
-import { FormEvent, useEffect } from 'react'
-import useForm from '@/app/lib/hooks/useForm'
+import { useEffect } from 'react'
+import useForm from '@/lib/hooks/useForm'
 import {
   ALL_TYPES_OPTIONS,
   BATHROOM_OPTIONS,
@@ -9,12 +9,12 @@ import {
   MAX_PRICE_OPTIONS,
   MIN_PRICE_OPTIONS,
   STATUS_OPTIONS
-} from '@/app/lib/constants/form-select-options.constants'
-import { ADVANCED_SEARCH_FIELDS } from '@/app/lib/constants/form-input-fields'
+} from '@/lib/constants/form-select-options.constants'
+import { ADVANCED_SEARCH_FIELDS } from '@/lib/constants/form-input-fields'
 import { useRouter, useSearchParams } from 'next/navigation'
-import cleanInputs from '@/app/lib/utils/cleanInputs'
+import cleanInputs from '@/lib/utils/cleanInputs'
 import { Filter, Rotate3d, Search } from 'lucide-react'
-import { getPropertySearchFormStyles } from '@/app/lib/utils/listings.utils'
+import { getPropertySearchFormStyles } from '@/lib/utils/listings.utils'
 
 export default function PropertySearchForm({ type }: { type: string }) {
   const router = useRouter()
@@ -47,7 +47,7 @@ export default function PropertySearchForm({ type }: { type: string }) {
     }
   }, [searchParams, setInputs])
 
-  const handleSubmitPropertySearch = (e: FormEvent) => {
+  const handleSubmitPropertySearch = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const cleanedInputs = cleanInputs(inputs)
 
@@ -78,7 +78,7 @@ export default function PropertySearchForm({ type }: { type: string }) {
     }
   }
 
-  const handleReset = (e: FormEvent) => {
+  const handleReset = (e: { preventDefault: () => void }) => {
     e.preventDefault()
     setInputs({})
     router.push('/listings')

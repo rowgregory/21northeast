@@ -1,11 +1,11 @@
 'use client'
 
 import { ReactNode } from 'react'
-import ThemeProvider from './lib/providers/theme.provider'
-import { NavigationDrawer } from './components/layout/NavigationDrawer'
+import ThemeProvider from '@/lib/providers/theme.provider'
+import { NavigationDrawer } from '@/components/layout/NavigationDrawer'
 import { usePathname } from 'next/navigation'
-import Header from './components/layout/header/Header'
-import Footer from './components/layout/Footer'
+import Header from '@/components/layout/header/Header'
+import Footer from '@/components/layout/Footer'
 
 const showLink = (path: string) =>
   !['/login', '/portal', '/super'].some((str) => path.includes(str))

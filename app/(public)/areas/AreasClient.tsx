@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Picture from '@/app/components/common/Picture'
+import Picture from '@/components/common/Picture'
 import { ArrowRight, Award, MapPin } from 'lucide-react'
-import { NORTH_SHORE_TOWNS_DATA } from '@/app/lib/schema/north-shore-towns'
+import { NORTH_SHORE_TOWNS_DATA } from '@/lib/schema/north-shore-towns'
 
 export default function AreasClient() {
   return (

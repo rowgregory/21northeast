@@ -1,14 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { underline } from '../common/styles'
+import { underline } from '../../../../components/common/styles'
 import { motion } from 'framer-motion'
-import {
-  buttonVariants,
-  containerVariants,
-  titleVariants
-} from '@/app/lib/constants/motion.constants'
-import { RepliersListing } from '@/app/lib/types/repliers.types'
+import { buttonVariants, containerVariants, titleVariants } from '@/lib/constants/motion.constants'
+import { RepliersListing } from '@/lib/types/repliers.types'
 import HorizontalScrollCards from './HorizontalScrollCards'
 
 const FindAProperty = ({ allListings }: { allListings: RepliersListing[] }) => {

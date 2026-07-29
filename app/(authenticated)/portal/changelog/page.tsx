@@ -1,6 +1,6 @@
 'use client'
 
-import { changelogData, typeConfig } from '@/app/lib/constants/changelog.constants'
+import { changelogData, typeConfig } from '@/lib/constants/changelog.constants'
 import { useState } from 'react'
 
 const ChangelogPage = () => {

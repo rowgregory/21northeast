@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import Picture from '../../../../components/common/Picture'
+import Picture from '@/components/common/Picture'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 

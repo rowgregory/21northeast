@@ -1,5 +1,5 @@
 import { PublicSoldClient } from '@/app/(public)/sold/PublicSoldClient'
-import { getAgentListings } from '@/app/lib/actions/repliers/getAgentListings'
+import { getAgentListings } from '@/lib/actions/repliers/getAgentListings'
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 

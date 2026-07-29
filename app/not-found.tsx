@@ -1,10 +1,7 @@
 'use client'
 
-import Picture from './components/common/Picture'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import useForm from './lib/hooks/useForm'
-import { Search } from 'lucide-react'
+import Picture from '@/components/common/Picture'
 
 // 404
 export const NotFoundBg =
@@ -12,15 +9,7 @@ export const NotFoundBg =
 export const FourZeroFour =
   'https://firebasestorage.googleapis.com/v0/b/devon-hunt-nextjs.appspot.com/o/images%2Fnot-found.png?alt=media&token=c9892802-a5d1-49fc-b201-b5e743646537'
 
-const NotFound = () => {
-  const { inputs, handleInput } = useForm(['keyword'])
-  const { push } = useRouter()
-
-  const handleKeywordSearch = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    push(`/listings?keyword=${inputs.keyword}`)
-  }
-
+export default function NotFound() {
   return (
     <div className="relative w-full h-181.25 xl:h-196.25">
       <Picture
@@ -49,27 +38,8 @@ const NotFound = () => {
               homepage
             </Link>
           </p>
-          <form
-            onSubmit={handleKeywordSearch}
-            className={`flex items-center h-16 w-full pb-3 relative after:absolute after:content-[''] after:left:0 after:bottom-0 after:w-full after:border-b-[1px] after:border-opacity-45 after:border-b-gray-200`}
-          >
-            <input
-              id="keyword"
-              name="keyword"
-              onChange={handleInput}
-              placeholder="ENTER YOUR KEYWORD"
-              className="form-control h-full w-full bg-transparent focus:outline-none text-white placeholder:text-white"
-              aria-label="Keyword"
-              value={inputs.keyword as string}
-            />
-            <button type="submit">
-              <Search className="w-4 h-4 text-white duration-200 hover:text-orange-500" />
-            </button>
-          </form>
         </div>
       </div>
     </div>
   )
 }
-
-export default NotFound

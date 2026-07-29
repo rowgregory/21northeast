@@ -1,4 +1,4 @@
-import { Inputs } from '@/app/lib/types/form-types'
+import { Inputs } from '@/lib/types/form-types'
 
 const cleanInputs = (inputs: Inputs) => {
   const cleanedInputs = {} as Record<string, any>

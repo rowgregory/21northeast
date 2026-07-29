@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { headerLinksData } from '../../lib/utils/navigation.utils'
+import { headerLinksData } from '@/lib/utils/navigation.utils'
 import { usePathname } from 'next/navigation'
-import useRemoveScroll from '../../lib/hooks/useRemoveScroll'
+import useRemoveScroll from '@/lib/hooks/useRemoveScroll'
 import { useAppStore } from '@/stores/appStore'
 
 export const NavigationDrawer = () => {

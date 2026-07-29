@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import Picture from '@/app/components/common/Picture'
-import { RepliersListing } from '@/app/lib/types/repliers.types'
+import Picture from '@/components/common/Picture'
+import { RepliersListing } from '@/lib/types/repliers.types'
 import { ChevronRight, Award, Home as HomeIcon } from 'lucide-react'
-import { TownData } from '@/app/lib/schema/north-shore-towns'
-import { addCommas } from '@/app/lib/utils/_shared.utils'
+import { TownData } from '@/lib/schema/north-shore-towns'
+import { addCommas } from '@/lib/utils/_shared.utils'
 
 interface TownClientProps {
   town: TownData

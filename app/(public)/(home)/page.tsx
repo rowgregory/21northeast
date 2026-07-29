@@ -1,5 +1,5 @@
-import { getAgentListings } from '../../lib/actions/repliers/getAgentListings'
-import { getListings } from '../../lib/actions/repliers/getListings'
+import { getAgentListings } from '@/lib/actions/repliers/getAgentListings'
+import { getListings } from '@/lib/actions/repliers/getListings'
 import HomeClient from './HomeClient'
 import { Suspense } from 'react'
 

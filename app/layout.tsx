@@ -2,9 +2,9 @@ import './globals.css'
 import 'ol/ol.css'
 import { RootLayoutWrapper } from './root-layout'
 import { siteMetadata } from './metadata'
-import { realEstateJsonLd } from './lib/schema/realEstateAgent.jsonld'
-import { companyContextJsonLd } from './lib/schema/companyContext.jsonld'
-import { faqJsonLd } from './lib/schema/faq.jsonld'
+import { realEstateJsonLd } from '@/lib/schema/realEstateAgent.jsonld'
+import { companyContextJsonLd } from '@/lib/schema/companyContext.jsonld'
+import { faqJsonLd } from '@/lib/schema/faq.jsonld'
 
 export const metadata = siteMetadata
 

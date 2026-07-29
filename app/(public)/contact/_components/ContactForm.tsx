@@ -1,4 +1,4 @@
-import { submitContactForm } from '@/app/lib/actions/contact-submission/submitContactForm'
+import { submitContactForm } from '@/lib/actions/contact-submission/submitContactForm'
 import { Phone, Send, User, Mail, Home, DollarSign, Clock, MessageSquare } from 'lucide-react'
 import { useState } from 'react'
 

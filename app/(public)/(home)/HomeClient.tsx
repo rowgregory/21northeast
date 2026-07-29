@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
-import FindAProperty from '../../components/home/FindAProperty'
-import HomeHero from '../../components/home/HomeHero'
-import PropertySearch from '../../components/home/PropertySearch'
+import HomeHero from './_components/HomeHero'
+import PropertySearch from './_components/PropertySearch'
+import FindAProperty from './_components/FindAProperty'
+import { RepliersResponse } from '@/lib/actions/repliers/getListings'
 
 export const metadata: Metadata = {
   title: 'Eileen Jonah - Realtor® | Century 21 North East | Massachusetts Real Estate',
@@ -14,7 +15,13 @@ export const metadata: Metadata = {
   }
 }
 
-const HomeClient = ({ agentListings, allListings }: any) => {
+export default function HomeClient({
+  agentListings,
+  allListings
+}: {
+  agentListings: any
+  allListings: RepliersResponse | null
+}) {
   return (
     <div className="min-h-screen w-full">
       <HomeHero listing={agentListings?.listings[0]} />
@@ -23,5 +30,3 @@ const HomeClient = ({ agentListings, allListings }: any) => {
     </div>
   )
 }
-
-export default HomeClient

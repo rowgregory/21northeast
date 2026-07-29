@@ -1,7 +1,7 @@
 'use client'
 
-import Picture from '@/app/components/common/Picture'
-import { servicesData, servicesStatsData } from '@/app/lib/constants/services.constants'
+import Picture from '@/components/common/Picture'
+import { servicesData, servicesStatsData } from '@/lib/constants/services.constants'
 import { Mail } from 'lucide-react'
 import Link from 'next/link'
 

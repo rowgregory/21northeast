@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
-import { getAgentListings } from './lib/actions/repliers/getAgentListings'
-import { getListings } from './lib/actions/repliers/getListings'
+import { getAgentListings } from '@/lib/actions/repliers/getAgentListings'
+import { getListings } from '@/lib/actions/repliers/getListings'
 
 const SITE_URL = 'https://www.jonahgroupre.com'
 

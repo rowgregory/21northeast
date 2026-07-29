@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import ListingDetailsClient from '@/app/(public)/listings/[mlsNumber]/ListingDetailsClient'
-import { getListingByMlsNumberCached } from '@/app/lib/actions/repliers/getListingByMlsNumberCached'
+import { getListingByMlsNumberCached } from '@/lib/actions/repliers/getListingByMlsNumberCached'
 
 const SITE_URL = 'https://www.jonahgroupre.com'
 

@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import Picture from '../common/Picture'
+import Picture from '../../../../components/common/Picture'
 import Link from 'next/link'
-import PropertyCardBottomBox from '../listings/PropertyCardBottomBox'
-import { addCommas } from '../../lib/utils/_shared.utils'
+import PropertyCardBottomBox from '../../../../components/listings/PropertyCardBottomBox'
+import { addCommas } from '@/lib/utils/_shared.utils'
 import { MapPin, Tag, Calendar, User } from 'lucide-react'
-import { RepliersListing } from '../../lib/types/repliers.types'
+import { RepliersListing } from '@/lib/types/repliers.types'
 
 interface HorizontalScrollCardsProps {
   items: RepliersListing[]

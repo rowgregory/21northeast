@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Role } from '@prisma/client'
-import { auth } from './app/lib/auth/auth'
+import { auth } from '@/lib/auth/auth'
 
 const publicRoutes = ['/login']
 const protectedRoutes = ['/portal']
