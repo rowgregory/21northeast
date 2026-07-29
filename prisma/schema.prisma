@@ -101,6 +101,20 @@ model ContactSubmission {
   @@index([createdAt])
 }
 
+model EileenListing {
+  id        String   @id @default(cuid())
+  mlsNumber String   @unique
+  data      Json
+  listPrice Float
+  city      String
+  status    String
+  syncedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([status])
+  @@index([city])
+}
+
 enum Role {
   SUPER_USER
   ADMIN

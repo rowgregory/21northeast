@@ -9,15 +9,13 @@ import { headerVariants, topBarVariants } from '@/app/lib/constants/motion.const
 import { headerLinksData } from '@/app/lib/utils/navigation.utils'
 import { usePathname } from 'next/navigation'
 import PropertySearchModal from './PropertySearchModal'
-import { useAppDispatch, useHeaderSeletor } from '@/app/lib/redux/store'
-import { openNavigationDrawer } from '@/app/lib/redux/features/headerSlice'
 import { logoLines } from '../../common/styles'
 import Logo from '../../common/Logo'
+import { useAppStore } from '@/stores/appStore'
 
 const Header = () => {
-  const dispatch = useAppDispatch()
   const path = usePathname()
-  const { navigationDrawer } = useHeaderSeletor()
+  const { navigationDrawer, openNavigationDrawer } = useAppStore()
   const [searchOpen, setSearchOpen] = useState(false)
 
   // cmd+k / ctrl+k
@@ -104,7 +102,7 @@ const Header = () => {
                 className={`w-10 flex items-center justify-center ${
                   navigationDrawer ? 'hidden' : 'block'
                 }`}
-                onClick={() => dispatch(openNavigationDrawer())}
+                onClick={openNavigationDrawer}
               >
                 <Menu className="w-5 h-5 cursor-pointer text-text-light dark:text-text-dark" />
               </motion.div>

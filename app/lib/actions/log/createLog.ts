@@ -11,6 +11,7 @@ export type LogAction =
   | 'USER_DELETED'
   | 'SUBMISSION_STATUS_CHANGED'
   | 'SUBMISSION_DELETED'
+  | 'CRON_SYNC_EILEEN_LISTINGS'
 
 type LogMetadata = Record<string, string | number | boolean | null | undefined>
 
